@@ -535,6 +535,56 @@ def build_unified_catalog(index_entries: list[dict]) -> dict:
                 }
             )
 
+    # 6b. Blinded Career Self-Audit: A. Nekrutenko (N=74)
+    an_file = ROOT / "anton_self_audit" / "anton_results_74.json"
+    if an_file.exists():
+        for r in json.loads(an_file.read_text(encoding="utf-8")):
+            aid = r["anon_id"]
+            yr = int(r.get("year") or 2020)
+            j_name = r.get("journal", "")
+            is_mega = any(
+                m in j_name.lower()
+                for m in ["plos one", "scientific reports", "sci rep", "nat commun", "peerj", "front", "bmc ", "heliyon", "mdpi"]
+            )
+            records.append(
+                {
+                    "uid": f"AN_{aid}",
+                    "code": r.get("an_id", aid),
+                    "anon_id": aid,
+                    "experiment": "Career Self-Audit: A. Nekrutenko (N=74)",
+                    "is_wild": False,
+                    "pmcid": r.get("pmcid", ""),
+                    "pmid": str(r.get("pmid") or ""),
+                    "doi": str(r.get("doi") or ""),
+                    "url": f"https://pmc.ncbi.nlm.nih.gov/articles/{r.get('pmcid')}/" if r.get("pmcid") else "",
+                    "title": r.get("title", ""),
+                    "authors": r.get("authors", ""),
+                    "authors_short": normalize_authors_short(r.get("authors", "")),
+                    "journal": j_name,
+                    "year": yr,
+                    "decade": r.get("decade") or infer_decade(yr),
+                    "subfield": f"Self-Audit ({r.get('authorship_role', 'Co-Author')})",
+                    "venue_tier": "Megajournal" if is_mega else "Selective / Established",
+                    "citedByCount": int(r.get("citedByCount") or 0),
+                    "author_count": int(r.get("author_count") or 1),
+                    "overall": round(float(r["overall"]), 2),
+                    "rigor": round(float(r["rigor"]), 2),
+                    "claims": round(float(r["claims"]), 2),
+                    "biology": round(float(r["biology"]), 2),
+                    "reproducibility": round(float(r["reproducibility"]), 2),
+                    "sci_core_8": round(float(r.get("sci_core_8") or (float(r["rigor"]) + float(r["claims"]) + float(r["biology"]))), 2),
+                    "tier": tier_for(float(r["overall"])),
+                    "study_modality": r.get("study_modality", "Not Annotated"),
+                    "tech_maturity": r.get("tech_maturity", "Not Annotated"),
+                    "epistemic_stage": r.get("epistemic_stage", "Not Annotated"),
+                    "bias_category": r.get("bias_category", ""),
+                    "verdict": r.get("verdict", ""),
+                    "review_path": f"anton_self_audit/reviews/{aid}_review.md",
+                    "human_review_path": "",
+                    "has_human_review": False,
+                }
+            )
+
     # Sort descending by overall score, then citations
     records.sort(key=lambda x: (x["overall"], x.get("citedByCount", 0)), reverse=True)
 
@@ -549,6 +599,7 @@ def build_unified_catalog(index_entries: list[dict]) -> dict:
         "Open-Review Concordance (N=100)",
         "35-Year Secular Trend (N=915)",
         "Career Self-Audit: S. Pond (N=164)",
+        "Career Self-Audit: A. Nekrutenko (N=74)",
         "Community / Issue-Triggered Reviews",
     ]
     # Validate all review_path and uid uniqueness before returning
@@ -616,6 +667,7 @@ def format_compact_readme_section(catalog: dict) -> str:
         "Open-Review Concordance (N=100)": "[`PEER_REVIEW_VALUE_ADDED.md`](PEER_REVIEW_VALUE_ADDED.md) · [Explore](https://spond.github.io/gemini-reviews/#experiment=Open-Review%20Concordance%20(N%3D100))",
         "35-Year Secular Trend (N=915)": "[`SECULAR_TRENDS_AND_COVARIATES.md`](SECULAR_TRENDS_AND_COVARIATES.md) · [Explore](https://spond.github.io/gemini-reviews/#experiment=35-Year%20Secular%20Trend%20(N%3D915))",
         "Career Self-Audit: S. Pond (N=164)": "[`SPOND_SELF_AUDIT.md`](SPOND_SELF_AUDIT.md) · [Explore](https://spond.github.io/gemini-reviews/#experiment=Career%20Self-Audit%3A%20S.%20Pond%20(N%3D164))",
+        "Career Self-Audit: A. Nekrutenko (N=74)": "[`ANTON_SELF_AUDIT.md`](ANTON_SELF_AUDIT.md) · [Explore](https://spond.github.io/gemini-reviews/#experiment=Career%20Self-Audit%3A%20A.%20Nekrutenko%20(N%3D74))",
         "Community / Issue-Triggered Reviews": "[`PROTOCOL.md`](PROTOCOL.md) · [Explore](https://spond.github.io/gemini-reviews/#experiment=Community%20%2F%20Issue-Triggered%20Reviews)",
     }
 

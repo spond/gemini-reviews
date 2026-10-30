@@ -1,0 +1,49 @@
+# Review of AN_ANON_015
+
+**Manuscript Title:** [REDACTED FOR BLINDED REVIEW]  
+**Authors:** [REDACTED FOR BLINDED REVIEW]  
+**Journal / Preprint:** [REDACTED FOR BLINDED REVIEW]  
+**Overall Score:** **7.9 / 10.0** (Strong / Sound) | **Scientific Core Score:** **6.0 / 8.0**  
+* **Score Breakdown:** Rigor: 2.5/3.5 | Claims: 1.9/2.5 | Biology: 1.6/2.0 | Reproducibility: 1.9/2.0
+
+---
+
+### 1. SUMMARY AND OVERALL IMPACT STATEMENT
+
+This manuscript describes the architectural integration of Project Jupyter interactive notebooks into the Galaxy bioinformatics platform via Docker-based Interactive Environments (IEs). Motivated by the two-stage structure of next-generation sequencing (NGS) analyses—where standardized upstream processing (QC, read mapping, variant calling, or feature counting) is followed by ad hoc downstream statistical exploration and visualization—the authors implement an Interactive Environment Entry Point (IEEP) that launches isolated, per-user Docker containers running a multi-kernel Jupyter server (Python, R, Julia, Ruby, Haskell, Octave) connected to the host Galaxy instance over SSL. Two custom API helper functions, `get(dataset_id)` and `put(filename)`, allow seamless bidirectional data transfer between a user's Galaxy history and the Jupyter container without downloading large files to a local workstation, while executed notebooks can be saved directly back into the Galaxy history as permanent, shareable provenance artifacts. The authors demonstrate the system through three biological examples of increasing complexity: (1) visualizing read coverage across simulated longitudinal HIV-1 resequencing data; (2) normalizing and shrinking variance in *Saccharomyces cerevisiae* wildtype vs. *snf2* knockout RNA-seq counts (`ERP004763`) using `HiSat`, `HTSeq-count`, and `DESeq2`; and (3) processing 312 paired-end Illumina fastq datasets (118 GB, `SRP047378`) from 156 tissue samples (39 mother–child pairs) through a Galaxy dataset-collection variant-calling workflow (yielding a 2.6-million-row variant table) followed by a Jupyter notebook that reproduces published findings on maternal age vs. mtDNA heteroplasmy accumulation and the ~40-segregating-unit germline mitochondrial bottleneck.
+
+The work provides a practical, well-engineered bridge between GUI-driven workflow management and flexible scripting environments, backed by live Galaxy history links and complete notebook supplements (S1–S3 Files). The primary technical caveat is that allowing users to install arbitrary packages on the fly inside running containers (`pip install` or equivalent; line 23) and execute interactive cells out of order introduces a reproducibility gap: unless the modified container state or exact environment lockfile is persisted alongside the `.ipynb` file in the Galaxy history, re-opening a saved notebook in a fresh default Docker container may fail or yield different numerical results if transient packages were installed during the interactive session. Addressing container-state persistence and reporting resource/scaling benchmarks for Example 3 would strengthen the technical rigor of the manuscript.
+
+---
+
+### 2. SPECIFIC CONCLUSIONS AND ASSESSMENT OF SUPPORT
+
+* **Claim 1: The Docker-based Galaxy–Jupyter Interactive Environment securely isolates users, eliminates local data transfer overhead via `get()`/`put()` API calls, and scales to multi-hundred-sample genomic datasets: [Well Supported].**  
+  The architectural design (Materials and Methods, lines 19–27) uses per-session Docker containers on randomized ports with optional remote execution via Docker client/server or Docker Swarm, SSL communication, CPU/memory limits, and network-traffic idle termination. Example 3 concretely validates that this architecture handles real-world scale by reducing 118 GB of raw sequencing reads across 312 fastq files (`SRP047378`) via Galaxy dataset collections to a 160 MB (2.6-million-row) variant matrix that is transferred into Jupyter via `get()` and analyzed to replicate published biological figures (Figure 2).
+
+* **Claim 2: Saving Jupyter notebooks back into the Galaxy history guarantees "the utmost level of reproducibility during data exploration" because new Jupyter instances retain the stored work: [Overstated].**  
+  In lines 23 and 27, the authors state that users can install additional packages on demand inside the running container using `pip` or other language package managers, and also claim that saving the `.ipynb` notebook to the Galaxy history "ensures the reproducibility of data analysis" when a new Jupyter instance is later spun up from that saved notebook. However, launching a new Jupyter instance spins up a fresh container from the base Docker image (`jupyter/minimal-notebook` derivative); any packages installed ad hoc via `pip` during the previous session inside the ephemeral container filesystem are lost unless written to a persistent user environment or explicitly re-installed via commands inside the first cells of the notebook. Moreover, Jupyter notebooks permit out-of-order cell execution and depend on transient in-memory state.
+
+* **Claim 3: Example 2 demonstrates a reproducible RNA-seq normalization and variance-shrinkage workflow on *S. cerevisiae* wildtype vs. *snf2* knockout data using `HiSat`, `HTSeq-count`, and `DESeq2`: [Well Supported].**  
+  As a pedagogical and functional demonstration of combining Galaxy upstream tools (`HiSat` mapping to `dm3` in Fig 1B legend / yeast genome in text line 57, followed by `HTSeq-count`) with Python (`pandas`) table joining and R (`DESeq2`) normalization inside Jupyter, Example 2 clearly illustrates cross-language interoperability. (Note, however, a factual contradiction between the main text and the Figure 1B legend regarding the organism and reference genome; see Suggestion 3 below.)
+
+* **Claim 4: Example 3 reproduces the key statistical findings of human maternal mtDNA heteroplasmy transmission—specifically the positive correlation with maternal age and a germline bottleneck of ~40 segregating units: [Well Supported].**  
+  The end-to-end replication of the authors' prior 156-sample mtDNA heteroplasmy study (`SRP047378`) from raw reads through `bwa-mem`, deduplication, quality/proper-pair filtering, indel realignment, `Naive Variant Caller`, and Jupyter statistical modeling (Figure 2A–D and S3 File) provides strong empirical proof that complex, publication-grade multi-sample analyses can be fully encapsulated within the hybrid Galaxy–Jupyter framework.
+
+---
+
+### 3. CONSTRUCTIVE AND DOABLE SUGGESTIONS FOR IMPROVEMENT
+
+#### 1. Address Ephemeral Package Installation and Out-of-Order Execution in Notebook Reproducibility
+* **WHY:** If a user installs a package via `pip` in a terminal or deleted cell during an interactive session (line 23), only the `.ipynb` JSON document—not the modified Docker container filesystem—is saved to the Galaxy history (line 27). When another user imports that history and launches the notebook in a fresh container, execution will fail with `ImportError` or use unpinned library versions.
+* **WHAT:** Clarify the distinction between container-image provenance and notebook-document provenance, and recommend best practices for self-contained reproducibility.
+* **HOW:** (1) Explicitly note in the Materials and Methods and Discussion that ephemeral `pip`/package installations inside a running container do not persist across container restarts unless placed directly inside the notebook cells with pinned version numbers (e.g., `!pip install package==x.y.z` or `conda env export`); (2) describe whether Galaxy stores the exact Docker image digest (SHA256) used to run the notebook in the history item metadata so that future updates to the default Docker image do not break historical notebooks; and (3) recommend executing "Restart Kernel and Run All Cells" prior to saving the notebook to the Galaxy history via `put()`.
+
+#### 2. Report Quantitative Runtime and Data-Transfer Benchmarks for Example 3
+* **WHY:** Line 25 notes that transferring datasets directly between the Galaxy host and the Docker container via `get()` and `put()` is faster than downloading to a local workstation, and Example 3 processes 118 GB of raw data into a 160 MB (2.6-million-row) table. However, no wall-clock execution times or memory footprints are reported.
+* **WHAT:** Provide concrete timing and resource utilization metrics for the three examples, particularly Example 3.
+* **HOW:** Report the wall-clock runtime of the 12-step Galaxy collection workflow on the 312 fastq files (118 GB), the transfer time of the 160 MB variant table (`dataset 1413`) into the Jupyter container via `get()`, and the execution time and peak RAM usage of the S3 File notebook.
+
+#### 3. Fix the Organism/Genome Contradiction Between Main Text (Yeast) and Figure 1B Legend (*Drosophila dm3*)
+* **WHY:** In the main text for Example 2 (line 57), the authors state that they analyzed RNA-seq data from *"Saccharomyces cerevisiae populations: wildtype and snf2 knock-out mutants (SRA accession ERP004763)"* and mapped reads *"against the yeast genome using HiSat."* However, the Figure 1B legend (line 51) states: *"Here, Illumina reads for two RNA-seq replicates from wildtype and snf2 knock-out are mapped against the Drosophila melanogaster genome (dm3) using HiSat split mapper. Next, HTSeq-count takes BAM datasets generated by HiSat and, using gene annotation for dm3 genome downloaded from the UCSC Table Browser (history dataset 9), computes per-gene read counts."* (`ERP004763` by Schurch et al. is indeed a *Saccharomyces cerevisiae* dataset, not *Drosophila melanogaster* `dm3`).
+* **WHAT & HOW:** Correct the Figure 1B legend (line 51) to replace *"Drosophila melanogaster genome (dm3)"* and *"dm3 genome"* with *"Saccharomyces cerevisiae genome (sacCer3)"* (or the exact yeast assembly identifier used in history dataset 9).

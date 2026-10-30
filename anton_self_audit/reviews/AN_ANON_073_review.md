@@ -1,0 +1,54 @@
+# Review of AN_ANON_073
+
+**Manuscript Title:** [REDACTED FOR BLINDED REVIEW]  
+**Authors:** [REDACTED FOR BLINDED REVIEW]  
+**Journal / Preprint:** [REDACTED FOR BLINDED REVIEW]  
+**Overall Score:** **8.0 / 10.0** (Strong / Sound) | **Scientific Core Score:** **6.4 / 8.0**  
+* **Score Breakdown:** Rigor: 2.7/3.5 | Claims: 1.9/2.5 | Biology: 1.8/2.0 | Reproducibility: 1.6/2.0
+
+---
+
+### 1. SUMMARY AND OVERALL IMPACT STATEMENT
+
+This manuscript performs a genome-wide test of the exon/domain shuffling hypothesis by analyzing intron phase combinations (`0–0`, `1–1`, `2–2`, and asymmetrical combinations) across 14,728 Pfam-annotated human genes (containing 20,778 Pfam domains, of which 345 single-exon [class 1] and 924 multi-exon [class 2] domains have flanking introns within $<10\%$ of the domain boundaries) and 19,682 *Caenorhabditis elegans* genes (286 intron-bounded domains). By contrasting introns located at domain boundaries ("boundary introns") against internal introns within multi-exon domains ("nonboundary introns"), and controlling for paralogous gene-family expansion by collapsing domains into weighted domain families (total weight per family = 1.0), the authors demonstrate that excess phase symmetry is strictly confined to domain-boundary introns ($P < 10^{-7}$ for class 1 domains and $P < 10^{-7}$ for 2-exon class 2 domains; $P < 0.05$ at the domain-family level), whereas internal nonboundary exons and multi-exon internal sets show zero excess symmetry ($P = 0.24$ to $0.75$; Table 2). Stratifying domains by evolutionary age shows that metazoan-specific ("new") domains are strongly enriched for extracellular `1–1` phase symmetry ($P < 10^{-3}$ in humans, $P < 10^{-4}$ in *C. elegans*). Public database versions (Ensembl 4.28, WormBase release 30, Pfam/InterPro) are clearly specified.
+
+The study is well-conceived and features a particularly strong internal negative control: testing single and consecutive sets of internal (nonboundary) exons within class 2 domains (Table 2) alongside 10,000 random subsamples from the 92,052-exon genomic background cleanly refutes the hypothesis that general splicing-error selection (Lynch's model) drives genome-wide exon symmetry, proving instead that symmetrical phase correlations arise from the shuffling of complete structural domains. The primary limitations are: (1) overstating the enrichment of `0–0` symmetrical domains among ancient ("old") prokaryote–eukaryote shared domains in the Abstract despite non-significant $P$-values across all human and *C. elegans* comparisons ($P = 0.19$ to $0.63$), (2) an inconsistency between the stated formula for expected values in Table 6 and the actual numbers reported in that table, and (3) applying standard Pearson $\chi^2$ tests directly to continuous fractional family weights.
+
+---
+
+### 2. SPECIFIC CONCLUSIONS AND ASSESSMENT OF SUPPORT
+
+* **Introns bordering structural protein domains (both single-exon class 1 and 2-to-4-exon class 2 domains) exhibit a highly significant excess of symmetrical phases (`1–1` and `0–0`), whereas internal nonboundary introns within domains follow random phase expectations: [Well Supported].**  
+  The contrast between boundary introns (Tables 3 and 5: 288 observed vs. 233.0 expected symmetrical class 1 domains, $P < 10^{-7}$; 235 observed vs. 180.4 expected 2-exon class 2 domains, $P < 10^{-7}$) and internal nonboundary exons (Table 2: 758 observed vs. 770.3 expected for single internal exons, $P = 0.57$; non-significant across 2-to-6-exon internal sets) is statistically robust, replicated in *C. elegans* (Table 7), and supported by Larger sample sizes in the nonboundary negative control than in the boundary test set.
+
+* **The excess of symmetrical boundary introns persists after collapsing paralogous expansions into weighted domain families, confirming that domain shuffling has acted across diverse structural families rather than a few hyper-expanded repeats: [Moderately Supported].**  
+  Weighting each domain family so that its constituent phase combinations sum to 1.0 appropriately prevents prolific families (such as 144 Sushi domains or 65 CUB domains, Table 4) from dominating the signal. However, in Tables 3, 5, 6, 7, and 8, the authors feed these continuous fractional family weights (e.g., `8.5` observed vs. `5.2` expected, or `24.3` vs. `17.9`) directly into a standard 1-df Pearson $\chi^2$ contingency test. Because fractional weights are not independent integer multinomial counts, the nominal $\chi^2$ $P$-values (such as $P < 0.05$ for class 1 families in Table 3 and 2-exon class 2 families in Table 5) are approximate and should be verified via a non-parametric permutation test of 5' and 3' intron phases across families.
+
+* **Metazoan-specific ("new") intron-bounded domains are strongly enriched for extracellular `1–1` symmetrical modules ($P < 10^{-3}$ in humans, $P < 10^{-4}$ in *C. elegans*) and depleted for `0–0` modules: [Well Supported].**  
+  In humans (Table 6), 138 of 222 new domains (62.2%) and 15.4 of 36 new domain families (42.8%) are `1–1` symmetrical, compared to expectations of 109.5 ($P < 10^{-3}$) and 7.0 ($P < 10^{-3}$), respectively, while `0–0` new domains are depleted (13 observed vs. 32.6 expected, $P < 10^{-3}$). The pattern is independently replicated in *C. elegans* (Table 8: 23 observed vs. 11.4 expected `1–1` new domains, $P < 10^{-4}$).
+
+* **Ancient ("old") domains shared between eukaryotes and prokaryotes are over-represented for `0–0` symmetrical phase combinations, supporting primordial domain shuffling in the progenote: [Overstated].**  
+  The Abstract states that `"0–0 symmetrical domains tend to be over-represented among ancient protein domains that are shared between the eukaryotic and prokaryotic kingdoms, which is compatible with the suggestion of primordial domain shuffling in the progenote."` However, in the Results (Table 6, line 243; and Table 8, line 286), the observed vs. expected counts for old `0–0` domains are statistically non-significant in every test performed: human domains (`80` vs. `71.0`, $P = 0.19$), human domain families (`27.5` vs. `23.4`, $P = 0.33$), *C. elegans* domains (`29` vs. `24.7`, $P = 0.34$), and *C. elegans* domain families (`12.1` vs. `10.7`, $P = 0.63$). Only the *under-representation* of `1–1` domains among old domains is statistically significant ($P < 0.02$ in humans, $P < 10^{-4}$ in *C. elegans*), which is expected as the mathematical complement of the metazoan-specific expansion of `1–1` domains.
+
+---
+
+### 3. CONSTRUCTIVE AND DOABLE SUGGESTIONS FOR IMPROVEMENT
+
+#### 1. Clarify and Reconcile the Expected Value Calculation in Table 6 and Table 8
+* **WHY:** The Table 6 footnote (line 239) and Methods (line 360) state that `"The expected numbers are based on the fraction of 0–0, 1–1, and 2–2 domains in the entire data set (1269 domains)."` However, across all 1,269 domains in Table 1, there are $29 + 176 = 205$ (`16.15%`) `0–0` domains and $257 + 298 = 555$ (`43.74%`) `1–1` domains. Multiplying the Table 6 group sizes (`222` New and `401` Old) by those dataset-wide fractions yields expected `0–0` counts of `35.9` (New) and `64.8` (Old) and expected `1–1` counts of `97.1` (New) and `175.4` (Old)—which do not match the values printed in Table 6 (`32.6` and `71.0` for `0–0`; `109.5` and `148.7` for `1–1`). Notice that in Table 6, the implied expected fraction of `1–1` domains is $109.5 / 222 = 49.3\%$ in New versus $148.7 / 401 = 37.1\%$ in Old, proving that two different baseline proportions were used for New and Old domains (likely computed from the marginal 5' and 3' intron phase frequencies within each age group or stratified by class 1/2 composition).
+* **WHAT:** Explicitly state the exact mathematical formula used to generate the expected values in Tables 6 and 8.
+* **HOW:** Update the Methods ("Statistical Analyses", line 360) and Table 6/8 footnotes to specify whether expected values were computed from within-group flanking intron phase marginals ($P_i P_j N_{\text{group}}$) or stratified by class 1 / class 2 proportions, and also report the direct contingency table test comparing `New` vs. `Old` phase distributions.
+
+#### 2. Temper the Abstract and Discussion Claims Regarding Ancient `0–0` Domain Enrichment
+* **WHY:** Highlighting an excess of `0–0` symmetrical domains among ancient proteins in the Abstract when $P = 0.19$ (human domains), $P = 0.33$ (human families), $P = 0.34$ (*C. elegans* domains), and $P = 0.63$ (*C. elegans* families) conflates a non-significant numerical difference with statistical evidence for the introns-early hypothesis.
+* **WHAT:** Revise the Abstract and Discussion to accurately reflect that `1–1` domains are significantly depleted among ancient domains ($P < 0.02$ in human, $P < 10^{-4}$ in *C. elegans*), whereas the slight numerical excess of `0–0` domains over random expectation within ancient domains does not reach statistical significance.
+* **HOW:** Replace `"On the other hand, 0–0 symmetrical domains tend to be over-represented among ancient protein domains..."` in the Abstract with `"On the other hand, 1–1 symmetrical domains are significantly under-represented among ancient protein domains shared between eukaryotes and prokaryotes, whereas 0–0 domains show only a slight, statistically non-significant excess over random phase expectations."`
+
+#### 3. Validate Fractional Domain-Family $\chi^2$ Tests Using a Permutation Test
+* **WHY:** Applying a standard Pearson $\chi^2$ test to summed fractional family weights (`Table 3`, `Table 5`, `Table 7`) treats weighted proportions across families of unequal size as integer counts.
+* **WHAT:** Confirm the domain-family symmetry $P$-values using a non-parametric permutation test that preserves family sizes.
+* **HOW:** Randomly permute the 3' boundary intron phases across the domains (or across domain families) 10,000 times, recompute the summed family weight of symmetrical combinations (`0–0`, `1–1`, `2–2`) in each permutation, and report the exact empirical $P$-values alongside the $\chi^2$ approximations in Tables 3, 5, and 7.
+
+#### 4. Perform Sensitivity Analysis on the 10% Domain-Boundary Tolerance Threshold
+* **WHY:** In the Methods (line 345), intron-bounded domains are defined by $\|d_n - i_n\| + \|d_c - i_c\| < 0.1 \cdot (d_c - d_n)$. Because only 6% of human Pfam domains (1,269 / 20,778) satisfy this threshold, it is informative to know whether the contrast between boundary and nonboundary intron symmetry is robust to tighter (5%) or looser (15–20%) boundary tolerances.
+* **HOW:** Re-run the boundary vs. nonboundary symmetry comparison at tolerance thresholds of 0.05, 0.10, 0.15, and 0.20 of domain length and report how the excess of symmetrical boundary introns decays as introns move further from the structural domain boundary.

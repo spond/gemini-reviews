@@ -1,0 +1,1037 @@
+# De-Identified Manuscript: AN_ANON_032
+
+> **Blinding Note:** All title, author, affiliation, journal, year, software, and identifier metadata have been scrubbed for unbiased methodological review.
+
+## Abstract
+
+## Jennifer Hillman-Jackson
+
+
+## Dave Clements
+
+
+## Daniel [AUTHOR]
+
+
+## James Taylor
+
+
+## Anton [AUTHOR]
+
+
+## Abstract
+
+Innovations in biomedical research technologies continue to provide experimental biologists with novel and increasingly large genomic and high-throughput data resources to be analyzed. As creating and obtaining data has become easier, the key decision faced by many researchers is a practical one: where and how should an analysis be performed? Datasets are large and analysis tool set-up and use is riddled with complexities outside of the scope of core research activities. The authors believe that Galaxy ( [WORKFLOW_PLATFORM] ) provides a powerful solution that simplifies data acquisition and analysis in an intuitive web-application, granting all researchers access to key informatics tools previously only available to computational specialists working in Unix-based environments. We will demonstrate through a series of biomedically relevant protocols how Galaxy specifically brings together 1) data retrieval from public and private sources, for example, UCSC’s Eukaryote and Microbial Genome Browsers ( genome.ucsc.edu ), 2) custom tools (wrapped Unix functions, format standardization/conversions, interval operations) and 3 rd party analysis tools, for example, Bowtie/Tuxedo Suite ( bowtie-bio.sourceforge.net ), Lastz ( www.bx.psu.edu/~rsharris/lastz/ ), SAMTools ( samtools .sourceforge.net ), FASTX-toolkit ( hannonlab.cshl.edu/ fastx_toolkit ), and MACS ( liulab.dfci.harvard.edu/ MACS ), and creates results formatted for visualization in tools such as the Galaxy Track Browser (GTB, [WORKFLOW_PLATFORM]/wiki/Learn/Visualization ), UCSC Genome Browser ( genome.ucsc.edu ), Ensembl ( www. ensembl .org ), and GeneTrack ( genetrack .bx.psu.edu ).
+
+Galaxy rapidly has become the most popular choice for integrated next generation sequencing (NGS) analytics and collaboration, where users can perform, document, and share complex analysis within a single interface in an unprecedented number of ways.
+
+Keywords: comparative genomics, genomic alignments, Web application, genome variation
+
+
+## INTRODUCTION
+
+Most experimental biologists cannot fully take advantage of genomic data due to a formidable wall of countless and unnecessary computational issues. The goal of Galaxy [ Goecks, et al. , [YEAR] ] is to solve these issues. Consider the following example: A researcher wants to identify protein-coding exons containing the highest density of SNPs. Most biologists know three primary sources of genome-wide data for vertebrates: Entrez at NCBI [ unit 1.3; Gibney et al. , [YEAR] ], the Genome Browser at the UCSC [ unit 1.4 ; Karolchik et al. , [YEAR]], and Ensembl [ unit 1.15 ; Fernández Suárez et al. , [YEAR] ] at the EBI/Wellcome Trust Sanger Institute (UK). Although these three sources offer extensive information about genes, including genomic structure, gene expression profiles, and SNPs, the end user must still perform this task elsewhere—the listed resources do not provide functionality necessary to perform this analysis. Typically, this project ends up in the hands of a graduate student who might initially try to achieve this using popular desktop applications. Unfortunately, Excel (like many other desktop applications) cannot handle that much data. As a result, this relatively simple task becomes a complex endeavor that may easily take weeks or months. In the authors’ view, this does not have to be complicated. Galaxy bridges the gap between data and analyses by allowing experimental biologists without programming experience to easily perform large scale studies from within their Web browsers.
+
+In this unit, the authors describe the functionality of Galaxy using a series of examples that correspond to the following protocols: Basic Protocol 1 covers the most fundamental features of Galaxy. Basic Protocol 2 elaborates on different types of data accepted by Galaxy. It also shows the user how to upload data and set data attributes. Basic Protocol 3 demonstrates analysis with ChIP-seq high throughput sequencing data. Basic Protocol 4 shows that manipulation of genomic intervals is one of Galaxy’s greatest strengths. Basic Protocol 5 explains how Galaxy enables users to manipulate multiple alignments.
+
+In addition, each protocol has a corresponding Galaxy tutorial including a Screencast (web video) hosted on the Galaxy wiki at http://galaxycast.org/CurrentProtocolsBioinfo2012 .
+
+
+## BASIC PROTOCOL 1
+
+
+## FINDING HUMAN CODING EXONS WITH HIGHEST SNP DENSITY
+
+Suppose one wants to find the top hundred protein-coding exons in the human genome with the highest density of single nucleotide polymorphisms (SNPs). Answering this question is not trivial. To do so, one needs to compare all human exons to all human SNPs. To put this into perspective, the current version of the human genome at UCSC for hg19 includes over 350,000 known coding exons and dbSNP build 134 [ Sherry et al., [YEAR] ] contains nearly 49 million SNPs. Galaxy is specifically designed to make such large-scale analyses fast and user-friendly. Galaxy’s interface is accessible from http://[WORKFLOW_PLATFORM] . In the following protocol, the authors will use RefSeq [ Pruitt et al., [YEAR] ] exons and dbSNP annotations on chromosome 22 extracted from the UCSC Table Browser [ Fujita et al., [YEAR] ].
+
+An Internet-connected computer.
+
+Internet browser that supports JavaScript (e.g., most current browsers such as Mozilla Firefox, Safari, Opera, Chrome, or Microsoft Internet Explorer)
+
+Open the [WORKFLOW_PLATFORM]’s homepage by pointing your Web browser to http://[WORKFLOW_PLATFORM].
+
+The project homepage features four prominent sections: Use Galaxy, Get Galaxy, Learn Galaxy, and Get Involved.
+
+Click on the “Use Galaxy” link ( http://[WORKFLOW_PLATFORM] ), which will bring up the free public [WORKFLOW_PLATFORM].
+
+The Galaxy interface, populated with sample data, is shown in Figure 10.5.1 .
+
+Hover over “User” in the top bar, then click on “Register” in the submenu.
+
+The center panel of the Galaxy interface will change into a form asking you to provide user account details.
+
+Fill in the Create Account form and click “submit”.
+
+Although Galaxy can be used without creating an account, the authors highly recommend registering. First, having an account allows you to access your data from any machine connected to the Internet. Second, having an account safeguards data stored in the history against deletion. Anonymous histories and datasets are not reusable from one session to the next. You also cannot do all the protocols in this unit without an account.
+
+When registering for the account, note the mailing list subscription checkbox. By checking it, a new user will be subscribed to the galaxy-announce mailing list. This list is a moderated, low volume list for announcements of interest to the [WORKFLOW_PLATFORM].
+
+After registering you will be automatically logged in. For subsequent sessions, login using your e-mail and password. Hover over “User” in the top menu and click “Login” in the submenu.
+
+Click on “Unnamed History” in the History panel
+
+Enter “Basic Protocol 1” and hit return.
+
+You can only do this step if you are logged in.
+
+Click the “Get Data” link at the top of the Tools panel.
+
+Click the UCSC Main link.
+
+The UCSC Table Browser interface will appear in the middle panel of the Galaxy screen. The History panel on the right will disappear until you leave UCSC Main.
+
+Click the “get output” button.
+
+This brings up the next screen of the Table Browser interface as shown in Figure 10.5.2B .
+
+Select the “Coding Exons” radio button.
+
+Click the “Send query to Galaxy” button.
+
+This will return you to Galaxy and create the first item called “UCSC Main on Human: refGene (chr22:1-51304566)” in your History panel, and a large green box in the center panel showing that the upload has been successfully added to the Galaxy job queue. The history item is initially gray, showing it is queued, ( Fig 10.5.3 ). The history item becomes yellow when the job is running, and green once it is complete. If a task fails for any reason the history item will turn red.
+
+This dataset contains ~ 7,100 exons.
+
+Click the dataset’s name (underlined text, upper left corner) to expand the box.
+
+Icons in the upper right corner (e.g., eye, pencil, and ×) as well as links in the expanded history item allow one to perform tasks described in the legend for Figure 10.5.4 .
+
+Rename the dataset to something more memorable.
+
+In the history panel, click the pencil icon next to the “UCSC Main on Human: refGene (chr22:1-51304566)” dataset.
+
+This opens the “Edit Attributes” panel in the center as shown in Figure 10.5.5 .
+
+Copy and paste the contents of the “Name” field into the “Info” field.
+
+This is step is not necessary, but it does keep this somewhat useful information (“UCSC Main on Human: refGene (chr22:1-51304566)”) associated with the dataset.
+
+Type “Exons hg19 chr22” into the “Name” text box.
+
+Click the “Save” button.
+
+The item is now renamed in the History panel. To see the new Info value (which was the old name), click on the new name in the History panel.
+
+Giving the dataset a meaningful name makes it easier to keep track of multiple datasets when working in large histories.
+
+In the Tools panel click “Get Data” and then “UCSC Main” under it.
+
+Click the “get output” button.
+
+This brings up the next screen of the Table Browser interface.
+
+Select the “Whole Gene” radio button
+
+Click the “Send query to Galaxy” button.
+
+This will create the second history item named “UCSC Main on Human: snp132Common (chr22:1-51304566)” This dataset is much larger than the Exons dataset, with ~170,000 SNPs in it.
+
+Rename the new dataset. Click on the new dataset’s pencil icon, copy the old name to the “Info” text box and type “SNPs hg19 chr22” in the “Name” text box. Finish by clicking the “Save” button.
+
+Click “Operate on Genomic Intervals” in the Tools panel.
+
+Click “Join” to perform a Join operation.
+
+This will join any exon and SNP records that overlap by one or more base pairs. For explanation of various join options, see Basic Protocol 4.
+
+This will take a few minutes to compute.
+
+The join tool allows the user to find intersections between two sets of genomic intervals. In our case we are joining protein-coding exons and SNPs as shown in Figure 10.5.6A .
+
+The result of this operation, a dataset with ~4,800 overlapping exon-SNP pairs, is shown in Figure 10.5.7 . The first six columns represent protein-coding exons while the last six represent SNPs. The six columns are: (1) chromosome, (2) start position, (3) end position, (4) description, (5) score (always 0 in this example), and (6) strand (+ or −). Figure 10.5.7 highlights a single exon (located on chromosome 22 between positions 17,264,508 and 17,265,299), which contains (overlaps with) 4 SNPs. One can see that coordinates of SNPs (columns eight and nine) are always within start and end position of the exon (columns two and three).
+
+[*Figs 6 and 7 near here]
+
+Rename the join dataset. Click on the new dataset’s pencil icon, copy the old name to the “Info” text box and type “Exon-SNP Pairings” in the “Name” text box. Finish by clicking “Save”.
+
+Click “Statistics” in the Tools panel.
+
+Click “Count” to count the number of SNPs per exon as shown in Figure 10.5.6B .
+
+Column 4 contains the exon name.
+
+Figure 10.5.7 shows that the number of times each exon is listed equals the number of SNPs that exon overlaps with. Thus, by counting the number of occurrences of every exon in this dataset one can compute how many SNPs each exon overlaps with. The resulting dataset contains ~2,600 lines, one for each exon that overlaps with one or more SNPs.
+
+Rename the new dataset. Click the new dataset’s pencil icon, set the “Info” text box to “Count on data 3; Count of unique values in c4” and type “Exon SNP Counts, unsorted” in the “Name” text box. Finish by clicking “Save”.
+
+Sort results by the number of SNPs per exon as shown in Figure 10.5.6C .
+
+In the Tools panel click “Filter and Sort” and then “Sort”
+
+The resulting history item contains the input dataset, sorted by the number of SNPs in each exon (column 1).
+
+Rename the sorted dataset. Click the new dataset’s pencil icon, copy the old name to the “Info” text box and type “Exon SNP Counts, sorted” in the “Name” text box. Finish by clicking “Save”.
+
+Select the top 100 exons from this list as shown in Figure 10.5.6D .
+
+In the Tools panel click “Text Manipulation” and then “Select first”.
+
+After execution is finished your new history item will contain a list of the 100 exons with the highest SNP density.
+
+Rename the sorted dataset. Click the new dataset’s pencil icon, copy the old name to the “Info” text box and type “Exon SNP Counts, top 100” in the “Name” text box. Finish by clicking “Save”.
+
+The question asked by this protocol has now been answered: The last dataset lists only the exons on chromosome 22 with the most SNPs. However, we lost some information about those exons, such as coordinates and strand, in the process. The final step will link these data back into the result.
+
+Retrieve the other information for the top 100 exons as shown in Figure 10.5.6E .
+
+In the Tools panel, click “Join, Subtract, and Group” and then “Compare two datasets”.
+
+The exon name, the common value between the two datasets, is in column 4 in the exons dataset and column two in the counts dataset.
+
+Rename and format the final result dataset.
+
+Click on the new dataset’s pencil icon, copy the old name to the “Info” text box and type “SNP Coding Exons chr22” in the “Name” text box. Finish by clicking the “Save” button. Click on the new history item’s pencil icon to name and format the BED file.
+
+Set “Score column for visualization:” to “5”.
+
+The resulting dataset contains 100 rows from the Exons dataset. Each row contains a full BED record. This dataset can now be used anywhere a genomic interval dataset (see Basic Protocol 4) or BED dataset can be used. It can also be visualized in genome browsers.
+
+Galaxy interface contains four areas: the top bar, Tools panel (left column), detail panel (middle column), and History panel (right column). The top bar contains user account controls as well as help and contact links. The left panel lists the analysis tools and data sources available to the user. The middle panel displays interfaces for tools selected by the user. The right panel (the History panel) shows datasets and the results of analyses performed by the user. Pictured here are four history items in two different stages of completion: The two “FASTQ Groomer” items are yellow, meaning they are in progress, while the two “ungroomed” items are shown in green, meaning they have completed successfully. Every action by the user generates one or more new history items, which can then be used in subsequent analyses, downloaded, or visualized.
+
+Uploading a list of protein-coding exons (in BED format) of known human genes from the UCSC Table browser involves two steps (A and B) described in the text.
+
+When a job is queued, a history item is initially gray. When a job is running, a history item is yellow. When a job is complete, a history item is green (successful) or red (error).
+
+Close up of Galaxy history item. Clicking on links and icons trigger the following events: eye = shows first megabyte of dataset in Galaxy’s middle panel; pencil = open metadata editor. This brings up interface in the middle panel of the Galaxy screen that allows one to edit the attributes of the current history item. For example, one may wish to give the history item a more descriptive name or change column assignments (see Basic Protocol 2); × = delete item from the history (To undelete or permanently delete, use the history’s Options menu and select “View deleted datasets”.) ; “save” = copy dataset to your computer; “i” = view details about this dataset in center panel, including the dataset(s), if any it was generated from. “rerun” = display this tool in center panel with the same settings it was run with, allowing this step to be exactly rerun or to be modified and rerun. “tags” = add free text tags to this dataset. “sticky note” = add free text annotation. Finally, if the dataset can be visualized in a browser, links to the Galaxy Track Browser (stacked bars icon) and to UCSC, GeneTrack, Ensembl, and others will also be displayed.
+
+The “Edit Attributes” form in the center panel. Each attribute can be modified and saved. In this figure the system generated name has been copied to the “Info” field, and a short descriptive name entered in the “Name” field.
+
+Data manipulation tools: Join (A), Count (B), Sort (C), Select first lines (D), and Compare two datasets (E).
+
+Result of joining two interval datasets, highlighting a single exon that contains (overlaps with) 4 SNPs.
+
+
+## BASIC PROTOCOL 2
+
+
+## LOADING DATA AND UNDERSTANDING DATATYPES
+
+In Galaxy, information is stored in “datasets” which are analogous to files. Datasets can be added to your history by uploading files from your computer, or extracting from external data sources integrated with Galaxy such as UCSC’s ENCODE datasets [ Raney et al., [YEAR] ]. Transferring external data via http/ftp, copying from shared or public Galaxy histories and libraries, and running data manipulation and analysis tools within Galaxy are explained. In addition to their data contents, each Galaxy “dataset” is associated with “metadata”. Metadata is information that describes the characteristics of a dataset. These can include the assigned and given names/annotation, the associated reference genome and build, the format datatype, and frequently additional datatype-specific labels and definitions.
+
+In this protocol we demonstrate how metadata is assigned and modified for common genome analysis datasets uploaded into Galaxy using the methods listed above. We also use Galaxy to transform a dataset from a custom format into a standard BED format.
+
+An Internet-connected computer.
+
+Internet browser that supports JavaScript (e.g., most current browsers such as Mozilla Firefox, Safari, Opera, Chrome, or Microsoft Internet Explorer) and an FTP client, such as FileZilla
+
+Return to the main Galaxy interface by going to the URL http://[WORKFLOW_PLATFORM] .
+
+Create a new history. In the History panel click on “Options” and select “Create New”.
+
+Name the new history by clicking on the text “Unnamed History” and entering “Basic Protocol 2”.
+
+Import two ChIP-Seq mouse ENCODE control and tag datasets from a shared data library.
+
+In the top menu click on “Shared Data”.
+
+Enter “mouse” in the search box, and then click on “ChIP-Seq Mouse Example” in the search results.
+
+Check the “Mouse ChIP-Seq example Control Data, chr19, mm9” and “Mouse ChIP-Seq Example Experimental Data, chr19, mm9” datasets.
+
+Set “For selected datasets:” to “Import to current history” and click “Go” as shown in Figure 10.5.8 .
+
+These datasets are raw data from an ENCODE transcription factor binding site experiment described at h ttp://genome.ucsc.edu/cgi-bin/hgFileUi?db=mm9&g=wgEncodeSydhTfbs . The original data were generated and analyzed by the labs of Michael Snyder at Stanford University and Sherman Weissman at Yale University. An important point for this protocol is that they are all in a legacy Illumina FASTQ format and processed by Galaxy’s primary tool base (as tools are backwards compatible with older FASTQ formats). To make this protocol run significantly faster, the two datasets have been reduced to contain only data that will eventually map to chromosome 19. The original full length files are available at http://hgdownload.cse.ucsc.edu/goldenPath/mm9/encodeDCC/wgEncodeSydhTfbs/wgEncodeSydhTfbsMelCtcfDmso20IggyaleRawData.FASTQ and http://hgdownload.cse.ucsc.edu/goldenPath/mm9/encodeDCC/wgEncodeSydhTfbs/wgEncodeSydhTfbsMelCtcfDmso20IggyaleRawDataRep1.FASTQ .
+
+Click “Analyze data” in the top bar to see your history.
+
+The two imported datasets are now history items.
+
+Click on the new history items’ pencil icons and change their names to “Control Chr19 ungroomed” (dataset #1) and “Tags Chr19 ungroomed” (dataset #2). Finish by clicking on “Save”.
+
+These datasets are in a deprecated format for short reads and will need to be “groomed” into a supported format before it is used. This grooming is done in Basic Protocol 3.
+
+Upload an annotated promoter dataset via FTP.
+
+Go to http://[WORKFLOW_PLATFORM]/wiki/Datafiles/Mouse%20ChIP-Seq%20Data in a separate web browser window.
+
+Download the file “MM9.chr19.AnnotatedPromotersWithTissueRNAP2Density.txt” to your computer.
+
+This dataset comes from the Mammalian Promotor Database (MPromDB, http://mpromdb.wistar.upenn.edu [Gupta et al., [YEAR]]), “a curated database that strives to annotate gene promoters identified from ChIP-Seq experiment results”. MPromDB is a public resource, but requires a login to download data and the data is restricted to non-commercial use.
+
+Launch your FTP client program. This example uses FileZilla, but any FTP client will do ( Fig. 10.5.9 ).
+
+In the “Local site:” panel in FileZilla (on the left), navigate to the directory/folder containing the downloaded file.
+
+Drag the file “MM9.chr19.AnnotatedPromotersWithTissueRNAP2Density.txt” from the left panel (“Local site:”) into the right panel (“Remote site:”).
+
+Depending on network speed and server load, this transfer may take several minutes.
+
+Go back to the Galaxy window in your Genome Browser and click “Get Data” in the Tools panel.
+
+The MM9.chr19.AnnotatedPromotersWithTissueRNAP2Density.txt file now appears in the “Files uploaded via FTP” section.
+
+Set the checkbox next to the uploaded file.
+
+Set the genome text box to “mm9”.
+
+Galaxy knows about many reference genome builds, including mm9, the most recent reference for mouse. Setting this field gives Galaxy context for subsequent operations.
+
+Click “Execute” with these parameters set as shown in Figure 10.5.10 .
+
+Click on the new history item’s pencil icon and change the name to “MPromDB Promoters chr19” and click “Save”.
+
+Galaxy’s FTP upload interface is used with large data files to work around web browser timeout issues when uploading files from user’s computers. Here we first downloaded the file (from the Galaxy wiki), and then uploaded from our computer. In this case, since the file is available from a public URL, we could have just typed in the original URL in the “URL/Text” field and uploaded it from there (but that would not have demonstrated the FTP upload interface) .
+
+Convert the dataset to a genomic intervals format so it can be visualized and used with Galaxy’s interval operations (as described in Basic Protocol 4).
+
+In the History panel click on the “MPromDB Promoters chr19” eye icon.
+
+Clicking the eye icon shows the first megabyte of the dataset in the center panel. Column 2 contains the genomic coordinates as chromosome:start..stop. To convert this file into a Galaxy genomic intervals format, this single column needs to be split into 3 columns.
+
+The resulting dataset contains only one column, the genomic coordinates, from column 2 the input dataset.
+
+The output dataset has two columns in it: the first containing the chromosome name, and the second the start and stop positions, separated by two periods.
+
+The output dataset has three columns in it.
+
+The output dataset has 13 columns in it. The first three are the genomic coordinates, and the last 10 are from the original dataset.
+
+Click the new history item’s pencil icon and change its name to “MPromDB Promoters chr19 interval” and click “Save”.
+
+Update the new history item’s datatype as well. In the center panel, under “Change data type” set “New Type:” to “interval” and click “Save”.
+
+The center panel is updated and several new attributes appear as shown in Figure 10.5.12 . In this case, Galaxy correctly detects that the chromosome column is 1, and the start and end columns are 2 and 3. Galaxy did not detect the strand and name columns, but they can be easily manually assigned.
+
+In the dataset preview in the History panel, columns 8 and 10 are now labeled Name and Strand. This dataset can now be used in any interval operation in Galaxy, including those discussed in Basic Protocol 4. This dataset can also be displayed at UCSC Main, GeneTrack, and Ensembl.
+
+Convert this dataset from a generic genomic interval format to BED format, which is a similar, but stricter, type of interval format. This allows the dataset to be used with tools that require BED format.
+
+The BED format is defined at http://genome.ucsc.edu/FAQ/FAQformat.html#format1 . Not all of the data in the MPromDB file maps to columns in BED, but the data for all required and some optional BED columns are in the MPromDB dataset.
+
+The output dataset contains ~8,600 promoters (same as the input file), but contains only the 6 columns specified in the Cut tool, and those columns have been rearranged as in Figure 10.5.13 . The dataset is now formatted as a BED file, but the format type as not been applied yet.
+
+Click on the pencil icon for the new dataset. In the center panel, scroll past and do not use “Convert to new format”. Instead, under “Change data type” enter “bed” and click “Save”.
+
+This adds an additional attribute, “Score column for visualization” to the center panel. BED can include (and this dataset does) a score value in column 5. Note that if “Convert to new format” is used to transform interval to BED, the score value will be lost (and padded as “0”) as it is not a defined interval format attribute.
+
+Select “5” in “Score column for visualization” and click “Save”.
+
+Rename the dataset. Set the “Info” text box to the default name (given by the “Cut” tool) and type “MPromDB Promoters Chr19 BED” in the “Name” text box. Finish by clicking “Save”.
+
+Get the RefSeq gene definitions for chromosome 19.
+
+This gene set will provide context for visualizations in subsequent protocols.
+
+In the Tools panel click on “Get Data” and then “UCSC Main”
+
+Click the “get output” button.
+
+This brings up the next screen of the Table Browser interface.
+
+Select the “Whole Gene” radio button.
+
+Click the “Send query to Galaxy” button.
+
+This will create an item named “UCSC Main on Mouse: refGene (chr19:1-61342430)” in your history. This dataset contains 944 genes at the time of publication; the exact count may vary slightly as the RefSeq Genes track is updated with GenBank incremental releases (by the track source, UCSC). This has no impact on the analysis methods presented in protocols that use this dataset, however some counts may vary slightly.
+
+Click on the new history item’s pencil icon and change the name to “RefSeq Genes chr19” and “Score column for visualization:” to “5” and click on “Save”.
+
+The data library “ChIP-Seq Mouse Example” is imported from a library into a history.
+
+Filezilla ( filezilla -project.org ) is one example of a desktop FTP client that works well with Galaxy.
+
+Get Data: Upload File tool. After a file has been uploaded using FTP, it appears in the “Files uploaded via FTP” section.
+
+The Cut tool form and parameter options to select a single column (number 2, or “c2”) from a tab-delimited dataset.
+
+Edit Attributes form in center panel, showing default metadata attributes assigned for the Interval format dataset.
+
+Diagram of the columns “Cut” from the Interval formatted dataset to create a BED formatted dataset. The result “BED6” format contains the six fields: chromosome, start (0-based), end, name, score, and strand.
+
+
+## BASIC PROTOCOL 3
+
+
+## CALLING PEAKS FOR CHIP-SEQ DATA
+
+The decreasing cost and increasing throughput of sequencing technologies has made chromatin immunoprecipitation followed by sequencing (ChIP-seq) an essential tool for genome-wide profiling of protein-binding, histone modification, and nucleosome positioning [ Park [YEAR] and Pepke et al. [YEAR] ]. There are numerous tools for various stages of ChIP-seq analysis and this Protocol will focus on the use of MACS (Model-based Analysis of ChIP-Seq) [ Zhang et al. [YEAR] ] to perform peak calling that identifies regions of the mouse genome that are positive for zinc-finger CTCF tags versus a control. CTCF is a transcription factor that can function as either a repressor or activator. Though known to bind to several thousand different genomic locations, it has also been experimentally associated with cancer tumors including but not limited to: testis, prostate, lung, and breast [ Phillips and Corces [YEAR] ]. This protocol begins with FASTQ Tag and Control datasets that are groomed (using FASTQ Groomer, a Galaxy tool that normalizes quality scores and FASTQ formatting) [ [AUTHOR et al.], [YEAR] ] and mapped (Bowtie, a DNA short read aligner) [ Langmead et al. [YEAR] ] and ends with peak calling by MACS.
+
+An Internet-connected computer.
+
+Internet browser that supports JavaScript (e.g., most current browsers such as Mozilla Firefox, Safari, Opera, Chrome, or Microsoft Internet Explorer)
+
+Results from Basic Protocol 2, Step 4:
+
+Control Chr19 ungroomed
+
+Also saved as Data Library at: Main Galaxy public instance http://[WORKFLOW_PLATFORM]
+
+“Shared Data: Data Library: ChIP-Seq Mouse Example”
+
+See Protocol 2 for the source and methods used to create these data.
+
+Return to the main Galaxy interface and start a new history
+
+Go to the URL http://[WORKFLOW_PLATFORM] .
+
+Hover over the top menu bar item “User” until the menu expands and click on “Login”
+
+Enter Galaxy credentials, email address and password
+
+Click on the button “Login”
+
+Click on “Options” at the top of the right “History” panel, the submenu will expand
+
+Click on “Create New”
+
+Click on “Unnamed history” at the top of History panel
+
+Enter “Basic Protocol 3” and hit return
+
+Load ChIP-seq input files described in “Basic Protocol 2, step 4”
+
+Option A: Load from the history created by Basic Protocol 2 as shown in Figure 10.5.14 .
+
+Click on “Options” at the top of the right “History” panel, the submenu will expand
+
+Click on “Copy Datasets”. A form will display in the center panel.
+
+Select the “Basic Protocol 2” history from top left menu named “Source History:”.
+
+Click the two checkboxes for the Chip-seq datasets associated with Step 4f:
+
+input (control) FASTQ file named “Control Chr19 ungroomed”
+
+treatment (tag) FASTQ file named “Tags Chr19 ungroomed”
+
+Select the “Basic Protocol 3” history from the top right menu named “Destination History:”.
+
+Click on the button “Copy History Items” at the bottom of the tool form.
+
+After the copy completes:
+
+-a green banner at the form top will display the following message:
+
+“2 datasets copied to 1 history: Basic Protocol 3”
+
+Click on “Analyze Data” in the top menu bar to refresh the history panel.
+
+- the right history panel will now contain the two copied datasets.
+
+Option B: Load from “Shared Data: Data Library”
+
+Follow “Basic Protocol 2, step 4”.
+
+Data from “Basic Protocol 2, Step 4” are in the original, ungroomed FASTQ format from the source. These data will require grooming (format standardization) prior to mapping.
+
+Groom the ChIP-seq FASTQ files as shown in Figure 10.5.15 .
+
+Click on “NGS: QC and manipulation” in the left Tool panel to expand the tool list
+
+Under “Illumina data:”, click on “FASTQ Groomer”
+
+Set “File to groom:” to “Control Chr19 ungroomed”
+
+Set “Input FASTQ quality scores type:” to “Sanger”
+
+Set “Advanced Options:” to “Hide Advanced Options”
+
+Repeat a–f, except change c. Set “File to groom:” to “Tags Chr19 ungroomed”
+
+Two new history datasets will be added to the history.
+
+Click on the new history items’ pencil icons and change their names to “Control Chr19 groomed” and “Tags Chr19 groomed”
+
+More about job status in the history panel: Often the next steps in a protocol can be started before a prior job run has completed, to create a queue of related jobs that will run in sequence.
+
+Map the ChIP-seq datasets to the Mouse Reference Genome using Bowtie.
+
+Click on “NGS: Mapping” in the left Tool panel to expand the tool list
+
+Click on “Map with Bowtie for Illumina”
+
+Leave as default all settings except for the following, as shown in Figure 10.5.16 :
+
+Set “Select a reference genome:” to “Mouse (Mus musculus): mm9 Canonical
+
+Male”. Do this by typing “mm9” into the search box and selecting the genome from the match list
+
+“Canonical Male” indicates a reference genome that contains all of the somatic, both sex chromosomes (X and Y), and the mitochondrial genome, but none of the unmapped contigs/scaffolds.
+
+Set “FASTQ file:” to “Control Chr19 groomed”
+
+Set “Bowtie settings to use:” to “Full parameter list”
+
+Set “Maximum permitted total of quality values at mismatched read positions (-e):” to “80”
+
+Set “Whether or not to try as hard as possible to find valid alignments when they exist (-y):” to be “Try hard”
+
+Set “Suppress the header in the output SAM file:” by checking the box
+
+This will launch the Bowtie mapping job for the input (control) dataset.
+
+Repeat a–d, except change c.ii. Set “FASTQ file:” to “Tag Chr19 groomed”
+
+This will launch the Bowtie mapping jobs for the control and tags datasets. The result will be two new datasets added to the history
+
+Click on the new history items’ pencil icons’ and change their names to “Control Chr19 SAM” and “Tags Chr19 SAM”
+
+These SAM files represent the primary source data used to call peaks in this workflow.
+
+SAM format (Sequence Alignment/Map) is an alignment storage file format, part of the SAM Tools utilities package ( http://samtools.sourceforge.net/ ) [ Li H. et al. [YEAR] ]
+
+Call Peaks with MACS (Model-based Analysis of ChIP-Seq)
+
+Click on “NGS: Peak Calling” in the left Tool panel to expand the tool list
+
+Leave as default all settings except for the following, as shown in Figure 10.5.17 :
+
+Set “ChIP-Seq Tag File:” to “Tags Chr19 SAM”
+
+Set “ChIP-Seq Control File:” to “Control Chr19 SAM”
+
+Set “Effective genome size:” to “1.87e+9”
+
+Set “Tag size:” to “36”
+
+Set “Select the regions with MFOLD high-confidence enrichment ratio against background to build model:” to “32”
+
+Optional : Set “Parse xls files into distinct interval files:” by checking the box.
+
+Creates optional output files in Step 7, b and c.
+
+Optional : Set “Save shifted raw tag count at every bp into a wiggle file:” to be “Save” and Set “Resolution for saving wiggle files:” to be “1”.
+
+Creates optional output files in Step 7, d and e.
+
+This will launch the MACS peak calling job. The result will become 2–6 new datasets depending on the optional output parameters used.
+
+Output datasets consist of one or more result files (a.–e.) and an HTML summary report (f.).
+
+Dataset results are listed in the far right history panel, and if the HTML summary report eye icon is clicked, it will display in the center panel, as shown in Figure 10.5.18 :
+
+standard output - peaks: bed
+
+optional output – peaks: interval
+
+optional output – negative peaks: interval
+
+optional output – treatment: wig
+
+optional output – control: wig
+
+standard output – html report
+
+BED and WIG are both plain text data formats that describe discrete or continuous genome annotation features. These datatypes were developed by the UC Santa Cruz Bioinformatics Group ( http://genome.ucsc.edu ) [ Fujita et al. [YEAR] ].
+
+Interval format is a plain text data format that describes discrete genome annotation features, This datatype was developed by the Galaxy Team ( http://[WORKFLOW_PLATFORM] ) [ Goecks et al. [YEAR] ],[ [AUTHOR et al.] [YEAR] ],[ Giardine et al. [YEAR] ]
+
+Click on the pencil icon for dataset 6.a. to name and format the BED file.
+
+Change the name to “CTCF Peaks chr19 BED”.
+
+Set “Score column for visualization:” to “5”.
+
+The “CTCF Peaks chr19 BED” result file demonstrates the primary output from this ChIP-seq expression peak-calling workflow.
+
+The Copy History form. The “Source History” on the left side of the center panel is the prior history from Basic Protocol 2. The “Destination History” on the right side of the center panel in the new history for Basic Protocol 3.
+
+The FASTQ Groomer tool form in the center panel with input-data specific quality score type option selected.
+
+The Bowtie tool form in the center panel with appropriate options selected. The highlighted parameters are those that are configured differently than the tool’s default options.
+
+View of MACS tool form in the center panel with the appropriate options selected. The highlighted parameters are those that are configured differently than the tool’s default options.
+
+History result datasets and HTML report detail produced by the MACS run.
+
+
+## BASIC PROTOCOL 4
+
+
+## COMPARE DATASETS USING GENOMIC COORDINATES
+
+The protocol describing finding human exons with highest SNP density (Basic Protocol 1) used the Join operation to find all protein-coding exons that contain SNPs. This is just one of many interval operations offered in Galaxy, which are based on the bx-python package ( [BITBUCKET_REPO_REDACTED] ) developed at Penn Sate University and Emory University. These include intersect, subtract, complement, merge, concatenate, cluster, coverage, base coverage, and join. Some operations are analogous to relational database queries, such as join and coverage [ unit 9.2 ; Jamison, [YEAR] ]. Other operations are analogous to set operations. Figures 10.5.19 and 10.5.20 show examples of input and output produced by individual interval operations. In the following protocol, the authors use two human chromosome 22 annotation datasets as examples. The first dataset "Exons", representing protein-coding exons, is imported from the "Basic Protocol 1" history. The second dataset "Repeats", representing interspersed repeats (also known as transposable elements or simply repeats in the text), is retrieved from the UCSC Table Browser.
+
+Graphical explanation showing input and output datasets for several interval operations, including (A) Overlapping intervals, (B) Overlapping pieces of intervals, (C) Intervals with no overlap, (D) Non-overlapping pieces of intervals, (E) Concatenated intervals, (F) Merge,
+
+Examples highlighting the functionality of coverage tools.
+
+[*Figs 19 and 20 near here]
+
+An Internet-connected computer.
+
+Internet browser that supports JavaScript (e.g., most current browsers such as Mozilla Firefox, Safari, Opera, Chrome, or Microsoft Internet Explorer)
+
+Create a new history. In the History panel click on “Options” and select “Create New”.
+
+Name the new history by clicking on the text “Unnamed History” and entering “Basic Protocol 3”.
+
+Retrieve exons for chromosome 22 dataset from the “Basic Protocol 1” history:
+
+In the History panel click on “Options” and select “Copy Datasets”.
+
+Under the “Source History” pulldown menu, select “Basic Protocol 1”.
+
+Check the “Exons hg19 chr22” dataset.
+
+Under the “Destination History” pulldown select “Basic Protocol 4”.
+
+Click “Copy History Items”.
+
+Refresh the History panel and use the pencil icon (see Figure 10.5.4 ) to change the name of the new dataset to “Exons” on the “Edit Attributes” form, as shown in Figure 10.5.5 .
+
+Retrieve repeats for chromosome 22:
+
+This brings up the next screen of the Table Browser interface
+
+Click “Send query to Galaxy”.
+
+The history item will appear after a moment (10 to 20 sec) with the name “UCSC Main on Human: rmsk (chr22:1-51304566)”
+
+Click the new dataset’s pencil icon (see Figure 10.5.4 ) and change the name to “Repeats” on the “Edit Attributes” form, as shown in Figure 10.5.5 .
+
+You can rename the dataset before, while, or after it loads. If you rename it before or while loading, you may see warnings about missing metadata. These warnings can be ignored.
+
+The Repeats dataset contains ~75,000 regions/rows.
+
+We are now ready to perform interval operations on these two datasets.
+
+Intersect: Find exons that overlap with one or more transposable elements, as shown in Figure 10.5.19A .
+
+Intersect allows for the intersection of two datasets. The intersect tool can output either the entire intervals from the first dataset that overlap the second dataset (e.g., all exons containing repeats), or it can return just the intervals representing the overlap between the two datasets (e.g., only the parts of exons that are repetitive). This step demonstrates the first option.
+
+When finding entire intervals (by setting Return to Overlapping Intervals), the order of the datasets is important. The operation will output all of the intervals in the first query that overlap any interval in the second query. It can also be thought of as a filter: intervals that do not overlap any interval in the second query will be filtered out.
+
+The minimum overlap of 1 requests that any overlapping regions (even if they overlap by only 1 position) will be output.
+
+This launches the intersect operation. A new item appears in the History panel. The resulting dataset contains ~220 regions -- every coding exon that overlaps at least 1 base pair of a transposable element. The entire intervals from the coding exons dataset are output whenever there is an overlap with any transposable element interval.
+
+Intersect: Find regions within exons that overlap with transposable elements, as shown in Figure 10.5.19B .
+
+The second intersect option is to return only the pieces of intervals that overlap. When finding pieces of intervals, or the regions representing the overlap between the two datasets (by setting Return to Overlapping Pieces of Intervals), the output will be the intervals of the first dataset with the nonoverlapping subregions removed.
+
+This launches the intersect operation. A new item appears in the History panel. The output dataset contains ~250 regions -- the subregions of the exons that overlap with the intervals of the repeats. This dataset contains more regions than the previous Intersect example because several exons overlap with more than one repeat.
+
+Examine the first few rows of this dataset. The start and end columns of the new dataset are different from those in the first intersect dataset, and the exon names are repeated whenever more than one repeat intersects with that exon.
+
+Subtract all: Find exons that do not contain any repeats, as shown in Fig 10.5.19C .
+
+Subtract does the opposite of intersect. It removes the intervals or parts of intervals in the first dataset that are found in the second dataset. Like Intersect, Subtract can treat intervals as a whole, removing or keeping entire intervals, or it can break them apart, removing overlapping subregions. This step demonstrates the first option, returning entire intervals.
+
+As with arithmetic subtraction, the order of the datasets is important. The second dataset is subtracted from the first dataset. The output is a variation of the first dataset and all of its columns. When subtracting whole intervals (by setting Return to Intervals with no overlap), the output will be the intervals of the first dataset that do not overlap any part of intervals of the second dataset.
+
+The minimum overlap of 1 means that any overlapping regions will be removed from the output.
+
+This launches the subtract operation. The output dataset contains ~7000 exons that contain no transposable elements; each exon that overlaps a transposable element is removed from the output.
+
+Subtract subregions: Remove subregions of exons that overlap with transposable elements, as shown in Figure 10.5.19D .
+
+When subtracting overlapping subregions (by setting Return to Non-overlapping pieces of intervals), the output will be the intervals of the first dataset with the overlapping subregions removed.
+
+The minimum overlap of 1 means that any overlapping regions will be removed from the output.
+
+This launches the subtract operation. The output dataset contains ~7300 regions/rows. These are the exons minus the subregions that overlap transposable elements. This is different from the previous example: only the overlapping subregions of the exons are removed. Regions or intervals not overlapping are preserved. Thus, this dataset contains more regions than the input exon dataset: exons that overlapped with repeats have now been split into multiple regions (but still with the same exon name).
+
+Concatenate and Merge: Compare coding exons and transposable elements, as shown in Figures 10.5.19E (Concatenate) and 10.5.19F (Merge).
+
+Concatenate and Merge together are analogous to addition or union. They can be used together to combine datasets and merge (or flatten) the intervals.
+
+Concatenate ( Figure 10.5.19E ) simply combines two interval datasets. The option “Both queries are exactly the same filetype” indicates that columns in both datasets are the same. If this option is unchecked, then the second dataset is adjusted to match the column assignments of the first. However, since the columns chromosome, start, end, and strand are the only columns used by the operations, all other columns will be replaced in the second dataset with a period. This option is usually left checked, as BED files are the typical interval format used within Galaxy.
+
+Merge reads a dataset and combines all overlapping intervals into single intervals. When merging intervals, all columns besides chromosome, start, and end are lost. When two intervals are combined into one, it is ambiguous what the other columns represent or which field should be carried over to the resulting interval. For this reason, all columns except for chromosome, start, and end are omitted from the output.
+
+Both datasets are in BED format.
+
+After the operation has completed, the history item will change to a light-green color. You may click on the title of the history item to view the first few lines, or click the eye icon to view the dataset. This dataset is both datasets combined into one dataset. It contains ~82,000 regions.
+
+Type “merge” in the Tools panel search box and then click on “Merge” under “Operate on Genomic Intervals”.
+
+The previous dataset, “Concatenate on data X and data Y ,” should be selected in the drop-down list labeled “Merge overlapping regions of”. If it is not, select the concatenated dataset.
+
+In this example, the two datasets are first concatenated. This outputs a BED file containing all of the intervals of both datasets. The next step, Merge ( Figure 10.5.19F ), merges all of the overlapping regions into single intervals.. The resulting dataset has ~59,000 rows and is a list of all of the regions on chromosome 22 that are either a coding exon, a transposable element, or both. Each region defines only the start and end position of each region. All other information is pruned from the dataset.
+
+“Concatenate” combines datasets, and has the ability to combine interval datasets of different types.
+
+“Merge” combines overlapping intervals into single intervals.
+
+Together, the two operations can be used to combine intervals from different datasets into simple regions.
+
+Base Coverage: Calculate the number of bases covered by all transposable elements, as shown in Figure 10.5.20A .
+
+The Base Coverage tool ( Figure 10.5.20A ) calculates the number of bases covered by all of the intervals in a dataset. It does not count overlapping bases more than once; if there are two intervals referring to the same region, those bases are only counted once.
+
+Type “base coverage” in the Tools Panel search box and then click on “Base Coverage” under “Operate on Genomic Intervals”.
+
+Set the drop-down list labeled “Compute coverage for” to the “Repeats” dataset.
+
+Click on the title of the history item. The item will expand and display a single number in the preview area, ~17,000,000, that is the total number of bases covered by transposable elements (about 1/3 of chromosome 22).
+
+Coverage: Determine how much of each coding exon is covered by repeats , as shown in Figure 10.5.20B .
+
+The Coverage tool ( Figure 10.5.20B ) is a combination of Intersect and Base Coverage. Coverage finds the number of bases each interval in the first dataset covers of the second dataset. In addition, it finds the fraction of the interval’s total length that covers intervals in the second query. The resulting dataset is all of the intervals from the first input dataset, with two columns added to the end: bases covered and fraction covered. The additional two columns can be manipulated with other tools such as Filter under the Filter and Sort section of the toolbox or with Compute under the Text Manipulations section of the toolbox.
+
+Type “coverage” in the Tools panel search box and then click “Coverage” under “Operate on Genomic Intervals”.
+
+Set the drop-down list labeled “What portion of” to the “Exons” dataset.
+
+Set the drop-down list labeled “is covered by” to the “Repeats” dataset.
+
+The resulting dataset contains all the coding exons, with two additional columns. The first additional column is the number of bases that the interval covers in the transposable elements dataset. The second additional column is the fraction of that interval that covers bases represented by the transposable elements dataset.
+
+Complement: Chromosome complement of repeats on chromosome 22, as shown in Figure 10.5.21A .
+
+The Complement tool ( Figure 10.5.21A ) inverts a dataset. Complement reads in all of the regions of a dataset, and outputs the regions not covered by any intervals in that dataset. The option Genome-wide complement allows for the entire genome to be complemented, regardless of whether a chromosome, contig, scaffold, etc. is represented in the query dataset. In a genome-wide complement of a dataset, any chromosome that does not have any intervals in the query dataset will be output in the result as the entire chromosome. In a normal complement, only the chromosomes, contigs, scaffolds, etc. that are referenced in the query dataset will be represented in the output.
+
+Type “complement” in the Tools panel search box and then click “Complement” under “Operate on Genomic Intervals”.
+
+Set the drop-down list labeled “Complement regions of” to the “Repeats” dataset.
+
+Uncheck the “Genome-wide complement” checkbox. Only chromosome 22 will be complemented.
+
+The resulting dataset contains ~55,000 intervals representing regions that are NOT transposable elements. Also, a normal complement is done in contrast to a genome-wide complement because the dataset was restricted to repeats from chromosome 22 (see step 5 above).
+
+Cluster: Merge clusters of at least 2 transposable elements within 100 base pairs into single region elements, as shown in Figures 10.5.21B and 10.5.21C .
+
+Cluster ( Figures 10.5.21B and 10.5.21C ) is one of the most versatile and powerful interval operations). Cluster finds clusters of intervals, and has a wide range of behavior depending on the options specified. The Maximum distance parameter specifies the maximum distance allowed between regions for those regions to be considered a cluster. Maximum distance can be a positive number, zero, or a negative number. When maximum distance is a positive number, regions that are at most that distance from each other are considered to be a cluster. When maximum distance is zero, cluster considers intervals that are touching to be a cluster. This is similar to the behavior of the merge tool, but is more flexible and specific. When maximum distance is a negative number, intervals that have that amount of overlap are considered to be a cluster.
+
+A cluster will be ignored unless it has at least as many intervals within it as specified by the parameter Minimum intervals per cluster. If this is set to 1 or lower, then all intervals, even single intervals that do not cluster with any surrounding intervals, are included in the output.
+
+Cluster has five options for output listed in the drop-down list Return type:
+
+Merge clusters into single intervals finds all of the clusters according to the criteria set by maximum distance and minimum intervals per cluster, and outputs the start and end of each cluster as an interval. The result is that clustered intervals become one large, continuous interval spanning all of the intervals within that cluster. Setting maximum distance to 0 and minimum intervals per cluster to 1 with this option produces exactly the same output as the Merge tool.
+
+Find cluster intervals; preserve comments and order finds all of the clusters according to the criteria set by maximum distance and minimum intervals per cluster, and outputs those intervals in the original order they were encountered in the input dataset. This option can be thought of as a filter that removes the intervals that are not found within a cluster.
+
+Find cluster intervals; output grouped by clusters finds all of the clusters according to the criteria set by maximum and minimum intervals per cluster. It is the same as the previous option, except that the intervals are grouped together in the output by cluster.
+
+Find the smallest interval in each cluster and Find the largest interval in each cluster first build the clusters and then return only the smallest or largest interval in each cluster.
+
+The history item changes to a light-green color when the operation completes. You may click on the title of the history item to view the first few lines, or click the eye icon to view the full ~13,500 record dataset.
+
+The dataset returned represents clusters of transposable elements within 100 bp of each other.
+
+Join: Compare and Join coding exons with transposable elements, as shown in Figure 10.5.22A .
+
+The Join ( Figure 10.5.22 ) tool’s operation is similar to joins done by database management systems such as MySQL. Join looks at two datasets of intervals, and joins them based on interval overlap. Any interval in the second dataset that overlaps an interval in the first dataset will be appended to the line from the first dataset and output.
+
+Like intersect, join allows a minimum overlap to be specified. Intervals must meet or exceed the minimum overlap to be joined. There are several types of join that can be done. These are specified by the drop-down list labeled “Return:”
+
+Only records that are joined (INNER JOIN) will only return intervals in the first query that overlap and are joined to an interval in the second query. For users of SQL databases, this is similar to an INNER JOIN ( Figure 10.5.22A ).
+
+All records of first dataset (fill null with ‘.’) returns all intervals from the first dataset. Any interval in the first dataset that does not join an interval in the second dataset will have the extra fields padded with a period ( Figure 10.5.22B ).
+
+All records of second dataset (fill null with ‘.’) returns all intervals from the second dataset. Any interval in the second dataset that is not joined to an interval in the first dataset will have fields filled in with a period ( Figure 10.5.22C ).
+
+All records of both datasets (fill nulls with a ‘.’) returns all of the intervals from both datasets. Intervals that do not join have fields filled in with a period ( Figure 10.5.22D . An example of output for each Join option is shown in Figure 10.5.22E . Notice that in all but the first option (A), example intervals may contain invalid chromosome, start, and/or end data points (null “.” values). This could result in a dataset that requires filtering to exclude “null” values before performing further operations.
+
+After the operation completes, the history item changes to a light-green color. You may click on the title of the history item to view the first few lines, or click the eye icon to view the dataset.
+
+The dataset returned contain a row for each time a coding exon overlaps a transposable element. The overlapping simple repeat is added as extra columns to the end of each line. Further analysis could use the coverage tool on this resulting dataset to calculate the amount of coverage each exon has on each repeat.
+
+Graphical explanation of the (A) Complement, (B) Find clusters, and (C) Merge clusters interval tools.
+
+Graphical explanation of genomic interval “Join” operations in Galaxy. (A) Only records that are joined, (B) All records of the first dataset, (C) Only records of second dataset, and (D) All records of both datasets. (E) Shows how all 4 variations are implemented on two small datasets.
+
+
+## BASIC PROTOCOL 5
+
+
+## WORKING WITH MULTIPLE SEQUENCE ALIGNMENTS
+
+Galaxy includes several tools to specifically work with paired and multiple sequence alignment format (MAF) datasets. The tool functions can upload, extract, and summarize the content of MAF datasets sourced from the UCSC Browser with the goal of maximizing analytical access to the underlying data. Both custom and standard MAF datasets can be uploaded and used with the majority of tools. The MAF manipulation tools used in this protocol were developed by the Galaxy team [ [AUTHOR et al.] [YEAR] ].
+
+Part A of this protocol will demonstrate how to extract regions from a standard Conservation MAF reference track (hg19), based on the query interval ranges from Basic Protocol 1, Step 20: top 100 SNP containing human coding exons on chromosome 22.
+
+Part B of this protocol will demonstrate how to generate coverage statistics from a standard Conservation MAF reference track (hg19), based on the query interval ranges from Basic Protocol 1, Step 20: top 100 SNP containing human coding exons on chromosome 22.
+
+Part C of this protocol will demonstrate how to extract and manipulate syntenic “transcript” FASTA sequence from a standard Conservation MAF reference track (hg19), based on the query interval ranges from a human RefSeq Genes track, as extracted in BED format from the UCSC Table Browser, limited to chromosome 22.
+
+An Internet-connected computer.
+
+Internet browser that supports JavaScript (e.g., most current browsers such as Mozilla Firefox, Safari, Opera, Chrome, or Microsoft Internet Explorer)
+
+Result data from Basic Protocol 1, Step 20: “SNP Coding Exons chr22”.
+
+See Basic Protocol 1 for the source, methods, and references for these data.
+
+UCSC Browser tracks for Conservation and RefSeq Genes
+
+“Conservation 46-way multiZ track for hg19” (standard MAF in Galaxy)
+
+“RefSeq Genes hg19 chr22” (loaded into Galaxy)
+
+Workflow at: Main Galaxy public instance http://[WORKFLOW_PLATFORM]
+
+“Shared Data: Published Workflows:
+
+Transform 'Stitch Gene blocks' FASTA blocks to standardized FASTA file”
+
+Return to the main Galaxy interface and start a new history
+
+Go to the URL http://[WORKFLOW_PLATFORM]/
+
+Hover over the top menu bar item “User” until the menu expands, then click on “Login”
+
+Enter Galaxy account credentials, email address and password
+
+Click on the button “Login”
+
+Click on “Options” at the top of the left “History” pane, the submenu will expand
+
+Click on “Create New”
+
+Click on “Unnamed history” at the top of History pane
+
+Enter “Basic Protocol 5” and hit return
+
+Copy BED file from Basic Protocol 1, Step 20: “SNP Coding Exons chr22”.
+
+Click on “Options” at the top of the right “History” panel, the submenu will expand
+
+Click on “Copy Datasets”. The form will display in the center panel.
+
+Select the “Basic Protocol 1” history from top left menu named “Source History:”.
+
+Click the checkbox for the file “SNP Coding Exons chr22”.
+
+Select the “Basic Protocol 5” history from the top right menu named “Destination History:”.
+
+Click on the button “Copy History Items” at the bottom of the tool form.
+
+After the copy completes:
+
+A green banner at the form top will display the following message:
+
+“1 datasets copied to 1 history: Basic Protocol 5”
+
+Click on “Analyze Data” in the top menu bar to refresh the history panel.
+
+The right history panel will now contain the copied dataset “SNP Coding Exons chr22”. This data copied from “Basic Protocol 1” is a 100 line BED format file.
+
+Extract conserved MAF blocks for primate species.
+
+Primate species included in MAF Conservation 46-way multiZ (hg19)
+
+Click “Fetch Alignments” in the left tool panel to expand the tool list.
+
+Click “Extract MAF blocks” and set options as shown in Figure 10.5.23 .
+
+Set “Choose intervals:” to “SNP Coding Exons chr22”.
+
+Set “MAF Source:” to “Locally Cached Alignments”.
+
+Set “Choose alignments:” to “46-way multiZ (hg19)”.
+
+Set “Choose species:” by clicking the boxes for the first ten species in the list. These correspond to the primate species specified at the start of this step (5).
+
+Set “Split blocks by species:” to “Do not split”.
+
+Click on the new history item’s pencil icon and change the name to “MAF blocks for SNP Coding Exons hg19 chr22”. Finish by clicking on “Save”.
+
+Result file “MAF blocks for SNP Coding Exons hg19 chr22” contains the MAF alignment blocks corresponding to the 100 input hg19 exon query interval ranges. An example of this output is in Figure 10.5.24 .
+
+Extract MAF blocks tool form highlighting a subset of the tool options.
+
+Result file produced by the Extract MAF blocks tool. Data are the MAF alignment blocks corresponding to the query interval ranges.
+
+Generate coverage statistics for “SNP Coding Exons chr22” from MAF for all species.
+
+Click “Fetch Alignments” in the left tool panel to expand the tool list.
+
+Click “MAF Coverage Stats” and set options as shown in Figure 10.5.25 .
+
+Set “Interval File:” to “SNP Coding Exons chr22”.
+
+Set “MAF Source:” to “Locally Cached Alignments”.
+
+Set “MAF Type:” to “46-way multiZ (hg19)”.
+
+Set “Type of Output:” to “Coverage by Region”
+
+Click on the new history item’s pencil icon and change the name to “MAF Coverage by Region for SNP Coding Exons hg19 chr22”. Finish by clicking on “Save”.
+
+Repeat steps a–g. except set “Type of Output:” to “Summarize Coverage”.
+
+Click on the new history item’s pencil icon and change the name to “MAF Summarized Coverage for SNP Coding Exons hg19 chr22”. Finish by clicking on “Save”.
+
+Result file “MAF Coverage by Region for SNP Coding Exons hg19 chr22” contains 3,440 regions, one line for each pair of query hg19 coding exon and species having an overlapping MAF alignment. Counts are for covered and not covered query hg19 exons bases that represent predicted evidence of conservation between the two species. An example of this output is in Figure 10.5.26 .
+
+Result file “MAF Summarized Coverage for SNP Coding Exons hg19 chr22” contains 46 lines (one for each species included in the input MAF alignment data) and three columns: species, nucleotides, and coverage. “Coverage” is defined number of nucleotides divided by the total length of the provided intervals (as notated in the methods description on the “MAF Coverage Stats” tool form). An example of this output is in Figure 10.5.27 .
+
+[*Fig 26 and 27 near here]
+
+MAF Coverage Stats tool form highlighting the tool options.
+
+Result file produced by the MAF Coverage Stats tool using the option “Coverage by Region”. Data are counts for covered and not covered query bases that represent predicted evidence of conservation between the two species.
+
+Result file produced by the MAF Coverage Stats tool using the option “Summarize Coverage”. Data has three columns: species, nucleotides, and coverage, where coverage is defined number of nucleotides divided by the total length of the provided intervals.
+
+Import transcript coordinates of human RefSeq Genes from the UCSC Table Browser to Galaxy. Make sure the following parameters are set:
+
+Click the “get output” button.
+
+This brings up the next screen of the Table Browser interface
+
+Select the “Whole Gene” radio button.
+
+Click the “Send query to Galaxy” button.
+
+Click on the new history item’s pencil icon and change the name to “RefSeq Genes hg19 chr22”. Finish by clicking on “Save”.
+
+The dataset “RefSeq Genes hg19 chr22” is a 879 line, 12 column BED format file that contains complete transcription (UTR and CDS) start and stop genome coordinates.
+
+Extract syntenic FASTA sequence from MAF for primate species (same 10 species as listed in Part A, Step 3). Example result data is shown in Figure 10.5.28 .
+
+Click “Fetch Alignments” in the left tool panel to expand the tool list.
+
+Click “Stitch Gene blocks”.
+
+Set “Gene BED File:” to “RefSeq Genes hg19 chr22”.
+
+Set “MAF Source:” to “Locally Cached Alignments”.
+
+Set “MAF Type:” to “46-way multiZ (hg19)”.
+
+Set “Choose species:” by clicking the boxes for the first ten species in the list. These correspond to the primate species specified at the start of Part A, Step 3.
+
+Set “Split into Gapless MAF blocks:” to “No”.
+
+Click on the new history item’s pencil icon and change the name to “FASTA blocks for RefSeq Genes hg19 chr22”. Finish by clicking on “Save”.
+
+Result file “FASTA blocks for RefSeq Genes hg19 chr22”contains predicted transcript FASTA sequence for each of the 10 species, corresponding to the input hg19 transcript query interval ranges (if conserved in the hg19 MAF data). The FASTA sequences are organized by transcript blocks and are labeled by species and the query interval’s transcript name. The file will state that it contains “8,790” sequences, results of 10 species for each of the 879 input regions, but it is expected that some records will have FASTA sequence and others will not, depending on MAF content. Filtering for this content is done in Steps 7 and 8. An example of the original output is in Figure 10.5.28 .
+
+Use a Galaxy “Workflow” to transform the FASTA blocks into a standardized FASTA file.
+
+Transforming the data into a concatenated FASTA file containing only those results with sequence will make the data suitable for tools that accept nucleotide FASTA sequence as an input.
+
+Hover over “Shared Data” in the top banner menu bar to expand the list.
+
+Click on “Published Workflows”.
+
+Enter “FASTA” into the top search box and click on the “find” icon at box’s right end.
+
+Click on the workflow named “Transform 'Stitch Gene blocks' FASTA blocks to standardized FASTA file”, as shown in Figure 10.5.29 .
+
+Click on “Import Workflow” next to the green “plus” icon in the top right corner of the left workflow summary panel, as shown in Figure 10.5.30 .
+
+Click on “start using this workflow” on the confirmed import form.
+
+Locate the workflow on the page “Your workflows”. It will be named “imported: Transform 'Stitch Gene blocks' FASTA blocks to standardized FASTA file”.
+
+Click in the down arrow at the end of the workflow name to expand the list and click on “Run”, as shown in Figure 10.5.31 .
+
+Set “Step 1: Input dataset” to “FASTA blocks for RefSeq Genes hg19 chr22” in the “Running workflow:” form in the center panel, as shown in Figure 10.5.32 .
+
+Click on “Run workflow”.
+
+This workflow generates 5 new datasets, some of them hidden in the history panel, as shown in Figure 10.5.33 . To access these intermediate hidden datasets, click on “Options: Show Hidden Datasets” in the top right corner of the right history panel.
+
+Click on the newest history item’s pencil icon.
+
+Change the name to “FASTA all for RefSeq Genes hg19 chr22”.
+
+Clear the “Database/Build:” assignment by clicking on the menu and selecting the top label line “----- Additional Species are Below -----“, as shown in Figure 10.5.34 .
+
+This is a dataset that contains genomic FASTA sequence from several species. To create a genomic FASTA sequence file from a single species, see the next step in this protocol, Step 8.
+
+The result dataset “FASTA all for RefSeq Genes hg19 chr22” will contain 6,882 sequences and is formatted for use with tools that accept FASTA format.
+
+Transform the FASTA blocks into a standardized FASTA file for a single species.
+
+Subsetting the results by species will give the data a specific genome context and make it useable by tools that require a reference genome assignment.
+
+Note: Many of this protocol’s operations in Step 8 are the same as those bundled into the Step 7 Workflow. Step 8 demonstrates the individual tools in detail, showing how Galaxy’s data manipulation, filtering, sorting, and format conversation tools work together in combination. Galaxy’s tools most often perform a single, distinct task to maximize the ability to create customized analysis paths. Bundling multiple steps into a workflow makes customized analysis easy to apply to additional datasets and share with collaborators.
+
+“rheMac2” is the short label for the reference genome, used for the attribute “database:” and “Database/Build:” in the Galaxy user interface and file system.
+
+Click on “Convert Formats” in the left Tool panel to expand the list.
+
+Click on “FASTA-to-Tabular” and set the following options and execute.
+
+Set “Convert these sequences:” to result dataset from step 5 “FASTA blocks for RefSeq Genes hg19 chr22”.
+
+Set “How many columns to divide title string into?:” to “1”.
+
+Set “How many title characters to keep?:” to “0”.
+
+Click on “Filter and Sort” in the left Tool panel to expand the list.
+
+Click on “Filter” and set the following options and execute.
+
+Set “Filter:” to result dataset from step b.
+
+Set “With following condition:” to “len(c2.replace('-', ")) > 0” (no double quotes), as shown in Figure 10.5.35 .
+
+Clarification: all quotes in the string are set as single ' quotes
+
+Click on “Select” and set the following options and execute.
+
+Set “Select lines from:” to result dataset from step c.
+
+Set “that” to “Matching”
+
+Set “the pattern:” to “^rheMac2\.” (no double quotes), as shown in Figure 10.5.36 .
+
+Using the reference database short label assigned in the name (FASTA sequence identifier value) to select only those sequences for this species and genome build.
+
+Click on “Convert Formats” in the left Tool panel to expand the list.
+
+Click on “Tabular-to-FASTA” and set the following options and execute.
+
+Set “Tab-delimited file:” to result dataset from step e.
+
+Select “c1” in the “Title column(s):” list.
+
+Set “Sequence column:” to “c2”.
+
+Click on “FASTA manipulation” in the left Tool panel to expand the list.
+
+Click on “FASTA Width formatter” and set the following options and execute.
+
+Set “Library to re-format:” to result dataset from step g.
+
+Set “New width for nucleotides strings:” to “50”.
+
+Click on the new history item’s pencil icon.
+
+Change the name to “FASTA rheMac2 for RefSeq Genes hg19 chr22”.
+
+Set “Database/Build:” to “Rhesus Jan. [YEAR] (MGSC Merged 1.0/rheMac2) (rheMac2)”. Do this by typing “rhe” into the box and selecting the full database name from the search result list, as shown in Figure 10.5.37 .
+
+Result dataset “FASTA rheMac2 for RefSeq Genes hg19 chr22”contains predicted transcript FASTA sequence for only the rheMac2 species/build, corresponding to the input hg19 transcript query interval ranges (when conserved in the hg19 MAF data). Reassignment of the database attribute assures that this dataset will be used correctly with downstream analysis tools.
+
+Result file produced by the Fetch Alignments: Stitch Gene blocks tool. Gapped bases are represented by the symbol “-”. It is expected that some MAF blocks will contain results with sequence, sequence plus gaps, or gaps only. Large gaps in the query or target genome may be interpreted as a region that is not well conserved. Input type should be carefully evaluated when choosing a MAF (or any) tool. The complete absence of sequence in the input query (as in the case of a non-coding RefSeq Gene, represented in the second block of this example) produces no results (sequence or gaps) in the output. As the Stitch Gene blocks tool is specifically designed to extract and stitch coding regions from the query input BED file, this is the correct result. To perform a similar function as Stitch Gene block for non-coding genes, the tool Stitch MAF blocks would be a better choice.
+
+Shared Data: Published Workflows on the Main [WORKFLOW_PLATFORM] at [WORKFLOW_PLATFORM] with the features for an individual workflow highlighted: Name (of workflow), Annotation (free text), Owner (Galaxy user name), Community Rating, Community tags (searchable keywords), Last Updated.
+
+Detailed view of an individual workflow’s steps with the “Import workflow” link highlighted.
+
+Your workflows page listing the newly imported workflow with the action menu highlighted. Menu selections: Edit, Run, Share or Publish, Download or Export, Clone, Rename, and Delete.
+
+A workflow that is selected to “Run” is displayed as a form in the center panel. User-specified input selections from the current history are made by using a step’s pull-down menu, as highlighted.
+
+Confirmation display when a workflow is executed (started) successfully. As the workflow is run, individual datasets produced by the workflow steps/jobs will be independently colored as gray (waiting to run), yellow (running), green (successful), and red (error). Note that all steps in the workflow are listed, including steps that produce hidden datasets.
+
+Tools can sometimes produce datasets that no longer should be assigned to the current (or any single) reference genome. Use the Edit Attributes form to assign/reassign a new reference genome (see Figure 10.5.37 ) or to unassign a reference genome (as shown) by selecting the menu title (interpreted as a “null” database) from the list.
+
+Filter tool form showing options, with the filter expression box highlighted containing a free text string. This specific filter string is designed to remove species rows that have no conserved genome sequence in the output of the Fetch Alignments: Stitch Gene blocks tool.
+
+Select tool form showing options, with the select expression box highlighted containing a free text string. This specific select string is designed to extract lines from a file that start with “rheMac.”.
+
+Tools can sometimes produce datasets that no longer should be assigned to the current (or any single) reference genome. Use the Edit Attributes form to assign/reassign a reference genome (as shown, in this case rheMac2) or to unassign a reference genome (see Figure 10.5.34 ).
+
+
+## GUIDELINES FOR UNDERSTANDING RESULTS
+
+Galaxy was designed to be an interactive system and in most cases results will be self-descriptive depending on which tools were applied to the original data. As always caution should be used when interpreting genomic data—the information produced by Galaxy is only as good as the underlying data imported.
+
+
+## COMMENTARY
+
+
+## Background Information
+
+Modern Web-based genomic resources offer many facilities for retrieving and visualization of data. However, few of these resources offer sophisticated tools for further analysis of these data. As a result, almost every experimental biologist has to analyze data on his/her own, struggling with numerous difficulties arising from format incompatibility or incomprehensible user interfaces. Although our computational colleagues are happy to help, few are willing to devote time and resources to develop a good user interface (a significant challenge). Galaxy is a system designed to help both sides. For experimental biologists, Galaxy provides an intuitive user interface offering a direct connection to many widely used data sources and browsers, a simplified FTP data loading procedure, and a custom genome option for most tools including the native Galaxy Track Browser (GTB, or Trackster ). The Galaxy workspace includes a unique history system to organize, label and displays data, to track datasets and analysis for sharing and/or publishing, and to extract analysis functions into workflows for re-use. For computational biologists, Galaxy provides a framework that can integrate command-line tools with almost no effort. For each tool, Galaxy generates an interface and provides all housekeeping (e.g., input and output management, job control, error catching, and testing facilities). As this text was compiled with experimental biologists in mind, it does not contain any information on technical aspects of the [WORKFLOW_PLATFORM] (found at http:// [WORKFLOW_PLATFORM]/wiki/ ).
+
+
+## Critical Parameters and Troubleshooting
+
+Galaxy allows performing an infinite number of analyses on genomic data. In designing the system, the authors tried to put as few constraints on the user as possible. In that sense Galaxy is similar to a car with the manual gearbox—it gives you more control if you know what you are doing (e.g., you do not shift from fifth to reverse). Fortunately, user feedback provides convincing evidence that a short test drive is sufficient to understand how Galaxy works. This text is equivalent to such a test drive. Below, the authors list the most common problems encountered by Galaxy users. They can be condensed into two categories: (1) data format issues and (2) genome build incompatibilities.
+
+Galaxy “understands” several datatypes including genomic coordinates (e.g., BED, GFF/GTF, Wig), sequences (e.g., FASTQ, FASTA), and alignments (e.g., SAM/BAM and MAF). Most of the tools require data to be in one of these formats. For example, the genomic intervals operations described in Basic Protocol 4 can be only performed on data in Interval format. In most cases changing your data to interval format is as simple as correctly setting metadata as shown in Step 6 of Basic Protocol 2.
+
+Galaxy supports interactive genome analyses that use a mix of different genomes within a single analysis space (History). In the authors’ opinion such “mixing” is essential for a true comparative genomics resource. The ease of mixing also means that in some cases users will accidentally attempt comparing data from different genomes. Thus, when using tools that operate on more than one history item (i.e., most genomic interval operations) make sure that all data come from the same genome build.
+
+Galaxy has a vibrant and growing user and developer community. If you have questions or encounter problems, the best places to start are the Galaxy Wiki ( http://[WORKFLOW_PLATFORM]/wiki ) and specifically the Galaxy Support page ( http://[WORKFLOW_PLATFORM]/wiki/Support ).
+
+A vision for Galaxy was originally articulated by Ross Hardison, who is also the major source of support and critical feedback. The authors would like to thank Jim Kent and David Haussler for their continuing support and making UCSC Genome Browser uplink and connection possible. Istvan Albert pioneered initial aspects of Galaxy design. Efforts of the Galaxy Team (Enis Afgan, Guru Ananda, Dannon Baker, Nate Coraor, Jeremy Goecks, Greg Von Kuster, Ross Lazarus) were instrumental for making this work happen. The following individuals also contributed to the [WORKFLOW_PLATFORM] at different stages: Richard Burhans, Ramkrishna Chakrabarty, Laura Elnitski, Belinda Giardiane, Bob Harris, Jianbin He, Kanwei Li, Webb Miller, Cathy Riemer, Kelly Vincent, and Yi Zhang. Robert Castelo, France Denoeud, Roderic Guigo, Erika Kvikstad, Julien Lagarde, and Kateryna Makova provided critical comments during software testing. Ramana Davuluri gave permission to use the MPromDB data in these protocols. This work was funded by an NIH grant GM07226405S2 to KDM, a Beckman Foundation Young Investigator Award to AN, NSF grant DBI 0543285 and NIH grant HG004909 to AN and JT, NIH grants HG005133 and HG005542 to JT and AN, as well as funds from [INSTITUTION_REDACTED] University and the Huck Institutes for the Life Sciences to AN and from Emory University to JT. Additional funding is provided, in part, under a grant with the Pennsylvania Department of Health using Tobacco Settlement Funds. The Department specifically disclaims responsibility for any analyses, interpretations or conclusions.

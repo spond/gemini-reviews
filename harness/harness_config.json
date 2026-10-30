@@ -1,0 +1,21 @@
+{
+  "harness": "Google Antigravity Agentic Coding Environment",
+  "model_id": "gemini-4-argon",
+  "model_public_name": "Gemini 3.1 Pro",
+  "subagent_isolation": "1 stateless subagent invocation per manuscript or blinded wave",
+  "tools_enabled": [
+    "read_file",
+    "write_file"
+  ],
+  "tools_disabled": [
+    "search_web",
+    "run_command"
+  ],
+  "rubric_template": "REVIEW_TEMPLATE.md (v1.1)",
+  "agent_definitions": [
+    "harness/anon-reviewer.md",
+    "harness/open-reviewer.md",
+    "harness/secular-reviewer.md",
+    "harness/forensic-reviewer.md"
+  ]
+}

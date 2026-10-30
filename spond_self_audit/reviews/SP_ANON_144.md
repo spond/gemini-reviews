@@ -31,5 +31,5 @@ This is a methodologically rigorous, well-controlled study that resolves prior d
 ---
 
 ### 4. Reproducibility & Data Completeness
-* **Open Code and Sequence Repositories:** Full custom pipelines for Primer ID processing (`MotifBinner2`), NGS filtering (`NGS_processing_pipeline`), codon alignment (`BioExt`), and multi-method OGV dating (`veg/ogv-dating`) are publicly available on GitHub, and PacBio OGV sequences are deposited in GenBank (`MN097551–MN097697`).
+* **Open Code and Sequence Repositories:** Full custom pipelines for Primer ID processing (`MotifBinner2`), NGS filtering (`NGS_processing_pipeline`), codon alignment (`BioExt`), and multi-method OGV dating (`[GITHUB_REPO_REDACTED]`) are publicly available on GitHub, and PacBio OGV sequences are deposited in GenBank (`MN097551–MN097697`).
 * **Minor Editorial Note:** Provide the pre-ART Illumina MiSeq SRA/BioProject accession numbers alongside the GenBank OGV accessions so that independent researchers can reproduce the full pre-ART longitudinal phylogenies from raw reads.

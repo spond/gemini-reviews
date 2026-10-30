@@ -1,0 +1,792 @@
+{
+  "description": "Sensitivity analysis excluding all 75 blinded BARS reviews where third-party GitHub owner/repo URLs were redacted in post-processing (commit a61d8eb).",
+  "total_blinded_reviews_affected": 75,
+  "cohort_sensitivity_summary": {
+    "35-Year Secular Trend (N=915)": {
+      "n_all": 915,
+      "mean_all": 6.573,
+      "n_excluding_url_reviews": 900,
+      "mean_excluding_url_reviews": 6.557,
+      "delta_mean": -0.016,
+      "affected_count": 15,
+      "affected_uids": [
+        "SEC_TIME_ANON_0936",
+        "SEC_TIME_ANON_0334",
+        "SEC_TIME_ANON_0290",
+        "SEC_TIME_ANON_0718",
+        "SEC_TIME_ANON_0160",
+        "SEC_TIME_ANON_0356",
+        "SEC_TIME_ANON_0814",
+        "SEC_TIME_ANON_0854",
+        "SEC_TIME_ANON_0152",
+        "SEC_TIME_ANON_67",
+        "SEC_TIME_ANON_0714",
+        "SEC_TIME_ANON_0984",
+        "SEC_TIME_ANON_0776",
+        "SEC_TIME_ANON_0503",
+        "SEC_TIME_ANON_0169"
+      ]
+    },
+    "8-Field Everyday Expansion (N=160)": {
+      "n_all": 160,
+      "mean_all": 4.515,
+      "n_excluding_url_reviews": 149,
+      "mean_excluding_url_reviews": 4.367,
+      "delta_mean": -0.148,
+      "affected_count": 11,
+      "affected_uids": [
+        "FEXP_FEXP_ANON_004",
+        "FEXP_FEXP_ANON_003",
+        "FEXP_FEXP_ANON_005",
+        "FEXP_FEXP_ANON_006",
+        "FEXP_FEXP_ANON_058",
+        "FEXP_FEXP_ANON_155",
+        "FEXP_FEXP_ANON_083",
+        "FEXP_FEXP_ANON_051",
+        "FEXP_FEXP_ANON_094",
+        "FEXP_FEXP_ANON_090",
+        "FEXP_FEXP_ANON_153"
+      ]
+    },
+    "Calibration: Cohort A (Known Invalid)": {
+      "n_all": 50,
+      "mean_all": 4.424,
+      "n_excluding_url_reviews": 49,
+      "mean_excluding_url_reviews": 4.365,
+      "delta_mean": -0.059,
+      "affected_count": 1,
+      "affected_uids": [
+        "CAL_A42"
+      ]
+    },
+    "Calibration: Cohort B (Validated Controls)": {
+      "n_all": 50,
+      "mean_all": 8.636,
+      "n_excluding_url_reviews": 45,
+      "mean_excluding_url_reviews": 8.642,
+      "delta_mean": 0.006,
+      "affected_count": 5,
+      "affected_uids": [
+        "CAL_B40",
+        "CAL_B14",
+        "CAL_B43",
+        "CAL_B15",
+        "CAL_B29"
+      ]
+    },
+    "Calibration: Cohort C (Wild 2024\u20132025)": {
+      "n_all": 101,
+      "mean_all": 5.477,
+      "n_excluding_url_reviews": 95,
+      "mean_excluding_url_reviews": 5.345,
+      "delta_mean": -0.132,
+      "affected_count": 6,
+      "affected_uids": [
+        "CAL_C07",
+        "CAL_C74",
+        "CAL_C90",
+        "CAL_C33",
+        "CAL_C39",
+        "CAL_C99"
+      ]
+    },
+    "Career Self-Audit: A. Nekrutenko (N=74)": {
+      "n_all": 74,
+      "mean_all": 7.469,
+      "n_excluding_url_reviews": 74,
+      "mean_excluding_url_reviews": 7.469,
+      "delta_mean": 0.0,
+      "affected_count": 0,
+      "affected_uids": []
+    },
+    "Career Self-Audit: S. Pond (N=164)": {
+      "n_all": 164,
+      "mean_all": 7.529,
+      "n_excluding_url_reviews": 132,
+      "mean_excluding_url_reviews": 7.45,
+      "delta_mean": -0.079,
+      "affected_count": 32,
+      "affected_uids": [
+        "SP_SP_ANON_058",
+        "SP_SP_ANON_090",
+        "SP_SP_ANON_050",
+        "SP_SP_ANON_089",
+        "SP_SP_ANON_147",
+        "SP_SP_ANON_016",
+        "SP_SP_ANON_049",
+        "SP_SP_ANON_084",
+        "SP_SP_ANON_072",
+        "SP_SP_ANON_010",
+        "SP_SP_ANON_099",
+        "SP_SP_ANON_096",
+        "SP_SP_ANON_043",
+        "SP_SP_ANON_020",
+        "SP_SP_ANON_022",
+        "SP_SP_ANON_019",
+        "SP_SP_ANON_029",
+        "SP_SP_ANON_027",
+        "SP_SP_ANON_060",
+        "SP_SP_ANON_040",
+        "SP_SP_ANON_011",
+        "SP_SP_ANON_008",
+        "SP_SP_ANON_025",
+        "SP_SP_ANON_014",
+        "SP_SP_ANON_069",
+        "SP_SP_ANON_057",
+        "SP_SP_ANON_065",
+        "SP_SP_ANON_087",
+        "SP_SP_ANON_012",
+        "SP_SP_ANON_146",
+        "SP_SP_ANON_164",
+        "SP_SP_ANON_044"
+      ]
+    },
+    "Community / Issue-Triggered Reviews": {
+      "n_all": 3,
+      "mean_all": 7.033,
+      "n_excluding_url_reviews": 3,
+      "mean_excluding_url_reviews": 7.033,
+      "delta_mean": 0.0,
+      "affected_count": 0,
+      "affected_uids": []
+    },
+    "Open-Review Concordance (N=100)": {
+      "n_all": 100,
+      "mean_all": 6.25,
+      "n_excluding_url_reviews": 99,
+      "mean_excluding_url_reviews": 6.241,
+      "delta_mean": -0.009,
+      "affected_count": 1,
+      "affected_uids": [
+        "OPEN_OPEN_ANON_030"
+      ]
+    },
+    "Out-of-Domain Wild (N=60)": {
+      "n_all": 60,
+      "mean_all": 4.878,
+      "n_excluding_url_reviews": 60,
+      "mean_excluding_url_reviews": 4.878,
+      "delta_mean": 0.0,
+      "affected_count": 0,
+      "affected_uids": []
+    },
+    "Preprint vs. Published (N=100)": {
+      "n_all": 100,
+      "mean_all": 6.693,
+      "n_excluding_url_reviews": 96,
+      "mean_excluding_url_reviews": 6.752,
+      "delta_mean": 0.059,
+      "affected_count": 4,
+      "affected_uids": [
+        "PR_PAIR_25_PPR",
+        "PR_PAIR_40_PUB",
+        "PR_PAIR_22_PPR",
+        "PR_PAIR_40_PPR"
+      ]
+    }
+  },
+  "affected_review_files": [
+    "calibration/reviews_anon/ANON_09.md",
+    "calibration/reviews_anon/ANON_116.md",
+    "calibration/reviews_anon/ANON_131.md",
+    "calibration/reviews_anon/ANON_137.md",
+    "calibration/reviews_anon/ANON_139.md",
+    "calibration/reviews_anon/ANON_159.md",
+    "calibration/reviews_anon/ANON_168.md",
+    "calibration/reviews_anon/ANON_174.md",
+    "calibration/reviews_anon/ANON_189.md",
+    "calibration/reviews_anon/ANON_200.md",
+    "calibration/reviews_anon/ANON_50.md",
+    "calibration/reviews_anon/ANON_59.md",
+    "field_expansion_160/reviews/FEXP_ANON_003.md",
+    "field_expansion_160/reviews/FEXP_ANON_004.md",
+    "field_expansion_160/reviews/FEXP_ANON_005.md",
+    "field_expansion_160/reviews/FEXP_ANON_006.md",
+    "field_expansion_160/reviews/FEXP_ANON_051.md",
+    "field_expansion_160/reviews/FEXP_ANON_058.md",
+    "field_expansion_160/reviews/FEXP_ANON_083.md",
+    "field_expansion_160/reviews/FEXP_ANON_090.md",
+    "field_expansion_160/reviews/FEXP_ANON_094.md",
+    "field_expansion_160/reviews/FEXP_ANON_153.md",
+    "field_expansion_160/reviews/FEXP_ANON_155.md",
+    "open_review_exp/reviews/OPEN_ANON_030.md",
+    "peer_review_exp/wave1_reviews/PR_W1_33.md",
+    "peer_review_exp/wave1_reviews/PR_W1_39.md",
+    "peer_review_exp/wave2_reviews/PR_W2_25.md",
+    "peer_review_exp/wave2_reviews/PR_W2_42.md",
+    "secular_trend_exp/reviews/TIME_ANON_0152.md",
+    "secular_trend_exp/reviews/TIME_ANON_0160.md",
+    "secular_trend_exp/reviews/TIME_ANON_0169.md",
+    "secular_trend_exp/reviews/TIME_ANON_0290.md",
+    "secular_trend_exp/reviews/TIME_ANON_0334.md",
+    "secular_trend_exp/reviews/TIME_ANON_0356.md",
+    "secular_trend_exp/reviews/TIME_ANON_0503.md",
+    "secular_trend_exp/reviews/TIME_ANON_0714.md",
+    "secular_trend_exp/reviews/TIME_ANON_0718.md",
+    "secular_trend_exp/reviews/TIME_ANON_0776.md",
+    "secular_trend_exp/reviews/TIME_ANON_0814.md",
+    "secular_trend_exp/reviews/TIME_ANON_0854.md",
+    "secular_trend_exp/reviews/TIME_ANON_0936.md",
+    "secular_trend_exp/reviews/TIME_ANON_0984.md",
+    "secular_trend_exp/reviews/TIME_ANON_67.md",
+    "spond_self_audit/reviews/SP_ANON_008.md",
+    "spond_self_audit/reviews/SP_ANON_010.md",
+    "spond_self_audit/reviews/SP_ANON_011.md",
+    "spond_self_audit/reviews/SP_ANON_012.md",
+    "spond_self_audit/reviews/SP_ANON_014.md",
+    "spond_self_audit/reviews/SP_ANON_016.md",
+    "spond_self_audit/reviews/SP_ANON_019.md",
+    "spond_self_audit/reviews/SP_ANON_020.md",
+    "spond_self_audit/reviews/SP_ANON_022.md",
+    "spond_self_audit/reviews/SP_ANON_025.md",
+    "spond_self_audit/reviews/SP_ANON_027.md",
+    "spond_self_audit/reviews/SP_ANON_029.md",
+    "spond_self_audit/reviews/SP_ANON_040.md",
+    "spond_self_audit/reviews/SP_ANON_043.md",
+    "spond_self_audit/reviews/SP_ANON_044.md",
+    "spond_self_audit/reviews/SP_ANON_049.md",
+    "spond_self_audit/reviews/SP_ANON_050.md",
+    "spond_self_audit/reviews/SP_ANON_057.md",
+    "spond_self_audit/reviews/SP_ANON_058.md",
+    "spond_self_audit/reviews/SP_ANON_060.md",
+    "spond_self_audit/reviews/SP_ANON_065.md",
+    "spond_self_audit/reviews/SP_ANON_069.md",
+    "spond_self_audit/reviews/SP_ANON_072.md",
+    "spond_self_audit/reviews/SP_ANON_084.md",
+    "spond_self_audit/reviews/SP_ANON_087.md",
+    "spond_self_audit/reviews/SP_ANON_089.md",
+    "spond_self_audit/reviews/SP_ANON_090.md",
+    "spond_self_audit/reviews/SP_ANON_096.md",
+    "spond_self_audit/reviews/SP_ANON_099.md",
+    "spond_self_audit/reviews/SP_ANON_146.md",
+    "spond_self_audit/reviews/SP_ANON_147.md",
+    "spond_self_audit/reviews/SP_ANON_164.md"
+  ],
+  "affected_catalog_records": [
+    {
+      "uid": "CAL_B40",
+      "anon_id": "ANON_200",
+      "experiment": "Calibration: Cohort B (Validated Controls)",
+      "review_path": "reviews/2015/pmc4636487-guinney-the-consensus-molecular-subtypes-of/review.md",
+      "overall": 9.4
+    },
+    {
+      "uid": "SP_SP_ANON_058",
+      "anon_id": "SP_ANON_058",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_058.md",
+      "overall": 9.3
+    },
+    {
+      "uid": "SP_SP_ANON_090",
+      "anon_id": "SP_ANON_090",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_090.md",
+      "overall": 9.2
+    },
+    {
+      "uid": "SEC_TIME_ANON_0936",
+      "anon_id": "TIME_ANON_0936",
+      "experiment": "35-Year Secular Trend (N=915)",
+      "review_path": "secular_trend_exp/reviews/TIME_ANON_0936.md",
+      "overall": 9.2
+    },
+    {
+      "uid": "CAL_B14",
+      "anon_id": "ANON_09",
+      "experiment": "Calibration: Cohort B (Validated Controls)",
+      "review_path": "reviews/2023/pmc10506532-bloom-fitness-effects-of-mutations-to/review.md",
+      "overall": 9.2
+    },
+    {
+      "uid": "CAL_B43",
+      "anon_id": "ANON_159",
+      "experiment": "Calibration: Cohort B (Validated Controls)",
+      "review_path": "reviews/2016/pmc4878611-schurch-how-many-biological-replicates-are/review.md",
+      "overall": 9.1
+    },
+    {
+      "uid": "SP_SP_ANON_050",
+      "anon_id": "SP_ANON_050",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_050.md",
+      "overall": 9.1
+    },
+    {
+      "uid": "SP_SP_ANON_089",
+      "anon_id": "SP_ANON_089",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_089.md",
+      "overall": 9.0
+    },
+    {
+      "uid": "CAL_C07",
+      "anon_id": "ANON_59",
+      "experiment": "Calibration: Cohort C (Wild 2024\u20132025)",
+      "review_path": "reviews/2022/pmc10431346-neher-contributions-of-adaptation-and-purifying/review.md",
+      "overall": 9.0
+    },
+    {
+      "uid": "SP_SP_ANON_147",
+      "anon_id": "SP_ANON_147",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_147.md",
+      "overall": 9.0
+    },
+    {
+      "uid": "SP_SP_ANON_016",
+      "anon_id": "SP_ANON_016",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_016.md",
+      "overall": 8.9
+    },
+    {
+      "uid": "SP_SP_ANON_049",
+      "anon_id": "SP_ANON_049",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_049.md",
+      "overall": 8.8
+    },
+    {
+      "uid": "SP_SP_ANON_084",
+      "anon_id": "SP_ANON_084",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_084.md",
+      "overall": 8.8
+    },
+    {
+      "uid": "CAL_B15",
+      "anon_id": "ANON_50",
+      "experiment": "Calibration: Cohort B (Validated Controls)",
+      "review_path": "reviews/2017/pmc5712493-dudas-virus-genomes-reveal-factors-that/review.md",
+      "overall": 8.8
+    },
+    {
+      "uid": "SP_SP_ANON_072",
+      "anon_id": "SP_ANON_072",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_072.md",
+      "overall": 8.6
+    },
+    {
+      "uid": "SP_SP_ANON_010",
+      "anon_id": "SP_ANON_010",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_010.md",
+      "overall": 8.5
+    },
+    {
+      "uid": "SP_SP_ANON_099",
+      "anon_id": "SP_ANON_099",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_099.md",
+      "overall": 8.5
+    },
+    {
+      "uid": "SEC_TIME_ANON_0334",
+      "anon_id": "TIME_ANON_0334",
+      "experiment": "35-Year Secular Trend (N=915)",
+      "review_path": "secular_trend_exp/reviews/TIME_ANON_0334.md",
+      "overall": 8.5
+    },
+    {
+      "uid": "SEC_TIME_ANON_0290",
+      "anon_id": "TIME_ANON_0290",
+      "experiment": "35-Year Secular Trend (N=915)",
+      "review_path": "secular_trend_exp/reviews/TIME_ANON_0290.md",
+      "overall": 8.4
+    },
+    {
+      "uid": "SP_SP_ANON_096",
+      "anon_id": "SP_ANON_096",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_096.md",
+      "overall": 8.4
+    },
+    {
+      "uid": "SP_SP_ANON_043",
+      "anon_id": "SP_ANON_043",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_043.md",
+      "overall": 8.4
+    },
+    {
+      "uid": "SEC_TIME_ANON_0718",
+      "anon_id": "TIME_ANON_0718",
+      "experiment": "35-Year Secular Trend (N=915)",
+      "review_path": "secular_trend_exp/reviews/TIME_ANON_0718.md",
+      "overall": 8.3
+    },
+    {
+      "uid": "FEXP_FEXP_ANON_004",
+      "anon_id": "FEXP_ANON_004",
+      "experiment": "8-Field Everyday Expansion (N=160)",
+      "review_path": "field_expansion_160/reviews/FEXP_ANON_004.md",
+      "overall": 8.3
+    },
+    {
+      "uid": "SEC_TIME_ANON_0160",
+      "anon_id": "TIME_ANON_0160",
+      "experiment": "35-Year Secular Trend (N=915)",
+      "review_path": "secular_trend_exp/reviews/TIME_ANON_0160.md",
+      "overall": 8.3
+    },
+    {
+      "uid": "SP_SP_ANON_020",
+      "anon_id": "SP_ANON_020",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_020.md",
+      "overall": 8.2
+    },
+    {
+      "uid": "CAL_C74",
+      "anon_id": "ANON_116",
+      "experiment": "Calibration: Cohort C (Wild 2024\u20132025)",
+      "review_path": "reviews/2024/pmc11410272-thompson-a-systematic-evaluation-of-the/review.md",
+      "overall": 8.0
+    },
+    {
+      "uid": "SP_SP_ANON_022",
+      "anon_id": "SP_ANON_022",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_022.md",
+      "overall": 8.0
+    },
+    {
+      "uid": "SEC_TIME_ANON_0356",
+      "anon_id": "TIME_ANON_0356",
+      "experiment": "35-Year Secular Trend (N=915)",
+      "review_path": "secular_trend_exp/reviews/TIME_ANON_0356.md",
+      "overall": 8.0
+    },
+    {
+      "uid": "SP_SP_ANON_019",
+      "anon_id": "SP_ANON_019",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_019.md",
+      "overall": 8.0
+    },
+    {
+      "uid": "SP_SP_ANON_029",
+      "anon_id": "SP_ANON_029",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_029.md",
+      "overall": 7.9
+    },
+    {
+      "uid": "CAL_C90",
+      "anon_id": "ANON_174",
+      "experiment": "Calibration: Cohort C (Wild 2024\u20132025)",
+      "review_path": "reviews/2025/pmc11974051-ivich-missing-cell-types-in-single/review.md",
+      "overall": 7.9
+    },
+    {
+      "uid": "SP_SP_ANON_027",
+      "anon_id": "SP_ANON_027",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_027.md",
+      "overall": 7.8
+    },
+    {
+      "uid": "SP_SP_ANON_060",
+      "anon_id": "SP_ANON_060",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_060.md",
+      "overall": 7.8
+    },
+    {
+      "uid": "CAL_C33",
+      "anon_id": "ANON_137",
+      "experiment": "Calibration: Cohort C (Wild 2024\u20132025)",
+      "review_path": "reviews/2019/pmc6852897-black-genomic-epidemiology-supports-multiple-introductions/review.md",
+      "overall": 7.8
+    },
+    {
+      "uid": "SP_SP_ANON_040",
+      "anon_id": "SP_ANON_040",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_040.md",
+      "overall": 7.8
+    },
+    {
+      "uid": "SP_SP_ANON_011",
+      "anon_id": "SP_ANON_011",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_011.md",
+      "overall": 7.8
+    },
+    {
+      "uid": "FEXP_FEXP_ANON_003",
+      "anon_id": "FEXP_ANON_003",
+      "experiment": "8-Field Everyday Expansion (N=160)",
+      "review_path": "field_expansion_160/reviews/FEXP_ANON_003.md",
+      "overall": 7.8
+    },
+    {
+      "uid": "SP_SP_ANON_008",
+      "anon_id": "SP_ANON_008",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_008.md",
+      "overall": 7.7
+    },
+    {
+      "uid": "SP_SP_ANON_025",
+      "anon_id": "SP_ANON_025",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_025.md",
+      "overall": 7.6
+    },
+    {
+      "uid": "SEC_TIME_ANON_0814",
+      "anon_id": "TIME_ANON_0814",
+      "experiment": "35-Year Secular Trend (N=915)",
+      "review_path": "secular_trend_exp/reviews/TIME_ANON_0814.md",
+      "overall": 7.6
+    },
+    {
+      "uid": "SEC_TIME_ANON_0854",
+      "anon_id": "TIME_ANON_0854",
+      "experiment": "35-Year Secular Trend (N=915)",
+      "review_path": "secular_trend_exp/reviews/TIME_ANON_0854.md",
+      "overall": 7.6
+    },
+    {
+      "uid": "FEXP_FEXP_ANON_005",
+      "anon_id": "FEXP_ANON_005",
+      "experiment": "8-Field Everyday Expansion (N=160)",
+      "review_path": "field_expansion_160/reviews/FEXP_ANON_005.md",
+      "overall": 7.6
+    },
+    {
+      "uid": "SEC_TIME_ANON_0152",
+      "anon_id": "TIME_ANON_0152",
+      "experiment": "35-Year Secular Trend (N=915)",
+      "review_path": "secular_trend_exp/reviews/TIME_ANON_0152.md",
+      "overall": 7.5
+    },
+    {
+      "uid": "FEXP_FEXP_ANON_006",
+      "anon_id": "FEXP_ANON_006",
+      "experiment": "8-Field Everyday Expansion (N=160)",
+      "review_path": "field_expansion_160/reviews/FEXP_ANON_006.md",
+      "overall": 7.4
+    },
+    {
+      "uid": "FEXP_FEXP_ANON_058",
+      "anon_id": "FEXP_ANON_058",
+      "experiment": "8-Field Everyday Expansion (N=160)",
+      "review_path": "field_expansion_160/reviews/FEXP_ANON_058.md",
+      "overall": 7.3
+    },
+    {
+      "uid": "CAL_A42",
+      "anon_id": "ANON_139",
+      "experiment": "Calibration: Cohort A (Known Invalid)",
+      "review_path": "reviews/2022/pmc9488757-ledesma-spurious-early-ecological-association-suggesting/review.md",
+      "overall": 7.3
+    },
+    {
+      "uid": "SP_SP_ANON_014",
+      "anon_id": "SP_ANON_014",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_014.md",
+      "overall": 7.2
+    },
+    {
+      "uid": "SP_SP_ANON_069",
+      "anon_id": "SP_ANON_069",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_069.md",
+      "overall": 7.2
+    },
+    {
+      "uid": "FEXP_FEXP_ANON_155",
+      "anon_id": "FEXP_ANON_155",
+      "experiment": "8-Field Everyday Expansion (N=160)",
+      "review_path": "field_expansion_160/reviews/FEXP_ANON_155.md",
+      "overall": 7.2
+    },
+    {
+      "uid": "SEC_TIME_ANON_67",
+      "anon_id": "TIME_ANON_67",
+      "experiment": "35-Year Secular Trend (N=915)",
+      "review_path": "secular_trend_exp/reviews/TIME_ANON_67.md",
+      "overall": 7.2
+    },
+    {
+      "uid": "OPEN_OPEN_ANON_030",
+      "anon_id": "OPEN_ANON_030",
+      "experiment": "Open-Review Concordance (N=100)",
+      "review_path": "open_review_exp/reviews/OPEN_ANON_030.md",
+      "overall": 7.1
+    },
+    {
+      "uid": "SP_SP_ANON_057",
+      "anon_id": "SP_ANON_057",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_057.md",
+      "overall": 7.0
+    },
+    {
+      "uid": "SEC_TIME_ANON_0714",
+      "anon_id": "TIME_ANON_0714",
+      "experiment": "35-Year Secular Trend (N=915)",
+      "review_path": "secular_trend_exp/reviews/TIME_ANON_0714.md",
+      "overall": 6.8
+    },
+    {
+      "uid": "SP_SP_ANON_065",
+      "anon_id": "SP_ANON_065",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_065.md",
+      "overall": 6.8
+    },
+    {
+      "uid": "CAL_C39",
+      "anon_id": "ANON_131",
+      "experiment": "Calibration: Cohort C (Wild 2024\u20132025)",
+      "review_path": "reviews/2025/pmc12625292-cherian-modelling-a-potential-zoonotic-spillover/review.md",
+      "overall": 6.8
+    },
+    {
+      "uid": "SP_SP_ANON_087",
+      "anon_id": "SP_ANON_087",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_087.md",
+      "overall": 6.8
+    },
+    {
+      "uid": "FEXP_FEXP_ANON_083",
+      "anon_id": "FEXP_ANON_083",
+      "experiment": "8-Field Everyday Expansion (N=160)",
+      "review_path": "field_expansion_160/reviews/FEXP_ANON_083.md",
+      "overall": 6.7
+    },
+    {
+      "uid": "SEC_TIME_ANON_0984",
+      "anon_id": "TIME_ANON_0984",
+      "experiment": "35-Year Secular Trend (N=915)",
+      "review_path": "secular_trend_exp/reviews/TIME_ANON_0984.md",
+      "overall": 6.6
+    },
+    {
+      "uid": "SEC_TIME_ANON_0776",
+      "anon_id": "TIME_ANON_0776",
+      "experiment": "35-Year Secular Trend (N=915)",
+      "review_path": "secular_trend_exp/reviews/TIME_ANON_0776.md",
+      "overall": 6.5
+    },
+    {
+      "uid": "CAL_B29",
+      "anon_id": "ANON_189",
+      "experiment": "Calibration: Cohort B (Validated Controls)",
+      "review_path": "reviews/2018/pmc6707353-matson-the-commensal-microbiome-is-associated/review.md",
+      "overall": 6.4
+    },
+    {
+      "uid": "SP_SP_ANON_012",
+      "anon_id": "SP_ANON_012",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_012.md",
+      "overall": 6.4
+    },
+    {
+      "uid": "SEC_TIME_ANON_0503",
+      "anon_id": "TIME_ANON_0503",
+      "experiment": "35-Year Secular Trend (N=915)",
+      "review_path": "secular_trend_exp/reviews/TIME_ANON_0503.md",
+      "overall": 6.4
+    },
+    {
+      "uid": "FEXP_FEXP_ANON_051",
+      "anon_id": "FEXP_ANON_051",
+      "experiment": "8-Field Everyday Expansion (N=160)",
+      "review_path": "field_expansion_160/reviews/FEXP_ANON_051.md",
+      "overall": 6.3
+    },
+    {
+      "uid": "SP_SP_ANON_146",
+      "anon_id": "SP_ANON_146",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_146.md",
+      "overall": 6.0
+    },
+    {
+      "uid": "CAL_C99",
+      "anon_id": "ANON_168",
+      "experiment": "Calibration: Cohort C (Wild 2024\u20132025)",
+      "review_path": "reviews/2025/pmc12603141-itai-investigating-prognostic-features-in-high/review.md",
+      "overall": 5.9
+    },
+    {
+      "uid": "FEXP_FEXP_ANON_094",
+      "anon_id": "FEXP_ANON_094",
+      "experiment": "8-Field Everyday Expansion (N=160)",
+      "review_path": "field_expansion_160/reviews/FEXP_ANON_094.md",
+      "overall": 5.8
+    },
+    {
+      "uid": "PR_PAIR_25_PPR",
+      "anon_id": "PR_W1_33",
+      "experiment": "Preprint vs. Published (N=100)",
+      "review_path": "peer_review_exp/wave1_reviews/PR_W1_33.md",
+      "overall": 5.8
+    },
+    {
+      "uid": "SP_SP_ANON_164",
+      "anon_id": "SP_ANON_164",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_164.md",
+      "overall": 5.8
+    },
+    {
+      "uid": "SEC_TIME_ANON_0169",
+      "anon_id": "TIME_ANON_0169",
+      "experiment": "35-Year Secular Trend (N=915)",
+      "review_path": "secular_trend_exp/reviews/TIME_ANON_0169.md",
+      "overall": 5.7
+    },
+    {
+      "uid": "FEXP_FEXP_ANON_090",
+      "anon_id": "FEXP_ANON_090",
+      "experiment": "8-Field Everyday Expansion (N=160)",
+      "review_path": "field_expansion_160/reviews/FEXP_ANON_090.md",
+      "overall": 5.6
+    },
+    {
+      "uid": "PR_PAIR_40_PUB",
+      "anon_id": "PR_W1_39",
+      "experiment": "Preprint vs. Published (N=100)",
+      "review_path": "peer_review_exp/wave1_reviews/PR_W1_39.md",
+      "overall": 5.6
+    },
+    {
+      "uid": "PR_PAIR_22_PPR",
+      "anon_id": "PR_W2_42",
+      "experiment": "Preprint vs. Published (N=100)",
+      "review_path": "peer_review_exp/wave2_reviews/PR_W2_42.md",
+      "overall": 5.1
+    },
+    {
+      "uid": "SP_SP_ANON_044",
+      "anon_id": "SP_ANON_044",
+      "experiment": "Career Self-Audit: S. Pond (N=164)",
+      "review_path": "spond_self_audit/reviews/SP_ANON_044.md",
+      "overall": 5.0
+    },
+    {
+      "uid": "PR_PAIR_40_PPR",
+      "anon_id": "PR_W2_25",
+      "experiment": "Preprint vs. Published (N=100)",
+      "review_path": "peer_review_exp/wave2_reviews/PR_W2_25.md",
+      "overall": 4.6
+    },
+    {
+      "uid": "FEXP_FEXP_ANON_153",
+      "anon_id": "FEXP_ANON_153",
+      "experiment": "8-Field Everyday Expansion (N=160)",
+      "review_path": "field_expansion_160/reviews/FEXP_ANON_153.md",
+      "overall": 1.7
+    }
+  ]
+}

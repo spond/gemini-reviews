@@ -1,3 +1,5 @@
+from pathlib import Path
+REPO_ROOT = Path(__file__).resolve().parent.parent
 import urllib.request
 import urllib.parse
 import json
@@ -12,7 +14,7 @@ def clean_text(el):
         return ""
     return re.sub(r"\s+", " ", el.get_text(" ", strip=True)).strip()
 
-sec_dir = Path(str(Path(__file__).resolve().parent.parent / "secular_trend_exp")
+sec_dir = Path(str(REPO_ROOT / "secular_trend_exp"))
 for sub in ["raw_papers", "anon_papers", "reviews"]:
     d = sec_dir / sub
     d.mkdir(parents=True, exist_ok=True)
@@ -39,9 +41,9 @@ tracks = [
 # Also exclude any PMCIDs already used in our main 200-paper calibration, OOD, or peer-review cohorts
 existing_pmcids = set()
 for mf in [
-    Path(str(Path(__file__).resolve().parent.parent / "data/cohort_manifest.json"),
-    Path(str(Path(__file__).resolve().parent.parent / "ood_exp/manifest.json"),
-    Path(str(Path(__file__).resolve().parent.parent / "peer_review_exp/manifest.json"),
+    Path(str(REPO_ROOT / "data/cohort_manifest.json")),
+    Path(str(REPO_ROOT / "ood_exp/manifest.json")),
+    Path(str(REPO_ROOT / "peer_review_exp/manifest.json")),
 ]:
     if mf.exists():
         try:

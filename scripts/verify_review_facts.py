@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-LIT_ROOT = Path("/Users/sergei/Projects/lit-estimation")
+LIT_ROOT = ROOT
 LEDGER_PATH = ROOT / "fact_verification_ledger.json"
 
 ACC_REGEX = re.compile(r"\b(?:GSE|PRJNA|SRR|ERR|NCT|rs)(\d{4,})\b")
@@ -33,9 +33,12 @@ EXTERNAL_CONTEXT_REGEX = re.compile(
     re.I,
 )
 GH_LEAK_REGEX = re.compile(
-    r"(?:https?://)?\bgithub\.com/(?!spond/gemini-reviews\b)[A-Za-z0-9_.-]+",
+    r"(?:https?://)?\b(?:github\.com|gitlab\.com|bitbucket\.org)/(?!spond/gemini-reviews\b)[A-Za-z0-9_.-]+",
     re.I,
 )
+EMAIL_LEAK_REGEX = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}")
+SELFAUDIT_HANDLE_REGEX = re.compile(r"\b(?:veg/[A-Za-z0-9_.-]+|nekrut[A-Za-z0-9_.-]*)\b", re.I)
+SELFAUDIT_SW_REGEX = re.compile(r"\b(?:Galaxy|UseGalaxy|Planemo|DuNovo|HyPhy|Datamonkey|HIV-TRACE)\b")
 
 
 def check_catalog_and_paths() -> list[str]:
@@ -86,6 +89,7 @@ def check_blinding_leaks() -> list[str]:
     errors = []
     cohort_dirs = [
         "spond_self_audit",
+        "anton_self_audit",
         "secular_trend_exp",
         "calibration",
         "ood",
@@ -98,9 +102,20 @@ def check_blinding_leaks() -> list[str]:
         if not d.exists():
             continue
         for md in d.rglob("*.md"):
-            txt = md.read_text(encoding="utf-8")
+            if "raw_papers" in md.parts or "reviews_identified" in md.parts or "human_" in md.name or "human_reports" in md.parts or "human_reviews" in md.parts:
+                continue
+            txt = md.read_text(encoding="utf-8", errors="ignore")
             for m in GH_LEAK_REGEX.finditer(txt):
                 errors.append(f"Blinding leak ({m.group(0)}) in {md.relative_to(ROOT)}")
+            # Check self-audit scrubbed inputs and reviews for emails, lab domains, and lab software names
+            if dname in ("spond_self_audit", "anton_self_audit") and ("anon_papers" in md.parts or "reviews" in md.parts):
+                for m in EMAIL_LEAK_REGEX.finditer(txt):
+                    errors.append(f"Email leak ({m.group(0)}) in {md.relative_to(ROOT)}")
+                for m in SELFAUDIT_HANDLE_REGEX.finditer(txt):
+                    errors.append(f"Lab handle leak ({m.group(0)}) in {md.relative_to(ROOT)}")
+                if dname == "anton_self_audit":
+                    for m in SELFAUDIT_SW_REGEX.finditer(txt):
+                        errors.append(f"Software name leak ({m.group(0)}) in {md.relative_to(ROOT)}")
     return errors
 
 
@@ -151,14 +166,15 @@ def verify_open_review_385_and_accessions() -> tuple[list[str], dict]:
 
     # If full-text manuscripts are available locally, verify all accession/rsID citations across all cohorts
     cohort_pairs = [
-        ("calibration", ROOT / "calibration" / "reviews_anon", LIT_ROOT / "papers_anon"),
-        ("ood", ROOT / "ood" / "reviews_stage1", LIT_ROOT / "ood_exp" / "papers_anon"),
-        ("fexp160", ROOT / "field_expansion_160" / "reviews", LIT_ROOT / "field_expansion_160" / "scrubbed_papers"),
-        ("pr_w1", ROOT / "peer_review_exp" / "wave1_reviews", LIT_ROOT / "peer_review_exp" / "wave1_papers"),
-        ("pr_w2", ROOT / "peer_review_exp" / "wave2_reviews", LIT_ROOT / "peer_review_exp" / "wave2_papers"),
-        ("open100", ROOT / "open_review_exp" / "reviews", LIT_ROOT / "open_review_exp" / "scrubbed_manuscripts"),
-        ("secular", ROOT / "secular_trend_exp" / "reviews", LIT_ROOT / "secular_trend_exp" / "anon_papers"),
-        ("spond", ROOT / "spond_self_audit" / "reviews", LIT_ROOT / "spond_self_audit" / "anon_papers"),
+        ("calibration", ROOT / "calibration" / "reviews_anon", ROOT / "calibration" / "papers_anon"),
+        ("ood", ROOT / "ood" / "reviews_stage1", ROOT / "ood" / "papers_anon"),
+        ("fexp160", ROOT / "field_expansion_160" / "reviews", ROOT / "field_expansion_160" / "scrubbed_papers"),
+        ("pr_w1", ROOT / "peer_review_exp" / "wave1_reviews", ROOT / "peer_review_exp" / "wave1_papers"),
+        ("pr_w2", ROOT / "peer_review_exp" / "wave2_reviews", ROOT / "peer_review_exp" / "wave2_papers"),
+        ("open100", ROOT / "open_review_exp" / "reviews", ROOT / "open_review_exp" / "scrubbed_manuscripts"),
+        ("secular", ROOT / "secular_trend_exp" / "reviews", ROOT / "secular_trend_exp" / "anon_papers"),
+        ("spond", ROOT / "spond_self_audit" / "reviews", ROOT / "spond_self_audit" / "anon_papers"),
+        ("anton", ROOT / "anton_self_audit" / "reviews", ROOT / "anton_self_audit" / "anon_papers"),
     ]
 
     tot_revs = 0
@@ -170,7 +186,7 @@ def verify_open_review_385_and_accessions() -> tuple[list[str], dict]:
             if not rdir.exists() or not pdir.exists():
                 continue
             for rf in sorted(rdir.glob("*.md")):
-                aid = re.sub(r"^REVIEW_", "", rf.stem)
+                aid = re.sub(r"(?:^REVIEW_|_review$)", "", rf.stem)
                 if aid == "ANON_201":
                     continue
                 pf = pdir / f"{aid}.md"
@@ -193,7 +209,7 @@ def verify_open_review_385_and_accessions() -> tuple[list[str], dict]:
                         errors.append(f"Unverified accession {m.group(0)} in {cname}/{rf.name}: {ctx[:90]}")
 
         summary = {
-            "total_catalog_records": 1703,
+            "total_catalog_records": 1777,
             "active_fulltext_reviews_verified": tot_revs,
             "open_review_ai_only_catches_total": total_catches,
             "open_review_ai_only_catches_grounded_in_manuscript": grounded_in_ms,
@@ -230,7 +246,7 @@ def main() -> int:
         return 1
 
     print(
-        f"[PASS] verify_review_facts.py: 1,703 catalog paths resolved, 0 GitHub org leaks, "
+        f"[PASS] verify_review_facts.py: 1,777 catalog paths resolved, 0 blinding leaks, "
         f"{summary.get('open_review_ai_only_catches_grounded_in_manuscript', 385)}/385 (100%) open-review catches grounded, "
         f"{summary.get('corpus_accession_rsid_tokens_verified', 0)}/{summary.get('corpus_accession_rsid_tokens_checked', 0)} (100%) accessions verified."
     )

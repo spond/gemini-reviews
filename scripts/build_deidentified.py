@@ -1,13 +1,14 @@
 from pathlib import Path
+REPO_ROOT = Path(__file__).resolve().parent.parent
 import os
 import re
 import json
 import random
 
-os.makedirs(str(Path(__file__).resolve().parent.parent / "papers_anon", exist_ok=True)
-os.makedirs(str(Path(__file__).resolve().parent.parent / "reviews_anon", exist_ok=True)
+os.makedirs(str(REPO_ROOT / "papers_anon"), exist_ok=True)
+os.makedirs(str(REPO_ROOT / "reviews_anon"), exist_ok=True)
 
-with open(str(Path(__file__).resolve().parent.parent / "cohorts.json") as f:
+with open(str(REPO_ROOT / "cohorts.json")) as f:
     cohorts = json.load(f)
 
 ab_papers = cohorts["cohort_a"] + cohorts["cohort_b"]
@@ -17,8 +18,46 @@ rng.shuffle(shuffled)
 
 anon_map = {}
 
-def scrub_manuscript(txt, meta, anon_id):
-    text = re.sub(r'(?:https?://)?\bgithub\.com/(?!spond/gemini-reviews\b)[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*', '[GITHUB_REPO_REDACTED]', text, flags=re.I)
+def extract_inline_formulas_from_xml(xml_text):
+    """Ensure any <inline-formula> / <tex-math> tags in raw XML/HTML text are unwrapped into inline LaTeX."""
+    def _repl(match):
+        inner = match.group(1)
+        m = re.search(r"\\begin\{document\}\s*(?:\}\{\})?(.*?)\\end\{document\}", inner, re.S)
+        if m:
+            return f" {m.group(1).strip()} "
+        cleaned = re.sub(r"<[^>]+>", " ", inner)
+        return " " + " ".join(cleaned.split()) + " "
+    return re.sub(r"<(?:inline-formula|disp-formula)[^>]*>(.*?)</(?:inline-formula|disp-formula)>", _repl, xml_text, flags=re.S)
+
+def extract_unified_jats_text(xml_text):
+    """
+    Unified JATS XML extractor (Issue #20): extracts <abstract>, <body>, <back> (excluding
+    <ref-list>, <ack>, and author contributions), and <front>//<custom-meta> Data/Code
+    Availability fields while preserving anchor href URLs prior to handle scrubbing.
+    """
+    xml_text = extract_inline_formulas_from_xml(xml_text)
+    # Preserve <ext-link xlink:href="..."> URLs inline before tag stripping
+    xml_text = re.sub(
+        r'<ext-link[^>]*xlink:href=["\']([^"\']+)["\'][^>]*>(.*?)</ext-link>',
+        lambda m: m.group(2) if m.group(1) in m.group(2) else f"{m.group(2)} ({m.group(1)})",
+        xml_text,
+        flags=re.I | re.S,
+    )
+    # Extract PLoS / JATS front-matter custom-meta Data Availability if present
+    avail_blocks = []
+    for m in re.finditer(r"<custom-meta[^>]*>.*?<meta-name>[^<]*data\s*availability[^<]*</meta-name>\s*<meta-value>(.*?)</meta-value>.*?</custom-meta>", xml_text, flags=re.I | re.S):
+        val = re.sub(r"<[^>]+>", " ", m.group(1)).strip()
+        if val:
+            avail_blocks.append(f"## Data Availability\n{val}\n")
+    # Remove <ref-list>, <ack>, and <author-notes> from <back>
+    xml_text = re.sub(r"<ref-list[^>]*>.*?</ref-list>", "", xml_text, flags=re.I | re.S)
+    xml_text = re.sub(r"<ack[^>]*>.*?</ack>", "", xml_text, flags=re.I | re.S)
+    xml_text = re.sub(r"<author-notes[^>]*>.*?</author-notes>", "", xml_text, flags=re.I | re.S)
+    return xml_text + ("\n" + "\n".join(avail_blocks) if avail_blocks else "")
+
+def scrub_manuscript(txt, meta, anon_id="ANON"):
+    txt = extract_unified_jats_text(txt)
+    txt = re.sub(r'(?:https?://)?\b(?:github\.com|gitlab\.com|bitbucket\.org)/(?!spond/gemini-reviews\b)[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*', '[CODE_REPO_REDACTED]', txt, flags=re.I)
     lines = txt.splitlines()
     # Drop the top metadata header lines (# A01..., **Title:**..., **Authors:**..., **Venue:**...)
     cleaned_lines = []
@@ -92,12 +131,13 @@ def scrub_manuscript(txt, meta, anon_id):
     if meta.get("journal") and len(meta["journal"]) > 4:
         body = re.sub(r"\b" + re.escape(meta["journal"]) + r"\b", "[REDACTED_VENUE]", body, flags=re.IGNORECASE)
 
-    # Scrub GitHub / GitLab / Bitbucket / Zenodo URLs and user/repo handles that can leak author/lab identity
-    body = re.sub(r"https?://(?:www\.)?github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", "[GITHUB_REPO_REDACTED]", body, flags=re.IGNORECASE)
-    body = re.sub(r"\bgithub\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", "[GITHUB_REPO_REDACTED]", body, flags=re.IGNORECASE)
-    body = re.sub(r"https?://(?:www\.)?gitlab\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", "[GITLAB_REPO_REDACTED]", body, flags=re.IGNORECASE)
-    body = re.sub(r"\bgitlab\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", "[GITLAB_REPO_REDACTED]", body, flags=re.IGNORECASE)
-    body = re.sub(r"https?://(?:www\.)?bitbucket\.org/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", "[BITBUCKET_REPO_REDACTED]", body, flags=re.IGNORECASE)
+    # Scrub GitHub / GitLab / Bitbucket / Zenodo / Figshare / Galaxy / WorkflowHub URLs, emails, and correspondence lines
+    body = re.sub(r"(?im)^.*(?:to whom correspondence|correspondence should be addressed|corresponding author|e-?mail:).*$", "[CORRESPONDENCE_REDACTED]", body)
+    body = re.sub(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}", "[EMAIL_REDACTED]", body)
+    body = re.sub(r"(?:https?://)?(?:www\.)?(?:github\.com|gitlab\.com|bitbucket\.org)/[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*", "[CODE_REPO_REDACTED]", body, flags=re.IGNORECASE)
+    body = re.sub(r"https?://[^\s\)\]>]*usegalaxy[^\s\)\]>]*/u/[A-Za-z0-9_.-]+[^\s\)\]>]*", "[GALAXY_URL_REDACTED]", body, flags=re.IGNORECASE)
+    body = re.sub(r"https?://(?:www\.)?workflowhub\.eu/[^\s\)\]>]+", "[WORKFLOWHUB_REDACTED]", body, flags=re.IGNORECASE)
+    body = re.sub(r"https?://(?:www\.)?(?:zenodo\.org/records?/\d+|figshare\.com/[^\s\)\]>]+|osf\.io/[A-Za-z0-9]+)", "[ARCHIVE_DOI_REDACTED]", body, flags=re.IGNORECASE)
 
     # Scrub author surnames from the author list (including short surnames when followed by et al. or year citations)
     common_words = {"wang", "chen", "zhang", "yang", "long", "park", "hill", "wood", "hall", "king", "west", "cole", "ross", "cook", "bell", "ward", "cox", "gray", "hunt", "pond", "love", "berg", "field"}
@@ -132,10 +172,10 @@ if __name__ == "__main__":
         anon_id = f"ANON_{idx:02d}"
         pmcid = meta["pmcid"]
         cid = meta["cohort_id"]
-        src_path = fstr(Path(__file__).resolve().parent.parent / "papers/{cid}_{pmcid}.md"
+        src_path = f"{REPO_ROOT}/papers/{cid}_{pmcid}.md"
         raw_txt = open(src_path).read()
         scrubbed = scrub_manuscript(raw_txt, meta, anon_id)
-        out_path = fstr(Path(__file__).resolve().parent.parent / "papers_anon/{anon_id}.md"
+        out_path = f"{REPO_ROOT}/papers_anon/{anon_id}.md"
         with open(out_path, "w") as f:
             f.write(scrubbed)
         anon_map[anon_id] = {

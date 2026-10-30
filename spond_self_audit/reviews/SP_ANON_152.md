@@ -30,7 +30,7 @@ The bioinformatic engineering for pandemic-scale selection tracking—particular
 ---
 
 ### 4. Reproducibility & Data Completeness
-* **Exemplary Open-Science Infrastructure:** The authors provide complete Zenodo variant archives (`10.5281/zenodo.5149112`), GitHub repositories (`veg/SARS-CoV-2`, `RASCL`, `BioExt`, `tn93`), Galaxy workflows, and five interactive ObservableHQ notebooks allowing full inspection of every gene, site, and temporal window.
+* **Exemplary Open-Science Infrastructure:** The authors provide complete Zenodo variant archives (`10.5281/zenodo.5149112`), GitHub repositories (`[GITHUB_REPO_REDACTED]`, `RASCL`, `BioExt`, `tn93`), Galaxy workflows, and five interactive ObservableHQ notebooks allowing full inspection of every gene, site, and temporal window.
 * **Typographical Fixes:**
   1. In the Figure 4 caption, *"between January and June **2001**"* should be **2021**.
   2. In the Results text, *"corresponding to **Heicase**/590I"* should be **Helicase/590I**.

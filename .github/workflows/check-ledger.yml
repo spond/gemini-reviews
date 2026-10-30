@@ -12,6 +12,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Compile all Python scripts in scripts/
+        run: python3 -m py_compile scripts/*.py
       - name: Regenerate index.json, catalog.json, and README.md; fail on diff or dead paths
         run: python3 scripts/update_leaderboard.py && git diff --exit-code index.json catalog.json README.md
       - name: Lint review score breakdowns against metadata.json

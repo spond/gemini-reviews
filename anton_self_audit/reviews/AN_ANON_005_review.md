@@ -3,56 +3,52 @@
 **Manuscript Title:** [REDACTED FOR BLINDED REVIEW]  
 **Authors:** [REDACTED FOR BLINDED REVIEW]  
 **Journal / Preprint:** [REDACTED FOR BLINDED REVIEW]  
-**Overall Score:** **7.8 / 10.0** (Strong / Sound)  
-**Scientific Core Score:** **6.0 / 8.0**  
-* **Score Breakdown:** Rigor: 2.5/3.5 | Claims: 1.9/2.5 | Biology: 1.6/2.0 | Reproducibility: 1.8/2.0
+**Overall Score:** **7.9 / 10.0** (Strong / Sound) | **Scientific Core Score:** **6.1 / 8.0**  
+* **Score Breakdown:** Rigor: 2.5/3.5 | Claims: 2.0/2.5 | Biology: 1.6/2.0 | Reproducibility: 1.8/2.0
 
 ---
 
 ### 1. SUMMARY AND OVERALL IMPACT STATEMENT
 
-This application note introduces the `[AUTHOR]` (Galaxy) Data Manager framework, a Python-based extension to the core platform designed to automate the acquisition, indexing, provenance tracking, and registration of built-in reference datasets (such as reference genome FASTA files, short-read aligner indices like BWA, and BLAST or protein domain databases). Previously, provisioning reference indices required system administrators to manually download sequences on the command line, run indexing binaries, edit tab-delimited location files (e.g., `tool-data/bwa_index.loc`), and restart the server—an unrecorded process vulnerable to silent configuration errors. The Data Manager framework extends standard XML tool wrappers via the `<tool type="data_manager">` attribute, passes server configuration context via JSON, parses a JSON output dictionary of new registry entries from the tool executable, applies path and value translations via XML `value_translation` tags, moves generated index files into permanent storage, and updates the server's in-memory and on-disk data tables in real time without a server restart. The framework is integrated into the open-source core platform and distributed via the community ToolShed with full versioning and dependency support.
+This software application note introduces the Data Manager framework for the `[AUTHOR]` workflow platform, designed to automate the downloading, indexing, registration, and provenance tracking of built-in reference datasets (such as reference genome FASTA sequences, BWA short-read mapper indexes, and BLAST databases). Previously, provisioning reference data in `[AUTHOR]` required administrators to manually download sequences, build binary indexes via the command line, edit tab-delimited location (`.loc`) files on disk, and restart the server—an error-prone workflow lacking provenance records. The Data Manager framework extends standard XML-defined `[AUTHOR]` tools via the `type="data_manager"` attribute, passing a JSON-encoded parameter and server configuration dictionary to an underlying wrapper executable, parsing a JSON output specification of new data table entries, applying XML-configured `value_translation` path mappings, and dynamically updating in-memory and on-disk data registries in real time without a server restart. The framework is written in Python, integrated into the core `[AUTHOR]` distribution, and distributed alongside community Data Manager tools via the ToolShed.
 
-The engineering architecture—reusing the platform's existing tool XML wrapper, ToolShed versioning, and job execution infrastructure while decoupling underlying indexing scripts from direct `.loc` file manipulation through a clean JSON abstraction layer—is practical and solves a genuine operational bottleneck for bioinformatics server administrators. However, the manuscript overstates the degree to which this mechanism alone guarantees cross-instance reference data reproducibility: it does not address cryptographic checksum verification (e.g., SHA-256) of downloaded upstream datasets or generated index files, nor does it explain whether downstream user analysis jobs link directly to the provenance history of the specific Data Manager run (as opposed to recording only a mutable string key such as `hg19`). Clarifying these provenance linkage details and documenting how real-time registry updates synchronize across multi-worker production servers would strengthen the technical presentation.
+The software architecture is clean, modular, and solves a genuine operational bottleneck in local and cloud `[AUTHOR]` deployments by bringing reference index generation under the same ToolShed versioning and dependency management used for analysis tools. However, the manuscript is purely descriptive and lacks any empirical validation or quantitative benchmarking (e.g., runtime, disk transaction safety under concurrent administrator jobs, or verification of cross-instance reproducibility when reference sources change upstream). Furthermore, the claim that Data Managers guarantee the same reproducibility and provenance as analysis tools is partially overstated because external reference URLs (e.g., UCSC or NCBI FASTA downloads) can mutate or disappear unless cryptographic checksums (MD5/SHA256) and immutable upstream identifiers are enforced and linked directly to downstream user histories.
 
 ---
 
 ### 2. SPECIFIC CONCLUSIONS AND ASSESSMENT OF SUPPORT
 
-* **The Data Manager framework eliminates manual command-line index building, `.loc` file editing, and server restarts by encapsulating reference data provisioning as GUI-, API-, and workflow-accessible tools: [Well Supported].**  
-  Sections 1 and 2 clearly describe how the `<tool type="data_manager">` declaration, JSON input/output contract, and XML `value_translation` rules automate steps (i)–(v) of the BWA index provisioning workflow and persist entries directly to the built-in data registry in real time.
+* **The Data Manager framework eliminates manual `.loc` file editing and server restarts when installing reference indexes: [Well Supported].**  
+  Sections 1 and 2 clearly describe the two-part architecture (`type="data_manager"` XML tool definition plus Data Manager configuration XML with `value_translation` tags) and its JSON communication layer, which parses completed job outputs and updates the `[AUTHOR]` data registry in real time while persisting entries to disk.
 
-* **Distributing Data Managers via the ToolShed controls the versions of the indexing software (e.g., BWA binary version) used to build reference indices: [Well Supported].**  
-  Because Data Managers inherit standard ToolShed dependency resolution, the exact binary version of the aligner or indexer used to construct a reference index is pinned and recorded at execution time, preventing version mismatch between index construction and subsequent alignment tool execution on the same server.
+* **Data Manager tools integrate with the `[AUTHOR]` ToolShed, Workflows, and REST API to automate multi-step reference provisioning: [Well Supported].**  
+  Because Data Managers are implemented as specialized `[AUTHOR]` tools, they inherit ToolShed versioning, tool dependency resolution (e.g., pinning the exact `bwa` binary version used to build an index), GUI execution, workflow chaining (e.g., fetch FASTA $\rightarrow$ build BWA index), and API invocation.
 
-* **Data Managers provide full reference-data reproducibility and provenance across time and between different server instances: [Moderately Supported].**  
-  While recording the Data Manager tool execution in the administrator's history captures *how* an index was built on a single server, two gaps remain for cross-instance and long-term reproducibility:
-  1. *Mutable upstream data sources and missing cryptographic digests:* If a Data Manager fetches a reference FASTA or annotation database from an external URL (e.g., NCBI BLAST databases, pathway databases, or patched genome assemblies), executing the same Data Manager at two different times can retrieve different underlying sequences while registering the same `dbkey` / data table ID. The framework specification in Section 2 (`ID`, `dbkey`, `display text`, and `files path`) does not include mandatory cryptographic hashes (MD5/SHA-256) of the input FASTA or output index files.
-  2. *Unlinked provenance between user tool runs and administrator Data Manager runs:* When a standard user runs an analysis tool (e.g., BWA) that selects a built-in index from the `bwa_indexes` data table, the manuscript does not specify whether the user's job provenance records the immutable UUID/hash of the Data Manager job that created that data table entry, or only the string identifier from the `.loc` table.
+* **The framework provides full reproducibility and provenance for built-in reference data equivalent to standard analysis tools: [Moderately Supported].**  
+  While the administrator's execution of a Data Manager tool records the tool version and input parameters in an administrative job record, the manuscript does not specify whether downstream user analysis jobs that select a `dbkey` from a data table automatically record the exact Data Manager job ID, reference file cryptographic hash, or index build version in the user's history metadata, nor how the framework handles mutable external URLs when a second server attempts to reproduce the reference cache later.
 
-* **Real-time updates to built-in data registries work seamlessly across heterogeneous cluster and cloud server environments without restarts: [Moderately Supported].**  
-  In single-process deployments, updating the in-memory registry upon Data Manager completion is straightforward. However, production instances typically run multiple separate web-worker and job-handler processes across shared network filesystems. The Methods section does not explain how in-memory data tables are invalidated and reloaded across sibling worker processes or how concurrent Data Manager writes to the same `.loc` table are locked against race conditions.
+* **Compatibility across heterogeneous cluster and cloud environments via `value_translation`: [Well Supported].**  
+  Separating the relative base file paths emitted by the underlying wrapper script (JSON output) from the final storage path configured by the administrator via XML `value_translation` directives cleanly decouples tool execution in temporary job working directories from permanent shared filesystem layouts.
 
 ---
 
 ### 3. CONSTRUCTIVE AND DOABLE SUGGESTIONS FOR IMPROVEMENT
 
-#### 1. Add Cryptographic Checksum (SHA-256) Recording and Provenance Linkage to Data Table Entries
-* **WHY:** Two servers can both have a `bwa_indexes` entry with `dbkey = hg19` (e.g., with vs. without decoy chromosomes or mitochondrial patches, or built with different `bwa index -a bwtsw` vs. `is` parameters), causing silent discrepancies when sharing workflows across instances.
-* **WHAT:** Extend the Data Manager JSON schema and data table metadata to compute and store a cryptographic hash (SHA-256) of the source FASTA and generated index files, and link the Data Manager job ID to the registered data table row.
-* **HOW:** In the post-execution hook of the Data Manager framework (Section 2, lines 25–27), automatically compute a SHA-256 digest of the finalized files moved into the permanent data store, append the digest and the executing Data Manager `job_id` as metadata columns in the data table registry, and record this digest in the provenance metadata of any downstream user job that references that data table entry.
+#### 1. Link Reference Data Provenance and Checksums Directly to Downstream User Analysis Histories
+* **WHY:** Recording how an administrator built a reference index only solves half of the provenance problem; if two `[AUTHOR]` instances register two different FASTA assemblies or index builds under the same `dbkey` (e.g., `hg19` with or without decoy chromosomes or mitochondrial patches), a user history recording only `dbkey=hg19` cannot detect the discrepancy.
+* **WHAT:** Record cryptographic checksums (MD5/SHA256) and the originating Data Manager job/tool version in the data table registry and propagate them into the provenance metadata of every user job that consumes that reference entry.
+* **HOW:** Extend the JSON output schema emitted by Data Manager executables to include an optional `sha256` or `md5` field for the source FASTA and generated index files, store this hash in the data table registry, and record the hash alongside the `dbkey` in the job parameters table when an analysis tool runs.
 
-#### 2. Document Multi-Process Synchronization and Atomic File Locking for Real-Time Registry Updates
-* **WHY:** Line 16 states that new entries are "enabled in real time and persisted to disk" without restarting the server, and line 34 highlights deployment across clusters and clouds. Readers administering multi-process web servers need to know how sibling web workers detect updated `.loc` files and how concurrent Data Manager runs avoid corrupting shared `.loc` files.
-* **WHAT:** Briefly specify in Section 2 how the framework handles file locking during `.loc` file persistence and how multi-process web workers synchronize their in-memory data registries.
-* **HOW:** Add 2–3 sentences at the end of Section 2 explaining the inter-process synchronization mechanism (e.g., file-modification-time polling, database-backed message queue signals across web/handler processes, and atomic temp-file-and-rename writes for `.loc` files).
+#### 2. Address Concurrent Registry Updates and Atomic Rollback on Index Build Failure
+* **WHY:** Real-time, in-memory updates to `tool-data/*.loc` tables without server restarts can suffer from race conditions if multiple Data Manager jobs (e.g., launched via a workflow or API) complete simultaneously or if a multi-node `[AUTHOR]` deployment runs multiple web/job handler processes.
+* **WHAT:** Clarify how the Data Manager framework synchronizes registry updates across multiple server processes and ensures atomic file moves and `.loc` table writes.
+* **HOW:** Add a brief technical paragraph in Section 2 explaining the locking mechanism used when writing to `.loc` files, how partial index directories are cleaned up if `bwa index` fails mid-execution, and how multi-process `[AUTHOR]` deployments reload updated data tables without restarting.
 
-#### 3. Include a Summary Table of Available Production Data Managers in the Main Text or Supplement
-* **WHY:** The text mentions BWA (`bwa_indexes`), `all_fasta`, BLAST databases, and protein/pathway domain databases (lines 14, 21), but does not provide a concrete inventory of which Data Managers are already available in the ToolShed for administrators to install.
-* **WHAT:** Provide a concise table listing the currently released ToolShed Data Managers, the target data tables they populate, and the upstream sources they support (e.g., UCSC, Ensembl, NCBI, local history dataset).
-* **HOW:** Add a compact table in Section 2 or Supplementary Material listing the core Data Managers (e.g., `data_manager_fetch_genome_dbkeys_all_fasta`, `data_manager_bwa_index_builder`, `data_manager_bowtie2_index_builder`, `data_manager_sam_fasta_index_builder`) along with their ToolShed repository URLs.
+#### 3. Provide a Concrete End-to-End Benchmark and Worked Example in the Main Text
+* **WHY:** Section 2 discusses the BWA indexer Data Manager conceptually, but provides no quantitative demonstration (e.g., time and steps required to provision a reference genome and aligner indexes via a Data Manager workflow versus manual configuration) or sample JSON payload in the main text.
+* **WHAT:** Include a compact figure or listing showing the exact JSON input/output dictionary for the BWA Data Manager and a timing/step comparison of automated provisioning.
+* **HOW:** Move or summarize the key workflow diagram from Supplementary Figure S1 into the main text alongside a minimal 6-line JSON output snippet (`data_tables` $\rightarrow$ `bwa_indexes` $\rightarrow$ `{value, dbkey, name, path}`) so readers can immediately see the contract required to write a custom Data Manager.
 
-#### 4. Minor Editorial Correction
-* **WHY:** Typographical error in Section 2.
-* **WHAT & HOW:**
-  * *Line 23:* Replace `"this declaration has the affect of instructing"` with `"this declaration has the effect of instructing"`.
+#### 4. Minor Editorial Cleanup
+* **WHY:** A typographical error appears in Section 2.
+* **WHAT & HOW:** In Section 2, paragraph 2 (line 23), change `"this declaration has the affect of instructing"` to `"this declaration has the effect of instructing"`.

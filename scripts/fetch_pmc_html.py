@@ -1,4 +1,5 @@
 from pathlib import Path
+REPO_ROOT = Path(__file__).resolve().parent.parent
 import os
 import re
 import json
@@ -8,7 +9,7 @@ import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor
 
-with open(str(Path(__file__).resolve().parent.parent / "cohorts.json") as f:
+with open(str(REPO_ROOT / "cohorts.json")) as f:
     cohorts = json.load(f)
 
 all_papers = cohorts["cohort_a"] + cohorts["cohort_b"] + cohorts["cohort_c"]
@@ -98,7 +99,7 @@ def parse_pmc_html(html_bytes, meta):
 def fetch_if_needed(meta):
     cid = meta["cohort_id"]
     pmcid = meta["pmcid"]
-    out_path = fstr(Path(__file__).resolve().parent.parent / "papers/{cid}_{pmcid}.md"
+    out_path = f"{REPO_ROOT}/papers/{cid}_{pmcid}.md"
     if os.path.exists(out_path) and os.path.getsize(out_path) > 6000:
         return (cid, pmcid, "already_full", os.path.getsize(out_path))
     

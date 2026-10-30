@@ -33,6 +33,6 @@ This comparative genomics and 3D chromatin architecture study presents chromosom
 - **Claim 4:** *Positive selection on CENPQ, CENPV, and MEI4 may have facilitated or adapted to rapid karyotype evolution.* `[Moderately Supported]` — Appropriately presented as a hypothesis requiring functional follow-up.
 
 ### 4. Reproducibility & Data Completeness
-- **Strengths:** Exact software versions, commit hashes (`Juicer d3ee11b`, `3D-DNA 745779b`, `cactus e4d0859`, `chainCleaner aacca59`, `BeforePhylo 0885849`), custom script names, and Bitbucket/GitHub repositories (`https://bitbucket.org/bredeson/artisanal`) are meticulously documented.
+- **Strengths:** Exact software versions, commit hashes (`Juicer d3ee11b`, `3D-DNA 745779b`, `cactus e4d0859`, `chainCleaner aacca59`, `BeforePhylo 0885849`), custom script names, and Bitbucket/GitHub repositories (`[CODE_REPO]`) are meticulously documented.
 - **Weaknesses:** The NCBI BioProject / GenBank assembly accession numbers for the newly generated *M. muntjak* and *M. reevesi* assemblies are not printed in the main text or Methods section of the manuscript file.
 </Blinded Review: TIME_ANON_0740>

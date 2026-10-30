@@ -3,56 +3,54 @@
 **Manuscript Title:** [REDACTED FOR BLINDED REVIEW]  
 **Authors:** [REDACTED FOR BLINDED REVIEW]  
 **Journal / Preprint:** [REDACTED FOR BLINDED REVIEW]  
-**Overall Score:** **8.1 / 10.0** (Strong / Sound)  
-**Scientific Core Score:** **6.2 / 8.0**  
-* **Score Breakdown:** Rigor: 2.5/3.5 | Claims: 2.0/2.5 | Biology: 1.7/2.0 | Reproducibility: 1.9/2.0
+**Overall Score:** **7.5 / 10.0** (Strong / Sound) | **Scientific Core Score:** **5.7 / 8.0**  
+* **Score Breakdown:** Rigor: 2.3/3.5 | Claims: 1.9/2.5 | Biology: 1.5/2.0 | Reproducibility: 1.8/2.0
 
 ---
 
 ### 1. SUMMARY AND OVERALL IMPACT STATEMENT
 
-This correspondence presents `Galaxy Cloud`, a cloud-computing deployment framework that couples the open-source `[WORKFLOW_PLATFORM]` (Galaxy) web workbench with `[SOFTWARE_PACKAGE]` (CloudMan) resource orchestration on Amazon Web Services (AWS) and Eucalyptus clouds. To overcome the queue limits, data-transfer bottlenecks, and privacy constraints of shared public Galaxy servers without requiring users to maintain local high-performance computing clusters, `Galaxy Cloud` provisions private, pre-configured Galaxy instances backed by persistent cloud storage volumes (containing pre-built reference genomes, aligner indices, and bioinformatics tools) and elastic worker-node auto-scaling. The authors demonstrate the system using a clinical mitochondrial DNA (mtDNA) heteroplasmy detection workflow across nine individuals from three families (`[14]`, 45 GB of raw sequencing data), showing that dynamic auto-scaling (ranging from 1 to 16 worker nodes) completes the analysis in 6 hours for $20 in compute costs (plus 9 hours and $5 for S3 data upload), matching the 6-hour speed of a fixed 20-node cluster ($50) at the $20 cost of a fixed 5-node cluster (9 hours). All input datasets, heteroplasmy workflows, and step-by-step cloud launch instructions are publicly archived via AWS S3 (`s3.amazonaws.com/heteroplasmy/index.html`) and a dedicated Galaxy Page.
+This correspondence introduces `[SOFTWARE]` Cloud, an on-demand cloud deployment of the `[SOFTWARE]` web-based bioinformatics platform managed by `[SOFTWARE_PACKAGE]` on Amazon Web Services (AWS) and compatible with Eucalyptus. `[SOFTWARE]` Cloud allows researchers to launch private, customizable `[SOFTWARE]` instances preloaded with reference genomes, aligner indexes, and analysis tools, backed by elastic cluster auto-scaling and persistent storage across sessions. To demonstrate its utility, the authors analyze 45 GB of mitochondrial DNA (mtDNA) next-generation sequencing data from nine individuals across three families to detect mitochondrial heteroplasmy. Uploading the 45 GB dataset to AWS S3 took 9 hours (1.5 MB/s, $5), and executing a strand-aware variant-calling workflow on an auto-scaled cluster of 1–16 nodes completed in ~6 hours for $20—matching the 6-hour runtime of a fixed 20-node cluster ($50) at the $20 cost of a slower 5-node cluster (9 hours). The workflow identified four heteroplasmic sites across two of the three families, and all input datasets and workflows are publicly archived on AWS S3 and `[WORKFLOW_PLATFORM]`.
 
-The manuscript is concise, well-balanced, and unusually transparent in both its empirical cost/runtime benchmarking against fixed-size cluster baselines and its candid discussion of cloud limitations (such as reduced cost-effectiveness during interactive trial-and-error workflow design and cloud instance RAM ceilings for de novo assembly, line 64). Only minor technical and reporting clarifications are needed: (1) specifying the exact EC2 instance types, per-hour pricing, and ongoing persistent storage costs (EBS/S3) when compute nodes are terminated; (2) stating the quantitative filtering thresholds (minimum variant frequency, base quality, and per-strand read depth) and concordance with reference `[14]` for the four reported heteroplasmic sites; and (3) qualifying the clinical privacy claim (line 56) by noting the encryption and access-control configurations required when handling clinical sequencing data on public clouds.
+The letter presents a practical, reproducible cloud computing solution for laboratories lacking local high-performance computing infrastructure, and the open availability of the 45 GB benchmark dataset and exact workflow is commendable. However, several technical and biological details needed to evaluate the case study and cloud performance claims are omitted from the main text: (1) the heteroplasmy calling criteria (minimum minor allele frequency threshold, per-strand read depth, base/mapping quality cutoffs, and control for nuclear mitochondrial DNA segments [NUMTs] or PCR/sequencing error) and any orthogonal validation of the four reported heteroplasmic sites are not stated; (2) the auto-scaling runtime and cost comparison reports single point estimates without specifying the AWS EC2 instance types or run-to-run variability; and (3) the claim that clinical samples with strict privacy concerns can be safely analyzed on a public cloud is presented without detailing encryption or access-control safeguards. These points can be addressed through concise textual additions.
 
 ---
 
 ### 2. SPECIFIC CONCLUSIONS AND ASSESSMENT OF SUPPORT
 
-* **Dynamic cluster auto-scaling via `[SOFTWARE_PACKAGE]` optimizes the runtime-versus-cost trade-off compared with static cluster allocations for multi-step NGS workflows: [Well Supported].**  
-  The benchmark on 45 GB of mtDNA sequencing data (line 62) compares dynamic auto-scaling (1–16 nodes: 6 hours, $20) directly against two static baselines with auto-scaling disabled (5 nodes: 9 hours, $20; 20 nodes: 6 hours, $50), demonstrating a 33% reduction in wall-clock time at identical cost relative to the small static cluster and a 60% cost reduction at identical wall-clock time relative to the large static cluster.
+* **`[SOFTWARE]` Cloud coupled with `[SOFTWARE_PACKAGE]` enables browser-based instantiation and persistent management of private elastic `[SOFTWARE]` clusters on AWS: [Well Supported].**  
+  The architectural integration of `[SOFTWARE]` with `[SOFTWARE_PACKAGE]` for dynamic compute node provisioning, persistent EBS/S3 storage of tools, reference indexes, and user data, and complete workflow provenance is clearly demonstrated and backed by live public images and documentation (`[WORKFLOW_PLATFORM]/cloud`).
 
-* **The mtDNA heteroplasmy workflow identifies four heteroplasmic sites across two of the three examined families and is fully reproducible from cloud-hosted artifacts: [Well Supported].**  
-  By hosting both the 45 GB raw sequencing dataset on AWS S3 and the exact strand-separated mapping and filtering workflow on a public Galaxy Page (line 60), the authors enable exact replication of the four heteroplasmy calls (`[14]`).
+* **Auto-scaling (1–16 nodes) achieves the 6-hour runtime of a 20-node fixed cluster at the $20 cost of a 5-node fixed cluster on the 45 GB mtDNA workflow: [Moderately Supported].**  
+  The empirical comparison (auto-scaled 1–16 nodes: 6 h, $20; fixed 5 nodes: 9 h, $20; fixed 20 nodes: 6 h, $50) illustrates how elasticity avoids paying for idle nodes during serial workflow stages. However, the main text does not specify which EC2 instance type (e.g., `m1.large`, `c1.xlarge`) was used, whether EBS storage/I/O fees were included in the $20 total, or whether timings reflect single runs or averages across replicates.
 
-* **Releasing compute resources when an analysis finishes preserves user data and instance state while eliminating compute charges: [Moderately Supported].**  
-  While terminating EC2 worker and master compute instances stops hourly compute billing and preserves user datasets on persistent storage volumes (lines 52, 54, 62), the cost discussion does not mention that preserved Elastic Block Store (EBS) volumes and S3 buckets continue to accrue monthly storage charges while the instance is dormant, nor does it report the specific EC2 instance types used in the benchmark.
+* **The `[SOFTWARE]` Cloud workflow accurately identifies four mtDNA heteroplasmic sites across two of the three studied families: [Fragile].**  
+  While the full workflow is shared online (`s3.amazonaws.com/heteroplasmy/index.html`), the letter itself omits the quantitative thresholds used to distinguish true mtDNA heteroplasmy from sequencing errors, strand bias, or paralogous nuclear mitochondrial pseudogenes (NUMTs), and does not state whether the four sites were validated by maternal transmission within the three-family pedigrees or by orthogonal assays.
 
-* **Clinical samples with strict privacy concerns "can be analyzed on a secure public or private cloud resource" using `Galaxy Cloud`: [Moderately Supported].**  
-  In contrast to uploading patient reads to a shared multi-tenant academic web server, a dedicated cloud instance isolates tenant compute and storage. However, running default cloud instances on a public cloud provider (AWS) does not by itself guarantee clinical data compliance (e.g., HIPAA/IRB protections) unless HTTPS/TLS encryption in transit, EBS/S3 encryption at rest, and restricted security-group authentication are explicitly enabled.
+* **`[SOFTWARE]` Cloud resolves clinical data privacy concerns by running on a "secure public or private cloud resource": [Moderately Supported].**  
+  Although running a private instance avoids uploading sensitive clinical reads to a multi-tenant public `[SOFTWARE]` web server, deploying on a public cloud (AWS) still requires specific technical safeguards (encrypted EBS volumes, S3 server-side encryption, HTTPS/SSL data transfer, and restricted security group ports) that are not described in the text.
 
 ---
 
 ### 3. CONSTRUCTIVE AND DOABLE SUGGESTIONS FOR IMPROVEMENT
 
-#### 1. Report Exact EC2 Instance Types, Instance-Hours, and Persistent Storage Retention Costs
-* **WHY:** Dollar figures alone ($20 for compute, $5 for transfer, line 62) depend on provider pricing tiers at the time of execution and cannot be directly translated into computational work (CPU-hours / RAM-hours) by future readers. Furthermore, users preserving inactive instances on AWS need to know the ongoing monthly storage cost of their retained EBS/S3 volumes.
-* **WHAT:** Specify the AWS EC2 instance type(s) (e.g., `m1.large` or `c1.xlarge` with CPU core and RAM counts), total instance-hours consumed under the 1–16 node auto-scaling run vs. the 5-node and 20-node static runs, and the monthly EBS/S3 storage rate for preserving the 45 GB dataset between sessions.
-* **HOW:** Update the benchmark paragraph (line 62) to include parenthetical hardware specifications (instance type, vCPUs, RAM per node, and total node-hours) alongside the dollar costs, and add one sentence noting the monthly storage cost ($/GB-month) when compute nodes are terminated.
+#### 1. Specify the Quantitative Thresholds and Validation Support for the Four mtDNA Heteroplasmic Sites
+* **WHY:** As the authors note, heteroplasmy detection is notorious for false positives arising from sequencing errors, PCR amplification artifacts, and co-amplified or mis-mapped NUMTs. Reporting "four heteroplasmic sites in two of the three examined families" without stating the minor allele frequency cutoff, coverage depth, or validation status leaves the biological case study incomplete.
+* **WHAT:** State the exact filtering thresholds implemented in the workflow and summarize the read depth, minor allele frequencies, and pedigree concordance of the four detected sites.
+* **HOW:** Add 2–3 sentences to paragraph 7 (line 58) specifying the minimum Phred base quality, minimum coverage per strand, minor allele frequency threshold (e.g., $\ge 1\%$ or $\ge 2\%$ on both forward and reverse strands), and whether the four calls were consistent with maternal inheritance across the three families `[14]`.
 
-#### 2. State the Numerical Thresholds and Validation Concordance for the Heteroplasmy Case Study
-* **WHY:** Line 58 states that the workflow identifies *"allelic variants above a certain frequency supported by high quality reads on both strands,"* yielding four heteroplasmic sites across two families, without stating the numerical thresholds or whether these four sites match the validated heteroplasmies reported in study `[14]`.
-* **WHAT:** State the exact Phred base quality threshold, minimum minor allele frequency cutoff, and per-strand coverage requirement in line 58, and confirm concordance with `[14]`.
-* **HOW:** Revise the final two sentences of line 58 to specify the exact parameter cutoffs (e.g., Phred score $\ge Q$, minor allele frequency $\ge f\%$, and $\ge k$ reads per forward/reverse strand) and note that the four identified sites reproduce the findings of `[14]`.
+#### 2. Document AWS EC2 Instance Types and Cost Breakdown for the Auto-Scaling Benchmark
+* **WHY:** Cloud runtimes (6 h vs. 9 h) and dollar costs ($20 vs. $50) cannot be interpreted or reproduced over time without knowing the exact hardware configuration (CPU cores, RAM, instance family) and hourly unit price used in the benchmark.
+* **WHAT:** Report the EC2 instance type(s) allocated for the master and worker nodes and clarify what cost components are included in the $5 transfer and $20–$50 compute figures.
+* **HOW:** In paragraph 9 (line 62), insert the specific AWS instance type (e.g., `m1.large` at $\$X/\text{hour}$) and state whether the $20 figure includes EBS volume provisioning and S3 storage costs alongside EC2 instance hours.
 
-#### 3. Qualify the Clinical Privacy Statement with Required Cloud Security Controls
-* **WHY:** Line 56 cites clinical sample privacy as Motivation #1 for `Galaxy Cloud`. Biomedical users unfamiliar with cloud administration may assume a freshly launched public cloud instance is encrypted by default.
-* **WHAT:** Briefly note that analyzing sensitive clinical samples on a public cloud requires enabling encrypted storage and secure network access controls.
-* **HOW:** Add a clause to Motivation #1 (line 56) or Supplemental Notes clarifying that for protected clinical samples on public clouds, users should enable HTTPS access, encrypted storage volumes, and institutional cloud compliance agreements, or deploy `Galaxy Cloud` on an on-premise private cloud (e.g., Eucalyptus).
+#### 3. Clarify Security and Encryption Mechanisms for Clinical Samples on Public Clouds
+* **WHY:** Motivation (1) for `[SOFTWARE]` Cloud (line 56) highlights clinical samples with strict privacy requirements, which readers may interpret as implying out-of-the-box regulatory (e.g., HIPAA) compliance on public AWS.
+* **WHAT:** Explicitly state what security controls `[SOFTWARE]` Cloud configures by default (e.g., SSH key-pair authentication, firewall security groups) and what additional steps (SSL/TLS, disk encryption, institutional Business Associate Agreements) users must enable for protected health information.
+* **HOW:** Add a qualifying sentence in paragraph 6 or 10 noting that while `[SOFTWARE]` Cloud isolates compute and storage to the user's own AWS account, analyzing regulated clinical data on public clouds requires enabling encrypted storage volumes and encrypted data transfer.
 
-#### 4. Minor Editorial Corrections
-* **WHY:** Three minor grammatical typos appear in the main text.
+#### 4. Technical and Editorial Cleanup
+* **WHY:** Two minor grammatical errors appear in the main text.
 * **WHAT & HOW:**
-  1. *Line 52:* Change `"is installed an available for immediate use"` to `"is installed and available for immediate use"`.
-  2. *Line 56:* Change `"4) There is currently has no commonly accepted approach"` to `"4) There is currently no commonly accepted approach"`.
-  3. *Line 66:* Change `"Galaxy Cloud instance are owned"` to `"Galaxy Cloud instances are owned"`.
+  1. **Paragraph 4 (line 52):** Change `"is installed an available for immediate use"` to `"is installed and available for immediate use"`.
+  2. **Paragraph 6 (line 56):** Change `"4) There is currently has no commonly accepted approach"` to `"4) There is currently no commonly accepted approach"`.

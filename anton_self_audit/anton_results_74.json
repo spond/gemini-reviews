@@ -15,13 +15,13 @@
     "an_id": "AN_RAW_001",
     "anon_id": "AN_ANON_012",
     "scrubbed_bytes": 39020,
-    "overall": 6.5,
+    "overall": 6.3,
     "rigor": 2.0,
-    "claims": 1.7,
+    "claims": 1.6,
     "biology": 1.6,
-    "reproducibility": 1.2,
-    "sci_core_8": 5.3,
-    "summary_note": "The study addresses a foundational question in comparative genomics and provides an intuitive demonstration (Figure 5) of why 100-kb buoyant density centrifugation fractions can create the illusion of internally homogeneous >300-kb isochores despite substantial sub-100-kb GC variation. However, the mathematical formulation and statistical analyses suffer from several methodological flaws: (1) all three mathematical equations in the text (lines 33, 36, 113, 173, 176, 179) are missing or corrupted in the manuscript formatting, and the verbal defi..."
+    "reproducibility": 1.1,
+    "sci_core_8": 5.2,
+    "summary_note": "The manuscript provides a clear empirical demonstration that buoyant density centrifugation averages out substantial fine-scale compositional variation within 100-kb DNA fragments (Figure 5), offering a useful critique of the strict classical isochore model. However, the study's quantitative metrics and comparative conclusions suffer from several methodological weaknesses: (1) all three equations defining the heterogeneity index and binomial standard error are missing or blank in the manuscript text, and the reported numerical values of the bin..."
   },
   {
     "pmcid": "PMC155263",
@@ -39,13 +39,13 @@
     "an_id": "AN_RAW_002",
     "anon_id": "AN_ANON_003",
     "scrubbed_bytes": 26535,
-    "overall": 6.0,
-    "rigor": 1.9,
-    "claims": 1.3,
+    "overall": 6.2,
+    "rigor": 2.0,
+    "claims": 1.4,
     "biology": 1.3,
     "reproducibility": 1.5,
-    "sci_core_8": 4.5,
-    "summary_note": "The empirical demonstration that typical mammalian internal exons (~132 bp at ~13.5% human\u2013mouse nucleotide divergence) contain sufficient mutational signal for a likelihood-based $K_A / K_S$ test to detect purifying selection in >90% of cases is a useful comparative genomics result, particularly for long exons and single-exon genes where single-genome *ab initio* Markov models degrade. However, the manuscript's statistical calibration and headline comparisons against *ab initio* gene predictors (e.g., GenScan) suffer from three methodological ..."
+    "sci_core_8": 4.7,
+    "summary_note": "While the empirical characterization of selective constraint across human\u2013mouse exons of varying lengths and positions is informative, the manuscript's headline claims that the test has \"a false-positive rate lower than all current methods\" and a false-negative rate directly competitive with *ab initio* gene predictors rest on three methodological flaws. First, the ~2.6% false-positive rate in Table 3 is not an empirical discovery of high specificity, but a mathematical artifact of applying a two-sided $\\chi^2_1$ critical value at $\\alpha = 0.0..."
   },
   {
     "pmcid": "PMC1186735",
@@ -87,13 +87,13 @@
     "an_id": "AN_RAW_004",
     "anon_id": "AN_ANON_030",
     "scrubbed_bytes": 41819,
-    "overall": 6.5,
+    "overall": 6.2,
     "rigor": 1.7,
     "claims": 1.5,
-    "biology": 1.6,
-    "reproducibility": 1.7,
-    "sci_core_8": 4.8,
-    "summary_note": "The study addresses an interesting evolutionary systems biology question and is commendable for bundling its Perl/C code, binary adjacency matrix, and gene-pair lists directly in the supplementary files. However, several statistical and network-construction flaws undermine its quantitative conclusions: (1) computing Pearson correlation $R \\ge 0.7$ across *only the $T$ tissues where both genes have $AD > 200$* (as Few as $T=7$ tissues out of 79) means different gene pairs are correlated over different sample sizes ($7 \\le n \\le 79$) and complete..."
+    "biology": 1.4,
+    "reproducibility": 1.6,
+    "sci_core_8": 4.6,
+    "summary_note": "While applying coexpression graph topology to study paralog evolution in mammals is an interesting systems-biology framework, several primary conclusions rest on statistical and conditioning artifacts: (1) computing Pearson $R \\ge 0.7$ over only the subset of tissues $T \\ge 7$ where both genes exceed $AD > 200$ means that the sample size $n_{ij} \\in [7, 79]$ and false-positive edge rate vary by orders of magnitude with expression breadth; (2) the claim of rapid partner acquisition ($n_1 + n_2 - n_{12} = 227.9 > 144.9$) is based on conditioning ..."
   },
   {
     "pmcid": "PMC1868773",
@@ -111,13 +111,13 @@
     "an_id": "AN_RAW_005",
     "anon_id": "AN_ANON_021",
     "scrubbed_bytes": 28233,
-    "overall": 6.8,
-    "rigor": 2.2,
-    "claims": 1.6,
+    "overall": 6.9,
+    "rigor": 2.1,
+    "claims": 1.7,
     "biology": 1.6,
-    "reproducibility": 1.4,
+    "reproducibility": 1.5,
     "sci_core_8": 5.4,
-    "summary_note": "The study introduces an interesting comparative genomics pipeline and a context-conditioned Markov codon model for overlapping reading frames, addressing a genuine biological question. However, the statistical inference for the 15 \"high-confidence\" candidates suffers from an inverted hypothesis-testing logic in both secondary evolutionary filters: in four-taxon alignments with low divergence, the authors treat *failure to reject* a constrained null hypothesis ($H_0: \\beta_{\\text{STOP}} = 0$ and $H_0: \\kappa_{12} = \\kappa_3$) as positive proof o..."
+    "summary_note": "The comparative screen and the CCRT conditional resampling test provide a creative control for amino acid composition and codon usage bias in the canonical reading frame. However, the two downstream substitution tests used to validate the 15 \"high-confidence\" candidates suffer from fundamental statistical flaws: both tests place the functional dual-coding hypothesis in the null hypothesis ($H_0: \\beta_{\\text{STOP}} = 0$ and $H_0: \\kappa_{12} = \\kappa_3$) and treat failure to reject $H_0$ ($p > 0.05$) in 4-species alignments as positive evidence..."
   },
   {
     "pmcid": "PMC1891355",
@@ -135,13 +135,13 @@
     "an_id": "AN_RAW_006",
     "anon_id": "AN_ANON_056",
     "scrubbed_bytes": 18715,
-    "overall": 7.6,
-    "rigor": 2.6,
+    "overall": 7.3,
+    "rigor": 2.3,
     "claims": 1.7,
     "biology": 1.6,
     "reproducibility": 1.7,
-    "sci_core_8": 5.9,
-    "summary_note": "As an integrative bioinformatics platform, `Galaxy2 ENCODE` delivers a clean, extensible architecture that removes file-parsing barriers between genomic interval algebra, whole-genome alignments, and maximum-likelihood phylogenetic software. The second vignette (ancestral repeat substitution rates with profile-likelihood confidence intervals) is methodologically sound and reproduces genome-wide mammalian neutral divergence benchmarks in seven minutes. However, the first illustrative vignette (Non-GENCODE ESTs) contains three methodological and ..."
+    "sci_core_8": 5.6,
+    "summary_note": "As a bioinformatics software resource and consortium data portal, `Galaxy2 ENCODE` is well engineered, lowers technical barriers for interval and comparative genomic workflows, and provides a clean neutral evolutionary rate benchmark showing that ENCODE autosomal ancestral repeats match genome-wide mammalian substitution rates. However, the biological vignette on Non-GENCODE ESTs contains three methodological and numerical flaws: (1) the null control for `EST`\u2013`transfrag` overlap (`Experiment B`, line 93) intersects `EST` exons with simulated `..."
   },
   {
     "pmcid": "PMC2099589",
@@ -159,13 +159,13 @@
     "an_id": "AN_RAW_007",
     "anon_id": "AN_ANON_042",
     "scrubbed_bytes": 53174,
-    "overall": 8.8,
-    "rigor": 2.9,
-    "claims": 2.2,
-    "biology": 1.8,
-    "reproducibility": 1.9,
-    "sci_core_8": 6.9,
-    "summary_note": "The primary deliverable\u2014the 28-way vertebrate alignment, `phastCons` conservation tracks, and `bx-python` LZO-indexed MAF processing suite\u2014is a rigorously engineered, foundational community resource accompanied by open data, open source code, and remarkably candid discussion of methodological limitations (including `phastCons` gap handling, tree topology dependence, and human polymorphism in *GFM2*). Within the three illustrative biological applications, several methodological caveats warrant attention: the parametric bootstrap test claiming a ..."
+    "overall": 9.2,
+    "rigor": 3.2,
+    "claims": 2.3,
+    "biology": 1.9,
+    "reproducibility": 1.8,
+    "sci_core_8": 7.4,
+    "summary_note": "The manuscript is an exemplary genomic resource paper characterized by careful algorithmic engineering\u2014most notably its distinction between syntenic and reciprocal-best net filtering by assembly depth and its gap-annotation-aware alignability metric (`maf_interval_alignability.py`), which excludes unsequenced draft gaps from non-aligned denominators\u2014and by unusually candid, self-critical reporting of negative and caveated results. The main analytical points that could be further strengthened are: (1) testing whether the apparent 2-fold slowdown..."
   },
   {
     "pmcid": "PMC3418382",
@@ -183,13 +183,13 @@
     "an_id": "AN_RAW_008",
     "anon_id": "AN_ANON_032",
     "scrubbed_bytes": 79201,
-    "overall": 7.8,
-    "rigor": 2.6,
-    "claims": 1.9,
-    "biology": 1.5,
-    "reproducibility": 1.8,
-    "sci_core_8": 6.0,
-    "summary_note": "Evaluated as a primary educational resource and software protocol unit, the manuscript is logically structured, pedagogically clear, and grounded in authentic public genomic datasets (UCSC Table Browser, ENCODE, MPromDB, 46-way multiZ). However, several technical and quantitative flaws in the protocol steps should be corrected so that users do not adopt biased analytical habits. Most notably, Basic Protocol 1 promises in its title and introduction to identify coding exons with the *\"highest SNP density\"*, but the actual workflow ranks exons str..."
+    "overall": 7.4,
+    "rigor": 2.3,
+    "claims": 2.0,
+    "biology": 1.6,
+    "reproducibility": 1.5,
+    "sci_core_8": 5.9,
+    "summary_note": "As an educational and practical resource, the manuscript clearly explains histories, metadata management, genomic coordinate formats, and multi-step workflow construction. However, the protocols contain one primary analytical flaw in Basic Protocol 1 and several step-by-step execution bugs across Basic Protocols 1, 2, 4, and 5 that will cause users following the text literally to obtain incorrect results or encounter errors: (1) Basic Protocol 1 claims to identify the 100 coding exons with the *\"highest SNP density\"*, but it ranks exons by the ..."
   },
   {
     "pmcid": "PMC3041519",
@@ -207,13 +207,13 @@
     "an_id": "AN_RAW_009",
     "anon_id": "AN_ANON_046",
     "scrubbed_bytes": 21175,
-    "overall": 6.9,
-    "rigor": 2.0,
-    "claims": 1.8,
+    "overall": 7.5,
+    "rigor": 2.4,
+    "claims": 1.9,
     "biology": 1.5,
-    "reproducibility": 1.6,
-    "sci_core_8": 5.3,
-    "summary_note": "While the architectural philosophy\u2014decoupling web-based workflow orchestration and metadata persistence from backend tool execution and remote web-service specifics\u2014is sound and pragmatic, the manuscript is written almost entirely as a high-level essay without technical specifications, architectural diagrams, XML schema examples, or quantitative empirical evidence. Crucially, although the paper frames data format incompatibility (\"wrestling data from one resource format to the formats required by various applications\" using spreadsheet \"string ..."
+    "reproducibility": 1.7,
+    "sci_core_8": 5.8,
+    "summary_note": "The manuscript makes a clear, pragmatic software-engineering case for loose coupling: pushing web-service and tool-specific complexities out of the core server into declarative XML wrappers and standalone command-line scripts has proven far more resilient than heavy web-service ontologies. However, as a scientific manuscript focused on translational genomics, its primary limitations are a complete absence of technical diagrams, concrete XML/protocol specifications, or quantitative server benchmarks, an idealized claim that private instances can..."
   },
   {
     "pmcid": "PMC2775585",
@@ -231,13 +231,13 @@
     "an_id": "AN_RAW_010",
     "anon_id": "AN_ANON_051",
     "scrubbed_bytes": 38798,
-    "overall": 8.0,
-    "rigor": 2.5,
-    "claims": 2.0,
-    "biology": 1.7,
-    "reproducibility": 1.8,
-    "sci_core_8": 6.2,
-    "summary_note": "As a bioinformatics workflow resource and reproducibility demonstration, the manuscript succeeds: it demonstrates that nucleotide-level MegaBLAST searches against NT and WGS with top-quartile alignability filtering closely reproduce MEGAN's protein-level taxonomic profiles on the Sargasso Sea dataset while accommodating non-coding eukaryotic genomic reads and 454 homopolymer base-calling errors. The authors also provide a candid assessment of how NCBI sequence database skew (where ~56% of insect entries come from Culicidae and Drosophilidae, an..."
+    "overall": 8.4,
+    "rigor": 2.6,
+    "claims": 2.1,
+    "biology": 1.8,
+    "reproducibility": 1.9,
+    "sci_core_8": 6.5,
+    "summary_note": "As a bioinformatics workflow and reproducibility resource, the work is well engineered: it demonstrates that nucleotide-level MegaBLAST searches with $Q_3$ alignable-fraction filtering recover the same dominant Gammaproteobacteria family profiles as protein-level `MEGAN` analyses while scaling to non-coding eukaryotic shotgun reads, and sets a high bar for transparent computational publishing. The primary methodological weakness lies in the statistical comparison of taxon abundances between Trip A and Trip B (Table 2), which models individual s..."
   },
   {
     "pmcid": "PMC4264107",
@@ -255,13 +255,13 @@
     "an_id": "AN_RAW_011",
     "anon_id": "AN_ANON_004",
     "scrubbed_bytes": 53647,
-    "overall": 7.5,
-    "rigor": 2.4,
-    "claims": 1.9,
-    "biology": 1.5,
+    "overall": 7.8,
+    "rigor": 2.5,
+    "claims": 2.0,
+    "biology": 1.6,
     "reproducibility": 1.7,
-    "sci_core_8": 5.8,
-    "summary_note": "As an instructional protocol resource, the unit succeeds in translating multi-step relational and genomic interval operations into clear, reproducible browser steps that require no command-line programming. However, several bioinformatic and biological pitfalls are embedded in the illustrative protocols without warning to novice users: (1) Basic Protocol 1 defines promoters strictly as 1,000 bp *upstream* flanks (`Get flanks`) outside the transcribed RefSeq coordinates, which excludes the transcription start site (TSS) and 5' untranslated regio..."
+    "sci_core_8": 6.1,
+    "summary_note": "Evaluated as an educational protocol and software tutorial rather than a hypothesis-testing primary study, the step-by-step instructions are clear, modular, and directly executable in a web browser. However, several bioinformatic and biological caveats in the worked examples are left unaddressed and can mislead novice experimentalists: Basic Protocol 2 ranks exons by raw SNP counts (`c2 >= 10`) without normalizing by exon length or accounting for overlapping alternative transcript isoforms in the UCSC Genes track; Basic Protocol 4 sorts BED int..."
   },
   {
     "pmcid": "PMC6529944",
@@ -280,12 +280,12 @@
     "anon_id": "AN_ANON_063",
     "scrubbed_bytes": 51361,
     "overall": 6.8,
-    "rigor": 2.0,
-    "claims": 1.5,
-    "biology": 1.5,
-    "reproducibility": 1.8,
-    "sci_core_8": 5.0,
-    "summary_note": "As a pedagogical walkthrough of web-based genomic interval operations and feature enrichment, the manuscript is clearly structured and accessible to bench biologists. However, the biological and statistical formulation of the three example case studies exhibits several methodological flaws that set a poor precedent for tutorial readers: (1) in Case Study 1 (Section 3.2), the \"independent test set of unseen genomic regions\" is drawn from the exact same chromosome (chromosome 21 promoter regions) as the chromosome 21 CpG island training set, crea..."
+    "rigor": 2.1,
+    "claims": 1.7,
+    "biology": 1.4,
+    "reproducibility": 1.6,
+    "sci_core_8": 5.2,
+    "summary_note": "As a pedagogical protocol, the paper offers clear operational instructions and includes helpful cautionary notes on matched control sampling (GC content, repeat overlap, chromosomal distribution in Note 2) and cross-validation feature-selection pitfalls (Note 5). However, the tutorial's flagship biological case studies contain three methodological flaws that teach problematic analytical habits to target readers: (1) in Case Study 3 (Section 3.4), the target class is defined by `dbSNP` SNP counts ($\\ge 10$ vs. $\\le 1$ SNP), yet the authors inclu..."
   },
   {
     "pmcid": "PMC2894519",
@@ -303,13 +303,13 @@
     "an_id": "AN_RAW_013",
     "anon_id": "AN_ANON_037",
     "scrubbed_bytes": 10894,
-    "overall": 7.7,
+    "overall": 7.9,
     "rigor": 2.5,
-    "claims": 1.8,
-    "biology": 1.5,
-    "reproducibility": 1.9,
-    "sci_core_8": 5.8,
-    "summary_note": "Evaluated as a brief bioinformatics software note, the toolkit addresses a critical source of silent downstream error in early short-read genomics: incompatible FASTQ quality score offsets (`Phred+33` vs. `Phred+64` vs. `Solexa` log-odds) and ad-hoc read preprocessing. Integrating automated functional regression tests using the Cock et al. reference test cases and reporting observed ASCII bounds (`<59` for Sanger) in `FASTQ Groomer` are sound software engineering practices. The primary technical limitations lie in (1) how paired-end read synchr..."
+    "claims": 2.0,
+    "biology": 1.6,
+    "reproducibility": 1.8,
+    "sci_core_8": 6.1,
+    "summary_note": "This is a useful, well-tested software contribution that directly addresses a common source of silent bioinformatics errors\u2014mis-specified FASTQ quality encodings\u2014while providing flexible read manipulation without requiring command-line scripting. Its primary limitations are: (1) the absence of any empirical runtime or memory benchmarks to support the claim that the Python toolkit has *\"no known data size limitations\"* when applied to multi-gigabyte high-throughput sequencing runs; (2) potential paired-end desynchronization and read-boundary cor..."
   },
   {
     "pmcid": "PMC2945788",
@@ -327,13 +327,13 @@
     "an_id": "AN_RAW_014",
     "anon_id": "AN_ANON_022",
     "scrubbed_bytes": 47242,
-    "overall": 8.4,
-    "rigor": 2.9,
+    "overall": 8.2,
+    "rigor": 2.7,
     "claims": 2.0,
     "biology": 1.7,
     "reproducibility": 1.8,
-    "sci_core_8": 6.6,
-    "summary_note": "This is a well-engineered foundational resource paper that delivers practical infrastructure for provenance tracking, workflow extraction, and interactive publication supplements without requiring end-users to program. Its primary technical limitations lie in the gap between its headline claims of \"exact repeatability\" and actual software environment determinism (tool versions are recorded internally in metadata but not yet exposed to users, and underlying binary/library dependencies are not pinned or containerized across servers), as well as t..."
+    "sci_core_8": 6.4,
+    "summary_note": "The software engineering design is well thought out and directly addresses a major practical bottleneck in genomic data science: bridging interactive analysis by non-programmers with structured provenance capture and executable publication supplements. The primary limitations are that (1) the paper equates repeatability within a single hosted server instance with full computational reproducibility, even though tool versions are not yet exposed to users in the interface, concurrent multi-version tool execution is not yet supported, and cross-ser..."
   },
   {
     "pmcid": "PMC3040530",
@@ -357,7 +357,7 @@
     "biology": 1.6,
     "reproducibility": 1.8,
     "sci_core_8": 6.0,
-    "summary_note": "The modular separation of the thin bootstrapping AMI from S3 contextualization metadata and EBS tool snapshots is a clean systems-engineering design that solves both data persistence across transient EC2 runs and decoupled software updates. However, the manuscript provides no quantitative performance benchmarks to substantiate its headline timing and scaling claims\u2014such as achieving a completely configured cluster in \"less than five minutes,\" scaling worker nodes in \"a few minutes,\" or dynamically expanding persistent EBS volumes (whose snapsho..."
+    "summary_note": "The architectural separation of the base AMI from EBS tool snapshots and S3 boot contextualization is a clean systems-engineering design that avoids rebuilding monolithic virtual machine images whenever bioinformatics tools are added or updated. However, the manuscript's primary weaknesses are the complete absence of empirical performance benchmarks (no measurements of cluster boot latency to support the \"<5 minutes\" claim, no EBS volume resize downtime metrics, and no NGS pipeline scaling or cost benchmarks across multiple worker nodes) and a ..."
   },
   {
     "pmcid": "PMC3092608",
@@ -399,13 +399,13 @@
     "an_id": "AN_RAW_017",
     "anon_id": "AN_ANON_052",
     "scrubbed_bytes": 55292,
-    "overall": 8.5,
-    "rigor": 2.7,
-    "claims": 2.2,
-    "biology": 1.8,
-    "reproducibility": 1.8,
-    "sci_core_8": 6.7,
-    "summary_note": "This is a well-controlled methodological and forensic study whose experimental controls (`pUC18`, 49:1 mixture, duplicate PCRs, and re-analysis of published CEPH reads) directly establish best practices for low-frequency variant detection and reproducibility. Its claims regarding population heteroplasmy prevalence are appropriately cautious, explicitly showing via Poisson resampling that its small sample of unrelated founders ($n=3$) is statistically compatible with prior studies. Two technical issues warrant correction: first, the resampling a..."
+    "overall": 7.7,
+    "rigor": 2.5,
+    "claims": 1.9,
+    "biology": 1.7,
+    "reproducibility": 1.6,
+    "sci_core_8": 6.1,
+    "summary_note": "The experimental control design (`pUC18` clonal negative control, `49:1` spike-in positive control, strand-concordance filtering, and poly-C indel re-alignment) and open-science infrastructure (`SRA` accession `DRA000390` plus workflow and cloud images) are strong contributions. However, three technical issues require correction: (1) testing maternal transmission and inter-tissue allele frequency shifts at site `8,992` via binomial read resampling / Fisher's exact test treats up to `52,519` PCR-amplified reads as independent biological draws ra..."
   },
   {
     "pmcid": "PMC3157923",
@@ -423,13 +423,13 @@
     "an_id": "AN_RAW_018",
     "anon_id": "AN_ANON_054",
     "scrubbed_bytes": 14845,
-    "overall": 8.4,
-    "rigor": 2.7,
+    "overall": 8.6,
+    "rigor": 2.8,
     "claims": 2.2,
-    "biology": 1.6,
+    "biology": 1.7,
     "reproducibility": 1.9,
-    "sci_core_8": 6.5,
-    "summary_note": "The toolset solves a genuine practical barrier in comparative genomics\u2014specifically the error-prone handling of negative-strand coordinate numbering in MAF files and random-access extraction from hundred-gigabyte multi-chromosome alignment archives. However, as a software note, the manuscript has two notable omissions: first, it provides no quantitative performance benchmarks (index construction time, compressed disk footprint, or query execution time and peak RAM when extracting genome-wide gene sets from the 28-way or 46-way MAF archives); se..."
+    "sci_core_8": 6.7,
+    "summary_note": "The toolset solves a genuine practical bottleneck in comparative genomics: whole-genome `MAF` files span hundreds of gigabytes and millions of fragmented local alignment blocks with non-standard minus-strand coordinate indexing that frequently causes off-by-one or strand-inversion bugs in custom scripts. The primary limitations are: (1) the `MAF Stitcher` resolves overlapping blocks using the original whole-block aggregate score without enforcing syntenic/strand continuity per species and silently strips non-reference insertions, which can intr..."
   },
   {
     "pmcid": "PMC3194890",
@@ -471,13 +471,13 @@
     "an_id": "AN_RAW_020",
     "anon_id": "AN_ANON_008",
     "scrubbed_bytes": 13756,
-    "overall": 8.1,
-    "rigor": 2.5,
-    "claims": 2.0,
-    "biology": 1.7,
-    "reproducibility": 1.9,
-    "sci_core_8": 6.2,
-    "summary_note": "The manuscript is concise, well-balanced, and unusually transparent in both its empirical cost/runtime benchmarking against fixed-size cluster baselines and its candid discussion of cloud limitations (such as reduced cost-effectiveness during interactive trial-and-error workflow design and cloud instance RAM ceilings for de novo assembly, line 64). Only minor technical and reporting clarifications are needed: (1) specifying the exact EC2 instance types, per-hour pricing, and ongoing persistent storage costs (EBS/S3) when compute nodes are termi..."
+    "overall": 7.5,
+    "rigor": 2.3,
+    "claims": 1.9,
+    "biology": 1.5,
+    "reproducibility": 1.8,
+    "sci_core_8": 5.7,
+    "summary_note": "The letter presents a practical, reproducible cloud computing solution for laboratories lacking local high-performance computing infrastructure, and the open availability of the 45 GB benchmark dataset and exact workflow is commendable. However, several technical and biological details needed to evaluate the case study and cloud performance claims are omitted from the main text: (1) the heteroplasmy calling criteria (minimum minor allele frequency threshold, per-strand read depth, base/mapping quality cutoffs, and control for nuclear mitochondr..."
   },
   {
     "pmcid": "PMC4282168",
@@ -495,13 +495,13 @@
     "an_id": "AN_RAW_021",
     "anon_id": "AN_ANON_039",
     "scrubbed_bytes": 29289,
-    "overall": 6.5,
-    "rigor": 2.0,
-    "claims": 1.6,
-    "biology": 1.4,
-    "reproducibility": 1.5,
-    "sci_core_8": 5.0,
-    "summary_note": "While the overarching pedagogical design and online companion resources (\"Using Galaxy: A live supplement\") are well conceived, the text of this manuscript is severely truncated across all five protocols, omitting the majority of the actual numbered procedural steps while retaining only isolated fragments and figure legends. For example, Basic Protocol 1 stops at Step 4 (*\"Click Statistics in the Tools panel\"*, line 57) before the `Join`, `Count`, `Sort`, `Select first`, and `Compare two datasets` operations are ever described, even though Basi..."
+    "overall": 8.1,
+    "rigor": 2.7,
+    "claims": 2.1,
+    "biology": 1.7,
+    "reproducibility": 1.6,
+    "sci_core_8": 6.5,
+    "summary_note": "As a pedagogical and resource protocol, the manuscript is practically organized and effectively addresses the two most common failure modes in browser-based bioinformatic workflows: coordinate format mismatches (0-based half-open BED vs. 1-based tabular intervals) and reference build incompatibilities (accidentally intersecting intervals from different assemblies or retaining stale reference genome assignments after multi-species MAF extraction). Its primary technical limitations are pedagogical shortcuts in the example workflows: Basic Protoco..."
   },
   {
     "pmcid": "PMC3889118",
@@ -519,13 +519,13 @@
     "an_id": "AN_RAW_022",
     "anon_id": "AN_ANON_018",
     "scrubbed_bytes": 19260,
-    "overall": 7.7,
-    "rigor": 2.5,
-    "claims": 1.9,
+    "overall": 7.4,
+    "rigor": 2.3,
+    "claims": 1.8,
     "biology": 1.6,
     "reproducibility": 1.7,
-    "sci_core_8": 6.0,
-    "summary_note": "The manuscript presents an elegant, well-engineered paradigm for interactive genomic computing (\"subset-tune-scale\") and validates it on a biologically challenging, non-canonical splicing and translational pausing locus (*XBP1*), complete with shared live Galaxy visualizations and workflows (`http://[WORKFLOW_PLATFORM]/interactive-rnaseq`). The primary methodological limitation is that tuning tool parameters visually on a single target locus (*XBP1*) to match a known ground-truth isoform structure and then applying those locus-tuned parameters ..."
+    "sci_core_8": 5.7,
+    "summary_note": "Coupling local-region parameter sweeps and dynamic visual filtering directly to a full workflow execution engine is a practical and well-implemented contribution to interactive genomics, and the complete workflows, histories, and live visualizations are openly shared online. However, the manuscript's methodological presentation of the *XBP1* case study has two notable limitations: (1) while the text emphasizes how difficult it was to tune Cufflinks parameters to resolve the 26-bp non-canonical *XBP1* intron and remove assembly artifacts, it nev..."
   },
   {
     "pmcid": "PMC8073171",
@@ -543,13 +543,13 @@
     "an_id": "AN_RAW_023",
     "anon_id": "AN_ANON_010",
     "scrubbed_bytes": 45562,
-    "overall": 7.2,
+    "overall": 7.0,
     "rigor": 2.1,
-    "claims": 1.8,
-    "biology": 1.6,
+    "claims": 1.7,
+    "biology": 1.5,
     "reproducibility": 1.7,
-    "sci_core_8": 5.5,
-    "summary_note": "The architectural decomposition\u2014separating immutable, snapshot-backed application binaries and reference indices from mutable user data and boot-time S3 contextualization\u2014is clean, practical, and directly solves the \"fat image\" update problem for cloud bioinformatics platforms. However, the manuscript is purely qualitative and contains **no quantitative benchmarks or empirical measurements** to substantiate its systems performance claims. Specifically, the paper provides no timing measurements for cluster instantiation and EBS snapshot attachme..."
+    "sci_core_8": 5.3,
+    "summary_note": "The architectural design is well-motivated and cleanly solves a major operational weakness of monolithic \"fat\" virtual machine images by allowing application binaries, reference genome indexes, and boot scripts to be updated and versioned independently via EBS snapshots and S3 contextualization while preserving user data across transient instances. However, as a systems and cloud engineering manuscript, its primary limitation is the complete absence of quantitative empirical evaluation: no measurements of instance contextualization and boot lat..."
   },
   {
     "pmcid": "PMC3691752",
@@ -615,13 +615,13 @@
     "an_id": "AN_RAW_026",
     "anon_id": "AN_ANON_035",
     "scrubbed_bytes": 18666,
-    "overall": 7.8,
-    "rigor": 2.5,
-    "claims": 2.0,
-    "biology": 1.5,
+    "overall": 8.5,
+    "rigor": 2.8,
+    "claims": 2.2,
+    "biology": 1.7,
     "reproducibility": 1.8,
-    "sci_core_8": 6.0,
-    "summary_note": "Evaluated as a short perspective/editorial piece, the manuscript is well-organized, pragmatic, and realistic about the day-to-day pressures faced by computational researchers. A particularly useful design feature is that every rule explicitly defines both a *gold-standard automated implementation* and a *minimum viable baseline* (\"As a minimum...\"), lowering the barrier to adoption for investigators transitioning from ad-hoc scripting to structured workflows. Because this is a brief conceptual commentary rather than an empirical research study,..."
+    "sci_core_8": 6.7,
+    "summary_note": "This is a clear, well-structured, and pragmatic guide that effectively bridges daily researcher habits (self-reproducibility and productivity) with community-wide scientific transparency. Because it is a methodological commentary rather than an empirical study, its evaluation rests on the technical precision and completeness of the ten rules. While the core principles are sound, three technical nuances warrant refinement so that readers do not adopt false assumptions about bit-level determinism or storage scalability: (1) Rule 6 asserts that pr..."
   },
   {
     "pmcid": "PMC4071198",
@@ -639,13 +639,13 @@
     "an_id": "AN_RAW_027",
     "anon_id": "AN_ANON_005",
     "scrubbed_bytes": 11308,
-    "overall": 7.8,
+    "overall": 7.9,
     "rigor": 2.5,
-    "claims": 1.9,
+    "claims": 2.0,
     "biology": 1.6,
     "reproducibility": 1.8,
-    "sci_core_8": 6.0,
-    "summary_note": "The engineering architecture\u2014reusing the platform's existing tool XML wrapper, ToolShed versioning, and job execution infrastructure while decoupling underlying indexing scripts from direct `.loc` file manipulation through a clean JSON abstraction layer\u2014is practical and solves a genuine operational bottleneck for bioinformatics server administrators. However, the manuscript overstates the degree to which this mechanism alone guarantees cross-instance reference data reproducibility: it does not address cryptographic checksum verification (e.g., ..."
+    "sci_core_8": 6.1,
+    "summary_note": "The software architecture is clean, modular, and solves a genuine operational bottleneck in local and cloud `[AUTHOR]` deployments by bringing reference index generation under the same ToolShed versioning and dependency management used for analysis tools. However, the manuscript is purely descriptive and lacks any empirical validation or quantitative benchmarking (e.g., runtime, disk transaction safety under concurrent administrator jobs, or verification of cross-instance reproducibility when reference sources change upstream). Furthermore, the..."
   },
   {
     "pmcid": "PMC4377138",
@@ -663,13 +663,13 @@
     "an_id": "AN_RAW_028",
     "anon_id": "AN_ANON_058",
     "scrubbed_bytes": 28098,
-    "overall": 7.4,
-    "rigor": 2.3,
-    "claims": 1.7,
-    "biology": 1.6,
-    "reproducibility": 1.8,
-    "sci_core_8": 5.6,
-    "summary_note": "The manuscript provides a practical, reproducible quality-control pipeline and an instructive empirical demonstration of well-to-well carryover on a 96-well plate. However, its quantitative rigor is limited by heuristic decision rules and unmodeled edge cases: the flagging threshold ($\\ge 10$ minor alleles) and MAF dispersion criteria lack formal statistical calibration or false-positive/false-negative benchmarking across varying haplogroup distances and contamination fractions; the synthetic minor-allele consensus sequence substitutes the mino..."
+    "overall": 8.3,
+    "rigor": 2.5,
+    "claims": 2.1,
+    "biology": 1.8,
+    "reproducibility": 1.9,
+    "sci_core_8": 6.4,
+    "summary_note": "The study addresses an important and frequently overlooked failure mode in ultra-deep organellar, viral, and somatic re-sequencing, and the combination of MAF tight-clustering diagnostics with phylogenetic source tracing (`F41` minor alleles clustering within `F46`) is clear and effective. Three methodological and experimental design points merit improvement: (1) constructing `<sample>_MINOR` sequences from a hard $\\ge 2\\%$ per-strand threshold yields chimeric sequences when contamination is near the detection limit (`1%\u20133%`) or when true heter..."
   },
   {
     "pmcid": "PMC4038738",
@@ -687,13 +687,13 @@
     "an_id": "AN_RAW_029",
     "anon_id": "AN_ANON_067",
     "scrubbed_bytes": 6789,
-    "overall": 7.0,
-    "rigor": 2.1,
-    "claims": 1.8,
-    "biology": 1.4,
-    "reproducibility": 1.7,
-    "sci_core_8": 5.3,
-    "summary_note": "As a software concept and reproducibility demonstration, the ToolShed architecture addresses a genuine bottleneck in web-based bioinformatics platforms by packaging tool wrappers, dependency metadata, and functional tests into version-controlled repositories. However, the manuscript provides no quantitative systems evaluation of the ToolShed itself (such as build success rates across operating systems, dependency isolation, or commit-pinning guarantees when fetching remote source code), and the mitochondrial case study relies on a simplified ma..."
+    "overall": 8.1,
+    "rigor": 2.6,
+    "claims": 2.1,
+    "biology": 1.6,
+    "reproducibility": 1.8,
+    "sci_core_8": 6.3,
+    "summary_note": "As a software note and reproducibility case study, the manuscript effectively demonstrates how wrapping ad hoc custom scripts into versioned, testable repository packages prevents workflow fragmentation. The biological vignette clearly illustrates the difference between a germline/somatic mitochondrial heteroplasmy (site 13,636) and a transcriptomic post-transcriptional modification signature (site 2,619). The primary technical limitations are restricted to the brevity of the variant-calling pipeline description\u2014specifically, relying on standar..."
   },
   {
     "pmcid": "PMC4217420",
@@ -711,13 +711,13 @@
     "an_id": "AN_RAW_030",
     "anon_id": "AN_ANON_060",
     "scrubbed_bytes": 39036,
-    "overall": 7.9,
-    "rigor": 2.3,
-    "claims": 1.9,
+    "overall": 8.2,
+    "rigor": 2.7,
+    "claims": 2.0,
     "biology": 1.8,
-    "reproducibility": 1.9,
-    "sci_core_8": 6.0,
-    "summary_note": "The experimental execution is rigorous: the dual-tissue mother\u2013child quartet design, Rho0 negative controls, exogenous spike-ins, and independent ddPCR re-amplification from template DNA set a high standard for controlling NUMTs, cross-sample carryover, and PCR polymerase errors. However, the population-genetic estimator used to infer the effective bottleneck size $N$ contains a mathematical bias: computing $\\hat{N}_i = p_i(1-p_i)/(\\Delta p_i^2 - 4\\sigma^2_{\\text{measure}})$ separately for each single-transmission quartet $i$ and taking the med..."
+    "reproducibility": 1.7,
+    "sci_core_8": 6.5,
+    "summary_note": "The experimental design\u2014pairing two somatic tissues per individual with high sequencing depth, physical contamination spike-ins, and re-amplified ddPCR validation that directly quantifies PCR-induced false positives ($2/18 = 11\\%$ in the $1\\text{--}10\\%$ MAF range)\u2014provides a well-controlled empirical dataset. However, the quantitative population-genetic inferences have notable statistical limitations: (1) estimating the bottleneck size $N = p(1-p)/\\sigma^2_{\\text{gen}}$ per site from a single mother\u2013child transmission ($n=1$ squared difference..."
   },
   {
     "pmcid": "PMC6280868",
@@ -735,13 +735,13 @@
     "an_id": "AN_RAW_031",
     "anon_id": "AN_ANON_023",
     "scrubbed_bytes": 40012,
-    "overall": 7.4,
+    "overall": 7.5,
     "rigor": 2.3,
-    "claims": 1.7,
+    "claims": 1.8,
     "biology": 1.7,
     "reproducibility": 1.7,
-    "sci_core_8": 5.7,
-    "summary_note": "StructureFold provides a practical, accessible web-based pipeline that bridges raw structure-probing reads and thermodynamic folding packages. However, several methodological and validation gaps limit the strength of its broader claims: (1) all empirical validations (gel comparison, ROC curves, and Mod-seeker concordance) are restricted exclusively to two highly abundant ribosomal RNAs (18S and 25S), leaving the central claim that FSRs are \"directly comparable\" across mRNAs of varying abundance and length untested; (2) the log-average denominat..."
+    "sci_core_8": 5.8,
+    "summary_note": "StructureFold provides a practical, end-to-end bioinformatic workflow that lowers the barrier for experimentalists analyzing high-throughput RNA structure-probing datasets, and its rRNA validation against PAGE gel probing and phylogenetic structures is solid. The primary methodological limitation is a disconnect between the mathematical normalization in Equations (1)\u2013(2) and the headline claim that StructureFold renders nucleotide reactivities \"directly comparable\" across transcripts of varying abundance and length: dividing $\\ln(\\text{count}+1..."
   },
   {
     "pmcid": "PMC4767623",
@@ -760,12 +760,12 @@
     "anon_id": "AN_ANON_011",
     "scrubbed_bytes": 13955,
     "overall": 6.8,
-    "rigor": 2.1,
+    "rigor": 2.2,
     "claims": 1.8,
-    "biology": 1.6,
+    "biology": 1.5,
     "reproducibility": 1.3,
     "sci_core_8": 5.5,
-    "summary_note": "As a community infrastructure and software interoperability report, the manuscript addresses a practical bottleneck in bioinformatics: moving data across heterogeneous desktop and web-based tools without writing custom format-conversion scripts. However, evaluated as a scientific and methodological contribution, the main text is almost entirely descriptive and lacks quantitative technical benchmarks of the platform's core engineering deliverables. Specifically, the manuscript provides no systematic evaluation of file-converter fidelity (e.g., d..."
+    "summary_note": "GenomeSpace addresses a practical bottleneck in integrative genomics\u2014moving heterogeneous data across standalone desktop and web tools without writing custom format-conversion scripts. However, as a scientific manuscript, the presentation is almost entirely descriptive and lacks quantitative technical benchmarks of its core architecture. The text provides no empirical measurements of file conversion fidelity, data transfer latency across cloud providers, scalability limits for large genomic files (such as BAM/VCF datasets), or systematic valida..."
   },
   {
     "pmcid": "PMC4987906",
@@ -783,13 +783,13 @@
     "an_id": "AN_RAW_033",
     "anon_id": "AN_ANON_047",
     "scrubbed_bytes": 22264,
-    "overall": 8.3,
-    "rigor": 2.6,
-    "claims": 2.1,
-    "biology": 1.7,
+    "overall": 9.0,
+    "rigor": 3.0,
+    "claims": 2.2,
+    "biology": 1.9,
     "reproducibility": 1.9,
-    "sci_core_8": 6.4,
-    "summary_note": "The manuscript documents substantive software engineering advances that directly solve major pain points in high-throughput sequencing analysis: specifically, `Dataset Collections` eliminate history clutter and manual pairing errors in multi-sample cohorts, `Data Managers` close a critical reproducibility gap by recording exact reference genome and index provenance, and IUC/CI review formalizes community tool quality. The primary limitations are a lack of quantitative benchmarking behind specific performance claims (such as the client-side Data..."
+    "sci_core_8": 7.1,
+    "summary_note": "The manuscript documents substantial, well-targeted engineering improvements that address two of the most significant historical weaknesses of browser-based bioinformatics workbenches: scaling multi-step pipelines from single files to multi-sample paired-end cohorts (solved via Dataset Collections) and tracking the provenance of reference genome indices (solved via Data Managers). The minor limitations of the report are the lack of quantitative benchmark details for the claim that the new Data Libraries interface is \"on average, five times fast..."
   },
   {
     "pmcid": "PMC5000403",
@@ -807,13 +807,13 @@
     "an_id": "AN_RAW_034",
     "anon_id": "AN_ANON_033",
     "scrubbed_bytes": 33711,
-    "overall": 7.9,
-    "rigor": 2.5,
-    "claims": 1.8,
-    "biology": 1.7,
-    "reproducibility": 1.9,
-    "sci_core_8": 6.0,
-    "summary_note": "`Du Novo` is a well-engineered and practical methodological advance: decoupling consensus generation from reference alignment eliminates reference mapping bias at indel-rich or divergent loci and increases on-target DCS depth on the `ABL1` benchmark by $78\\%$ (`1,099x` vs. `618x`) while matching the published `E279K` (`G>A`) minor allele frequency ($1.28\\text{--}1.31\\%$ vs. $1.29\\text{--}1.31\\%$). The manuscript also identifies a critical experimental pitfall when applying duplex sequencing to PCR amplicons\u2014heteroduplex formation during late-cy..."
+    "overall": 6.6,
+    "rigor": 2.1,
+    "claims": 1.7,
+    "biology": 1.4,
+    "reproducibility": 1.4,
+    "sci_core_8": 5.2,
+    "summary_note": "Replacing initial reference mapping with within-family multiple sequence alignment is a sound algorithmic improvement that avoids reference bias during consensus construction and recovers 78% more DCS coverage on the *ABL1* benchmark. However, the experimental validation and mathematical modeling have three major flaws: (1) in the SC8 mtDNA experiment, long-range PCR amplification was performed **before** duplex adapter ligation; because any polymerase error during long-range PCR creates a double-stranded mutant homoduplex prior to barcode tagg..."
   },
   {
     "pmcid": "PMC5444614",
@@ -831,13 +831,13 @@
     "an_id": "AN_RAW_035",
     "anon_id": "AN_ANON_015",
     "scrubbed_bytes": 25656,
-    "overall": 7.9,
-    "rigor": 2.5,
-    "claims": 1.9,
+    "overall": 7.5,
+    "rigor": 2.3,
+    "claims": 1.8,
     "biology": 1.6,
-    "reproducibility": 1.9,
-    "sci_core_8": 6.0,
-    "summary_note": "The work provides a practical, well-engineered bridge between GUI-driven workflow management and flexible scripting environments, backed by live Galaxy history links and complete notebook supplements (S1\u2013S3 Files). The primary technical caveat is that allowing users to install arbitrary packages on the fly inside running containers (`pip install` or equivalent; line 23) and execute interactive cells out of order introduces a reproducibility gap: unless the modified container state or exact environment lockfile is persisted alongside the `.ipynb..."
+    "reproducibility": 1.8,
+    "sci_core_8": 5.7,
+    "summary_note": "The software architecture is well-conceived and solves a genuine usability and provenance gap between standardized GUI-based preprocessing and custom programmatic data exploration. All three examples are backed by live shareable workflow histories and supplementary notebook files (S1\u2013S3 Files). However, the manuscript has several technical and methodological shortcomings: (1) it overstates the \"utmost level of reproducibility\" of interactive notebooks while permitting arbitrary on-demand `pip` package installations inside mutable containers tha..."
   },
   {
     "pmcid": "PMC5967460",
@@ -855,13 +855,13 @@
     "an_id": "AN_RAW_036",
     "anon_id": "AN_ANON_006",
     "scrubbed_bytes": 17219,
-    "overall": 7.4,
-    "rigor": 2.1,
-    "claims": 1.9,
+    "overall": 7.6,
+    "rigor": 2.3,
+    "claims": 2.0,
     "biology": 1.7,
-    "reproducibility": 1.7,
-    "sci_core_8": 5.7,
-    "summary_note": "The practical recommendations at the heart of the manuscript\u2014adopting Bioconda and Linux containers for version-pinned binary distribution, avoiding isolated single-purpose web servers that cannot chain upstream alignment or downstream statistical steps, and investing in hands-on tutorials\u2014are timely, technically accurate, and directly useful to the evolutionary biology software community. The primary methodological weakness lies in the lack of a transparent, reproducible evaluation rubric for the 23-paper *MBE* usability audit cited to motivat..."
+    "reproducibility": 1.6,
+    "sci_core_8": 6.0,
+    "summary_note": "As a best-practices commentary, the manuscript offers practical, technically sound recommendations that directly address software decay and installation barriers in evolutionary bioinformatics. Its primary methodological weakness lies in the informal 23-paper *MBE* usability survey used to anchor the narrative: the inclusion criteria (restricting to open-access papers or those with a URL in the abstract) and the evaluation rubric for what constitutes \"easily installed and used\" are not defined in the main text, making the headline \"only 3 of 23..."
   },
   {
     "pmcid": "PMC6030816",
@@ -879,13 +879,13 @@
     "an_id": "AN_RAW_037",
     "anon_id": "AN_ANON_064",
     "scrubbed_bytes": 31550,
-    "overall": 7.6,
-    "rigor": 2.3,
-    "claims": 1.7,
+    "overall": 8.2,
+    "rigor": 2.6,
+    "claims": 2.0,
     "biology": 1.7,
     "reproducibility": 1.9,
-    "sci_core_8": 5.7,
-    "summary_note": "The infrastructure engineering described in this update\u2014particularly CVMFS Stratum 0/1 reference data synchronization, automated `Bioconda`/`BioContainers` dependency resolution, `Ansible` deployment playbooks, and dynamic routing of heavy jobs to XSEDE resources\u2014represents solid systems architecture that directly benefits reproducible bioinformatics. However, every performance and scalability claim in the manuscript is presented qualitatively without supporting numerical data: the single-cell RNA-seq frontend benchmark (11,872 history items ac..."
+    "sci_core_8": 6.3,
+    "summary_note": "The manuscript provides a transparent systems-level blueprint (especially Figure 2's infrastructure schematic and open `Ansible` playbooks) that enables external institutions to replicate the exact production architecture of `[SOFTWARE]` Main. The primary limitations are: (1) the frontend and backend scalability claims\u2014handling 11,872 history items \"seamlessly\" and running jobs \"up to an order of magnitude larger than before\" on `Bridges`/`Stampede` (Figure 3)\u2014are presented without quantitative timing, latency, memory, or job-throughput tables;..."
   },
   {
     "pmcid": "PMC6263957",
@@ -903,13 +903,13 @@
     "an_id": "AN_RAW_038",
     "anon_id": "AN_ANON_043",
     "scrubbed_bytes": 23469,
-    "overall": 7.7,
-    "rigor": 2.5,
-    "claims": 1.8,
-    "biology": 1.6,
-    "reproducibility": 1.8,
-    "sci_core_8": 5.9,
-    "summary_note": "The architectural integration of Bioconda recipes with automated container builds (`BioContainers`) and workflow engines (`galaxy-lib`, Snakemake, CWL) represents a major practical contribution that substantially lowers the barrier to environment portability in bioinformatics. However, the manuscript's central thesis\u2014that computational reproducibility is \"no longer a technological issue\" and that running Bioconda-generated containers provides \"a guarantee of result consistency (ability to guarantee that the same version of a tool gives exactly ..."
+    "overall": 8.9,
+    "rigor": 3.0,
+    "claims": 2.1,
+    "biology": 1.9,
+    "reproducibility": 1.9,
+    "sci_core_8": 7.0,
+    "summary_note": "The core technical contribution\u2014automatically building and archiving standard container images directly from tested Bioconda recipes and resolving multi-package containers on demand via `[SOFTWARE]-lib`\u2014is a practical engineering advance that eliminates hand-crafted, unmaintained Dockerfiles while addressing HPC security constraints through native Singularity support. The manuscript's primary limitations are a few overstatements regarding bitwise output determinism (asserting that container isolation alone \"guarantees that the same version of a..."
   },
   {
     "pmcid": "PMC6296361",
@@ -927,13 +927,13 @@
     "an_id": "AN_RAW_039",
     "anon_id": "AN_ANON_025",
     "scrubbed_bytes": 23016,
-    "overall": 8.6,
-    "rigor": 2.8,
-    "claims": 2.0,
+    "overall": 8.9,
+    "rigor": 2.9,
+    "claims": 2.2,
     "biology": 1.8,
     "reproducibility": 2.0,
-    "sci_core_8": 6.6,
-    "summary_note": "This is a well-architected, fully open-source community resource paper whose software engineering, FAIR metadata integration (YAML/EDAM/TeSS), Zenodo dataset archival, and containerized offline reproducibility are exemplary. Its primary limitation is that while the technical infrastructure for content creation is thoroughly validated, the manuscript provides no quantitative pedagogical or operational evaluation of learner outcomes, tutorial execution pass rates against live tool updates, or long-term maintenance verification of the topic Docker..."
+    "sci_core_8": 6.9,
+    "summary_note": "This is a well-engineered, FAIR-compliant educational resource that solves practical pain points for both learners and instructors (software installation, dataset curation, broken tutorial links, and unreliable workshop internet connections), backed by active community adoption (>60 contributors and 33 participating groups). The main limitations are that (1) continuous integration (CI) testing on pull requests currently verifies HTML rendering, links, and image alt-text, but does not automatically execute the underlying tutorial workflows again..."
   },
   {
     "pmcid": "PMC6145887",
@@ -951,13 +951,13 @@
     "an_id": "AN_RAW_040",
     "anon_id": "AN_ANON_029",
     "scrubbed_bytes": 58633,
-    "overall": 6.3,
-    "rigor": 1.6,
-    "claims": 1.5,
+    "overall": 6.5,
+    "rigor": 1.8,
+    "claims": 1.6,
     "biology": 1.4,
-    "reproducibility": 1.8,
-    "sci_core_8": 4.5,
-    "summary_note": "The integration of longitudinal growth curve modeling (PACE, function-on-scalar regression, and FLAME) with well-phenotyped mother-child dyads and open data/code archival is a clear strength. However, the study's bioinformatics, statistical modeling, and causal framing suffer from several major methodological flaws: (1) **temporal inversion in regression specification**: the function-on-scalar regressions model weight-for-length trajectories from *birth to 24 months* (and CWG from *birth to 6 months*) as the **response** variable predicted by m..."
+    "reproducibility": 1.7,
+    "sci_core_8": 4.8,
+    "summary_note": "While integrating longitudinal functional data analysis with pediatric microbiome profiling is a creative methodological contribution, the core conclusions are undermined by four primary methodological and statistical flaws: (1) computing ecological $\\alpha$-diversity (Inverse Simpson) and $\\beta$-diversity on **phylum-level** counts rather than OTU/ASV or genus-level counts, which collapses richness/evenness to a near-collinear proxy of the dominant phyla; (2) modeling longitudinal growth from birth to age two as the *response* ($Y(t), t \\in [..."
   },
   {
     "pmcid": "PMC6931352",
@@ -975,13 +975,13 @@
     "an_id": "AN_RAW_041",
     "anon_id": "AN_ANON_024",
     "scrubbed_bytes": 32981,
-    "overall": 5.8,
-    "rigor": 1.5,
-    "claims": 1.4,
-    "biology": 1.3,
-    "reproducibility": 1.6,
-    "sci_core_8": 4.2,
-    "summary_note": "While leveraging historical workflow telemetry to optimize HPC backfill scheduling is a practical engineering goal, the machine learning pipeline contains several methodological flaws that invalidate or inflate the reported performance metrics: (1) Table 1 (`ob_id`, `dataset_id`, `file_size`, `type (input or output)`, `end_epoch`, `cpuacct.usage`, `memory.max_usage_in_bytes`) includes *output* dataset sizes and post-execution metrics in the attribute schema without explicitly excluding output files from the pre-execution feature matrix; (2) fea..."
+    "overall": 6.7,
+    "rigor": 2.0,
+    "claims": 1.8,
+    "biology": 1.5,
+    "reproducibility": 1.4,
+    "sci_core_8": 5.3,
+    "summary_note": "Leveraging large-scale production telemetry from bioinformatics workflows to replace static over-allocation heuristics (e.g., 30\u201332 GB RAM and 36\u201372 h walltime) is a practical operational goal, and the authors candidly document real-world data caveats (untracked heterogeneous cluster routing, concurrent node load, and silent zero-input job successes). However, the evaluation suffers from three methodological weaknesses: (1) cross-validation is performed on a randomly shuffled dataset (and after global target-bucket construction and feature scal..."
   },
   {
     "pmcid": "PMC6827461",
@@ -999,13 +999,13 @@
     "an_id": "AN_RAW_042",
     "anon_id": "AN_ANON_026",
     "scrubbed_bytes": 54609,
-    "overall": 6.6,
-    "rigor": 1.9,
-    "claims": 1.5,
-    "biology": 1.7,
-    "reproducibility": 1.5,
-    "sci_core_8": 5.1,
-    "summary_note": "The experimental application of duplex sequencing to track sub-1% plasmid evolution in real time is creative and uncovers a clear empirical phenomenon: transient emergence and subsequent clonal-interference purging of ori-region copy-number mutants. However, the mathematical modeling and several experimental interpretations have substantial weaknesses: (1) all mathematical equations in the Materials and Methods (lines 35\u201385) are missing/blank in the manuscript text; (2) the deterministic/mean-field model fits 7 free parameters to a single summa..."
+    "overall": 8.1,
+    "rigor": 2.5,
+    "claims": 2.0,
+    "biology": 1.8,
+    "reproducibility": 1.8,
+    "sci_core_8": 6.3,
+    "summary_note": "The experimental design\u2014combining turbidostat selection, ultra-sensitive duplex sequencing, host whole-genome sequencing, and single-colony plasmid curing\u2014provides direct empirical resolution of transient sub-1% adaptive plasmid trajectories that were invisible to conventional sequencing. However, the mathematical modeling component has notable limitations: fitting 7 free parameters to a single summed allele-frequency trajectory results in biologically implausible mutation rate estimates ($\\hat{\\mu} = 5.09 \\times 10^{-5}$ per plasmid across jus..."
   },
   {
     "pmcid": "PMC6911200",
@@ -1047,13 +1047,13 @@
     "an_id": "AN_RAW_044",
     "anon_id": "AN_ANON_061",
     "scrubbed_bytes": 16616,
-    "overall": 7.5,
-    "rigor": 2.3,
-    "claims": 1.6,
+    "overall": 7.8,
+    "rigor": 2.4,
+    "claims": 1.9,
     "biology": 1.7,
-    "reproducibility": 1.9,
-    "sci_core_8": 5.6,
-    "summary_note": "As a software engineering and community tool update, the architectural improvements\u2014particularly non-interactive CLI execution, relative path resolution, `bioconda` packaging, structured JSON outputs, and automated cross-tool likelihood verification\u2014meaningfully improve reproducibility and pipeline integration for molecular evolution studies. However, as a scientific manuscript, the text is entirely descriptive and presents zero empirical data, benchmark tables, runtime scaling curves, memory profiles, or numerical accuracy comparisons to subst..."
+    "reproducibility": 1.8,
+    "sci_core_8": 6.0,
+    "summary_note": "As a software update article, the manuscript documents substantial engineering modernization that improves command-line reproducibility, installation portability, and automated verification of likelihood calculations across independent phylogenetic engines. The primary limitation of the manuscript is the absence of empirical benchmark data\u2014such as runtime, memory footprint, multi-core scaling curves, or maximum tractable alignment sizes\u2014to substantiate headline claims of \"substantial performance and stability enhancements\" and optimization for ..."
   },
   {
     "pmcid": "PMC7057607",
@@ -1071,13 +1071,13 @@
     "an_id": "AN_RAW_045",
     "anon_id": "AN_ANON_066",
     "scrubbed_bytes": 37091,
-    "overall": 7.0,
-    "rigor": 2.2,
+    "overall": 6.4,
+    "rigor": 1.8,
     "claims": 1.5,
-    "biology": 1.5,
-    "reproducibility": 1.8,
-    "sci_core_8": 5.2,
-    "summary_note": "The core engineering ideas\u2014using an FM-index (`Bowtie`) to avoid $O(N^2)$ pairwise edit-distance comparisons across >$10^6$ duplex barcodes, calling `Kalign2` directly in-memory from Python, and buffering worker queues\u2014deliver a clear $7\\text{--}9\\times$ wall-clock speedup (Table 3) and recover $12\\%\\text{--}23\\%$ more Duplex Consensus Sequences (DCSs) by rescuing singleton reads whose barcodes suffered a 1\u20133 bp PCR/sequencing error (Table 1). However, several numerical inconsistencies and methodological ambiguities in the manuscript's validati..."
+    "biology": 1.4,
+    "reproducibility": 1.7,
+    "sci_core_8": 4.7,
+    "summary_note": "The algorithmic engineering\u2014using an FM-index to avoid $O(n^2)$ pairwise barcode comparisons without requiring reference-genome alignment, and integrating `Kalign2` with buffered multiprocessing to achieve an $\\sim 6\\text{--}9\\times$ wall-clock speedup (Table 3)\u2014is practical and well-motivated. However, the manuscript suffers from three severe internal inconsistencies in its empirical and simulation tables that require resolution before the accuracy and yield claims can be trusted: (1) in Table 1 (`pBR322`), as the barcode mismatch threshold in..."
   },
   {
     "pmcid": "PMC7193333",
@@ -1095,13 +1095,13 @@
     "an_id": "AN_RAW_046",
     "anon_id": "AN_ANON_002",
     "scrubbed_bytes": 8893,
-    "overall": 8.2,
-    "rigor": 2.7,
+    "overall": 8.5,
+    "rigor": 2.8,
     "claims": 2.1,
     "biology": 1.8,
-    "reproducibility": 1.6,
-    "sci_core_8": 6.6,
-    "summary_note": "Evaluated within its genre as a scientific retrospective and obituary, the manuscript is accurate, well-structured, and grounded in verifiable milestones from the published literature (`[1]`\u2013`[10]`). Because the piece is a non-empirical commentary, standard statistical hypothesis-testing criteria apply only to its historical, bibliometric, and technical assertions regarding computational reproducibility and platform adoption. The primary areas where the technical narrative could be sharpened involve replacing qualitative usage descriptors (\"tho..."
+    "reproducibility": 1.8,
+    "sci_core_8": 6.7,
+    "summary_note": "As a commemorative obituary and historical retrospective rather than an empirical research study, the manuscript does not introduce new mathematical models, statistical tests, or experimental datasets. Evaluated against its genre and stated scope, the biographical narrative and descriptions of published computational and biological contributions are accurate and appropriately referenced. The minor limitations are confined to qualitative superlatives regarding platform adoption (\"thousands of scientists around the world use `[SOFTWARE]` daily\", ..."
   },
   {
     "pmcid": "PMC7319590",
@@ -1119,13 +1119,13 @@
     "an_id": "AN_RAW_047",
     "anon_id": "AN_ANON_062",
     "scrubbed_bytes": 28037,
-    "overall": 7.6,
-    "rigor": 2.3,
-    "claims": 1.7,
+    "overall": 8.0,
+    "rigor": 2.5,
+    "claims": 2.0,
     "biology": 1.7,
-    "reproducibility": 1.9,
-    "sci_core_8": 5.7,
-    "summary_note": "As a resource report for a major open-source bioinformatics infrastructure, the engineering enhancements\u2014particularly CVMFS/Singularity container synchronization across continental flagships, OIDC least-privilege token delegation, and rule-based dataset collection tagging\u2014directly address real bottlenecks in large-scale multi-sample biomedical workflows. However, the manuscript has three notable weaknesses: (1) it claims that Interactive Tools (`Jupyter`, `RStudio`) \"inherit all the capabilities of existing Galaxy tools\" alongside the blanket a..."
+    "reproducibility": 1.8,
+    "sci_core_8": 6.2,
+    "summary_note": "The manuscript documents a mature, federated bioinformatics infrastructure that lowers technical barriers to reproducible multi-step data analysis across hundreds of public and institutional servers. Its primary limitations are: (1) the absence of quantitative performance benchmarks validating the systems-level engineering claims (such as network transfer speedups from single-hop `[SOFTWARE_PACKAGE]` data staging or workflow scheduling latency for collections of thousands of datasets); (2) an unaddressed tension between the platform's core guar..."
   },
   {
     "pmcid": "PMC7425854",
@@ -1149,7 +1149,7 @@
     "biology": 1.6,
     "reproducibility": 1.9,
     "sci_core_8": 5.5,
-    "summary_note": "As an open-science advocacy piece and rapid-response bioinformatics resource, the study is exemplary in its transparency, versioned workflow sharing, and concrete demonstration of why raw sequencing reads (rather than consensus FASTA files alone) are essential for outbreak quality control (noting, for example, that reference 4 cited `FreeBayes` as a de novo short-read assembler and that four later SRA uploads contained no usable viral reads). However, several of the specific evolutionary and genomic analyses performed in the paper suffer from m..."
+    "summary_note": "The manuscript's central message\u2014that infectious disease emergencies require immediate deposition of raw sequencing reads and fully parameterized, version-locked open workflows\u2014is timely, well-argued, and exemplary in its own reproducibility (providing live workflow histories across four international servers, GitHub repositories, and Zenodo DOIs). However, several of the illustrative evolutionary and structural analyses in the main text have methodological and biophysical flaws: (1) in the Spike HR1/HR2 analysis (line 30), the authors claim th..."
   },
   {
     "pmcid": "PMC7574357",
@@ -1167,13 +1167,13 @@
     "an_id": "AN_RAW_049",
     "anon_id": "AN_ANON_019",
     "scrubbed_bytes": 37178,
-    "overall": 7.5,
+    "overall": 7.4,
     "rigor": 2.2,
-    "claims": 1.8,
+    "claims": 1.7,
     "biology": 1.6,
     "reproducibility": 1.9,
-    "sci_core_8": 5.6,
-    "summary_note": "As a community training and reproducible workflow infrastructure effort, the manuscript provides an accessible, well-organized, and openly archived resource that lowers technical barriers for wet-lab biologists entering single-cell transcriptomics. However, as a scientific methods paper, it is entirely descriptive and includes zero quantitative benchmarks or empirical validation results in the main text\u2014for example, claiming that `RNA STARsolo` achieves a \"10-fold speedup in comparison to Cell Ranger\" and that `STARsolo`, `Cell Ranger`, `Alevin..."
+    "sci_core_8": 5.5,
+    "summary_note": "This is a well-organized, community-backed training and workflow resource that lowers technical barriers for wet-lab biologists entering single-cell transcriptomics while enforcing version-locked reproducibility via Conda/Containers and Zenodo-archived tutorial datasets. However, as a scientific and methodological manuscript, it is entirely descriptive and includes no quantitative benchmarks of the integrated workflows (such as count-matrix concordance and runtime speedup between STARsolo, Cell Ranger, and Alevin on a reference dataset, or memo..."
   },
   {
     "pmcid": "PMC7872198",
@@ -1191,13 +1191,13 @@
     "an_id": "AN_RAW_050",
     "anon_id": "AN_ANON_031",
     "scrubbed_bytes": 52338,
-    "overall": 7.4,
+    "overall": 7.5,
     "rigor": 2.3,
-    "claims": 1.6,
+    "claims": 1.8,
     "biology": 1.6,
-    "reproducibility": 1.9,
-    "sci_core_8": 5.5,
-    "summary_note": "The diagnostic toolset addresses a genuine practical bottleneck in duplex sequencing: substantial read loss caused by strict $\\text{FS} \\ge 3$ filtering, tag errors, and library preparation artifacts such as end-polishing and barcode collisions. However, several statistical and algorithmic limitations temper the manuscript's broader conclusions. First, the Chimera Analysis (CA) statistic ($\\text{relative }\\Delta\\text{TD} = 1$) mathematically conflates true PCR template-switching chimeras with independent barcode collisions at one adapter end, a..."
+    "reproducibility": 1.8,
+    "sci_core_8": 5.7,
+    "summary_note": "This is a practical, well-engineered bioinformatic toolkit that addresses a genuine bottleneck in duplex sequencing\u2014diagnosing library preparation inefficiencies and recovering usable read depth from small families ($FS = 1\\text{\u2013}2$) in low-input samples. Its primary limitations are: (1) a mathematical flaw in the Chimera Analysis (CA) interpretation, which equates any sharing of a single 10-bp half-tag ($\\text{TD}a_{\\min} = 0$ or $\\text{TD}b_{\\min} = 0$, yielding $\\text{relative }\\Delta\\text{TD} = 1$) with PCR chimeras or dangerous barcode co..."
   },
   {
     "pmcid": "PMC8002175",
@@ -1215,13 +1215,13 @@
     "an_id": "AN_RAW_051",
     "anon_id": "AN_ANON_055",
     "scrubbed_bytes": 31504,
-    "overall": 6.3,
-    "rigor": 1.7,
-    "claims": 1.5,
-    "biology": 1.4,
-    "reproducibility": 1.7,
-    "sci_core_8": 4.6,
-    "summary_note": "Using paired-end overlaps within a fixed fractional read-length bin (50\u201360%) to isolate post-cluster instrument errors across $>1,100$ public SRA runs is a sound, scalable concept that reveals striking inter-laboratory variability within platforms. However, the downstream analyses of sequence context, trimer motifs, and post-homopolymer errors suffer from three methodological flaws that invalidate several headline conclusions about platform-specific chemistry biases: (1) sequence context and \"preceding\" bases were extracted from the reference g..."
+    "overall": 7.0,
+    "rigor": 2.0,
+    "claims": 1.7,
+    "biology": 1.5,
+    "reproducibility": 1.8,
+    "sci_core_8": 5.2,
+    "summary_note": "The core study design\u2014using paired-end overlap discordance at a standardized read-length bin to survey real-world sequencing accuracy across $>1,100$ public runs\u2014is a useful empirical contribution, and the demonstration of massive inter-lab variability within each platform is convincing. However, three methodological issues affect the quantitative error rates and sequence-context conclusions: (1) in the sequence-context (Figure 3) and trimer (Figure 4) analyses, errors are collapsed to unweighted *unique genomic error loci* rather than weighted..."
   },
   {
     "pmcid": "PMC8118283",
@@ -1239,13 +1239,13 @@
     "an_id": "AN_RAW_052",
     "anon_id": "AN_ANON_045",
     "scrubbed_bytes": 28597,
-    "overall": 7.4,
-    "rigor": 2.2,
-    "claims": 1.8,
-    "biology": 1.6,
-    "reproducibility": 1.8,
-    "sci_core_8": 5.6,
-    "summary_note": "The manuscript offers a practical, accessible blueprint for remote computational biology instruction that effectively leverages zero-install browser workspaces, pre-staged Data Libraries, TIaaS queue isolation, and history provenance sharing to eliminate local software installation barriers and reduce student cognitive load. Its primary methodological limitation is the absence of quantitative empirical evaluation: although the platform natively logs job execution states, error frequencies, completion timestamps, and TIaaS dashboard metrics\u2014and ..."
+    "overall": 7.7,
+    "rigor": 2.4,
+    "claims": 1.9,
+    "biology": 1.7,
+    "reproducibility": 1.7,
+    "sci_core_8": 6.0,
+    "summary_note": "The manuscript provides practical, well-structured guidance for bioinformatics educators, demonstrating how browser-based execution, pre-loaded Data Libraries, and dedicated TIaaS queues eliminate local software installation barriers and student hardware inequities. Its primary limitations are the absence of quantitative evaluation metrics in the four User Stories (relying on qualitative assertions such as \"fewer errors occurred than in offline courses\" and \"unanimously positive feedback\" without reporting server-side job error rates, completio..."
   },
   {
     "pmcid": "PMC8178898",
@@ -1311,13 +1311,13 @@
     "an_id": "AN_RAW_055",
     "anon_id": "AN_ANON_028",
     "scrubbed_bytes": 7650,
-    "overall": 8.3,
+    "overall": 8.4,
     "rigor": 2.7,
-    "claims": 1.9,
-    "biology": 1.8,
-    "reproducibility": 1.9,
+    "claims": 2.0,
+    "biology": 1.7,
+    "reproducibility": 2.0,
     "sci_core_8": 6.4,
-    "summary_note": "As a short correspondence/resource announcement, the manuscript delivers a timely, high-capacity, and fully transparent bioinformatic infrastructure that democratizes raw-read viral genomic analysis (providing 250 GB of expandable storage and free HPC execution to researchers worldwide without commercial cloud billing barriers). Its main scientific limitations lie in the brief treatment of low-frequency intra-host variant artifacts\u2014specifically, inferring \"shared intra-host dynamics\" and \"early warnings\" from low-frequency allelic variants in h..."
+    "summary_note": "Pooling public high-performance computing across three continents to enable free, standardized reanalysis of raw SARS-CoV-2 sequencing reads (rather than relying solely on static consensus assemblies) is a major practical contribution to global pathogen genomics and data equity. The primary scientific limitation lies in the biological interpretation of low-frequency minor allelic variants (AVs) in large multi-center amplicon datasets: while the manuscript highlights \"non-random associations among common low-frequency AVs that may reflect shared..."
   },
   {
     "pmcid": "PMC8863334",
@@ -1335,13 +1335,13 @@
     "an_id": "AN_RAW_056",
     "anon_id": "AN_ANON_040",
     "scrubbed_bytes": 58435,
-    "overall": 8.4,
-    "rigor": 2.7,
-    "claims": 2.1,
-    "biology": 1.8,
-    "reproducibility": 1.8,
-    "sci_core_8": 6.6,
-    "summary_note": "As a resource perspective, the manuscript presents a well-engineered, standards-driven architecture that solves major practical barriers in human genomics\u2014specifically enabling isolated, compliant execution of interactive tools like Galaxy and Bioconductor on controlled-access human data without local data egress. The primary limitations lie in the lack of empirical performance distributions behind several headline cost and scalability assertions (such as constant wall-clock execution time and `<$5.00` per-genome GATK4 processing in Note S1), u..."
+    "overall": 9.0,
+    "rigor": 3.0,
+    "claims": 2.2,
+    "biology": 1.9,
+    "reproducibility": 1.9,
+    "sci_core_8": 7.1,
+    "summary_note": "The manuscript provides a balanced, technically transparent overview of a major community genomics infrastructure. A particular strength is its candid discussion of current operational bottlenecks\u2014including phenotypic metadata inconsistencies across cohorts, lack of automated cloud budget \"bumpers\" to prevent unexpected user expenditure, and the transitional reality of hybrid local/cloud workflows. The primary areas where the manuscript can be strengthened are clarifying the scaling and preemptible-VM assumptions behind the Note S1 GATK4 cost/w..."
   },
   {
     "pmcid": "PMC9037384",
@@ -1383,13 +1383,13 @@
     "an_id": "AN_RAW_058",
     "anon_id": "AN_ANON_050",
     "scrubbed_bytes": 44354,
-    "overall": 7.3,
-    "rigor": 2.2,
-    "claims": 1.8,
-    "biology": 1.6,
-    "reproducibility": 1.7,
-    "sci_core_8": 5.6,
-    "summary_note": "The evidence for genuine in vivo co-infection with Alpha and Epsilon variants is thorough, combining epidemiological contact tracing, TaqPath RT-PCR cycle threshold (Ct) shifts, four independent re-extractions across two aliquots, and molecular-clock phylogenetic placement. However, the manuscript's secondary conclusion\u2014that the observed recombinant haplotypes predominantly reflect in vivo viral recombination rather than in vitro reverse-transcription (RT) or PCR template switching\u2014rests on a flawed statistical premise and lacks an essential ex..."
+    "overall": 7.8,
+    "rigor": 2.5,
+    "claims": 2.0,
+    "biology": 1.7,
+    "reproducibility": 1.6,
+    "sci_core_8": 6.2,
+    "summary_note": "The evidence for authentic Alpha/Epsilon co-infection is solid, supported by TaqPath S-gene Ct shifts (~2.5\u20133 cycles higher than ORF1ab/N), consistent allele frequency distributions across four independent extractions, and phylogenetic placement showing the major strain is identical to the contact-traced index case and contemporaneous Ghanaian sequences while the minor strain has no close relatives in the sequencing laboratory. However, the inference that all observed mosaic haplotypes reflect in vivo recombination rather than in vitro RT-PCR t..."
   },
   {
     "pmcid": "PMC9629619",
@@ -1407,13 +1407,13 @@
     "an_id": "AN_RAW_059",
     "anon_id": "AN_ANON_065",
     "scrubbed_bytes": 50181,
-    "overall": 6.5,
-    "rigor": 2.0,
-    "claims": 1.5,
-    "biology": 1.4,
-    "reproducibility": 1.6,
-    "sci_core_8": 4.9,
-    "summary_note": "Bundling `tn93-cluster` diversity-preserving subsampling with internal-branch-restricted codon selection models is a practical engineering strategy for scaling phylogenetic selection scans during a pandemic. However, the manuscript suffers from several substantive methodological, numerical, and quality-control flaws: (1) SARS-CoV-2 consensus genome artifacts\u2014specifically tiled-amplicon primer dropout (`-` gaps) and reference-allele backfilling at clade-defining Omicron sites\u2014are not filtered prior to selection inference, directly contaminating ..."
+    "overall": 7.5,
+    "rigor": 2.3,
+    "claims": 1.8,
+    "biology": 1.6,
+    "reproducibility": 1.8,
+    "sci_core_8": 5.7,
+    "summary_note": "`RASCL` provides a practical, well-engineered workflow that makes sophisticated codon-based phylogenetic selection models operational at genomic surveillance scales, and its restriction of inference to internal branches is a sensible safeguard against singleton sequencing errors and transient within-host mutations. However, several methodological and reporting issues weaken the quantitative claims: (1) complete-linkage diversity-maximizing clustering (`tn93-cluster`) preferentially retains divergent outlier sequences\u2014including recurrent amplico..."
   },
   {
     "pmcid": "PMC10069471",
@@ -1431,13 +1431,13 @@
     "an_id": "AN_RAW_060",
     "anon_id": "AN_ANON_027",
     "scrubbed_bytes": 43463,
-    "overall": 8.5,
-    "rigor": 2.9,
-    "claims": 2.0,
+    "overall": 8.9,
+    "rigor": 3.0,
+    "claims": 2.2,
     "biology": 1.8,
-    "reproducibility": 1.8,
-    "sci_core_8": 6.7,
-    "summary_note": "This is a well-engineered, mature infrastructure resource paper that documents the critical automation backbone linking community package managers (Bioconda/BioContainers) with vetted tool/workflow repositories (IUC/IWC) and interactive training networks. Its primary limitations are: (1) Table 1 (the central summary of subcommands and functionality) is completely omitted/blank in the manuscript text, and several blocks of paragraphs in the Methods (lines 106\u2013150) are duplicated verbatim; (2) an overstated security claim in the Results (line 48)..."
+    "reproducibility": 1.9,
+    "sci_core_8": 7.0,
+    "summary_note": "The SDK is a mature, well-architected piece of scientific software engineering infrastructure (over 70,000 downloads via PyPI and Anaconda) that effectively bridges human code review and automated CI/CD across thousands of community-maintained bioinformatics tools and workflows. The primary limitations are: (1) the manuscript includes no quantitative empirical metrics on CI/CD performance (such as the fraction of automated version updates that pass vs. fail tool tests due to upstream command-line changes, or typical testing runtimes); (2) the c..."
   },
   {
     "pmcid": "PMC10288729",
@@ -1455,13 +1455,13 @@
     "an_id": "AN_RAW_061",
     "anon_id": "AN_ANON_016",
     "scrubbed_bytes": 25118,
-    "overall": 5.5,
-    "rigor": 1.5,
-    "claims": 1.2,
-    "biology": 1.2,
-    "reproducibility": 1.6,
-    "sci_core_8": 3.9,
-    "summary_note": "Integrating template-based interface threading (`SPRING`, `HHsearch`, `TM-align`) into an automated, shareable Galaxy workflow with self-updating PDB/PDB70 indexing tools (`DBkit`) is a useful bioinformatics contribution. However, both the statistical validation of the genome-wide PPI network and the biological interpretation of the SARS-CoV-2 structural predictions suffer from major methodological flaws: (1) the cross-validation MCC benchmark in Figure 1 suffers from severe template leakage (complexes already solved in the PDB and curated into..."
+    "overall": 4.5,
+    "rigor": 1.2,
+    "claims": 1.0,
+    "biology": 1.1,
+    "reproducibility": 1.2,
+    "sci_core_8": 3.3,
+    "summary_note": "While packaging template-based docking tools into an accessible, shareable workflow is a useful software engineering contribution, the manuscript's validation design and biological claims regarding SARS-CoV-2 receptor binding suffer from major methodological flaws. First, the human and yeast BioGRID benchmark lacks any temporal or sequence-identity holdout between the PDB template library and the BioGRID test set, meaning that complexes already crystallized in the PDB (and deposited in BioGRID) are trivially recovered by self-matches. Second, t..."
   },
   {
     "pmcid": "PMC11462542",
@@ -1479,13 +1479,13 @@
     "an_id": "AN_RAW_062",
     "anon_id": "AN_ANON_013",
     "scrubbed_bytes": 14642,
-    "overall": 7.8,
-    "rigor": 2.6,
-    "claims": 1.8,
-    "biology": 1.6,
+    "overall": 8.3,
+    "rigor": 2.8,
+    "claims": 2.0,
+    "biology": 1.7,
     "reproducibility": 1.8,
-    "sci_core_8": 6.0,
-    "summary_note": "The manuscript delivers a high-utility, openly accessible, and thoroughly documented bioinformatics resource backed by public cloud infrastructure, training tutorials, and open data deposition in GenomeArk and NCBI BioProject PRJNA489243. Its primary weakness lies in the extreme brevity of the main text, which omits concrete quantitative summary statistics for the 51 HiFi assemblies versus the 19 CLR baseline assemblies (deferring all numerical values to Figure 2 and Supplementary Table 5), provides no explanation in the main text of the \"analy..."
+    "sci_core_8": 6.5,
+    "summary_note": "This is a well-engineered, practical bioinformatic resource paper that makes chromosome-scale, haplotype-phased reference genome assembly accessible on public computational infrastructure without requiring local HPC installation. The workflows, tutorials, and resulting assemblies (deposited in GenomeArk and NCBI BioProject PRJNA489243) are openly documented and reproducible. The primary limitation of the manuscript as written is that nearly all quantitative validation metrics, comparative statistics (such as exact QV improvements, switch error ..."
   },
   {
     "pmcid": "PMC12401588",
@@ -1503,13 +1503,13 @@
     "an_id": "AN_RAW_063",
     "anon_id": "AN_ANON_009",
     "scrubbed_bytes": 35235,
-    "overall": 8.4,
-    "rigor": 2.6,
-    "claims": 2.0,
-    "biology": 1.8,
+    "overall": 7.8,
+    "rigor": 2.4,
+    "claims": 1.8,
+    "biology": 1.6,
     "reproducibility": 2.0,
-    "sci_core_8": 6.4,
-    "summary_note": "`rdeval` is a well-engineered, high-utility software contribution backed by exemplary open-source distribution and a massive 63.5-Tbp empirical demonstration across the VGP archive. There are, however, three methodological and statistical areas where the manuscript should be tightened: (1) per-read average quality is computed as the arithmetic mean of the Phred `QUAL` integers (`mean(QUAL)`, Figure 3b legend), which averages logarithmic scores rather than averaging base error probabilities $P_i = 10^{-Q_i/10}$ prior to Phred transformation; (2)..."
+    "sci_core_8": 5.8,
+    "summary_note": "`rdeval` is a well-engineered, highly practical utility with exemplary open-science availability (code, documentation, and 3,010 public snapshots on GenomeArk). However, three methodological and statistical issues affect the secondary comparative and biological analyses presented in the paper: (1) the file-format benchmark concluding that CRAM v3.1 offers only a \"marginal\" compression advantage over BAM evaluates *unaligned* reads downloaded via `fasterq-dump`, disabling the reference-based delta encoding that is CRAM's primary compression mech..."
   },
   {
     "pmcid": "PMC12621372",
@@ -1527,13 +1527,13 @@
     "an_id": "AN_RAW_064",
     "anon_id": "AN_ANON_034",
     "scrubbed_bytes": 51004,
-    "overall": 8.1,
-    "rigor": 2.6,
-    "claims": 1.9,
-    "biology": 1.7,
-    "reproducibility": 1.9,
-    "sci_core_8": 6.2,
-    "summary_note": "`KegAlign` represents a well-engineered systems bioinformatics contribution that directly targets the computational bottleneck of vertebrate-scale comparative genomics (`lastZ`). The root-cause profiling of `SegAlign` (Figure 3, Figure 4) and the algorithmic insight of partitioning HSP anchors along diagonals rather than rows/columns to preserve `lastZ`'s internal anchor-shadowing linked list (Figures 5\u20137) are technically convincing. However, three methodological and reporting issues merit correction: (1) an arithmetic/definition error in the M..."
+    "overall": 8.5,
+    "rigor": 2.8,
+    "claims": 2.1,
+    "biology": 1.8,
+    "reproducibility": 1.8,
+    "sci_core_8": 6.7,
+    "summary_note": "This is a well-engineered systems bioinformatics paper with a clear algorithmic insight: recognizing that `lastZ` anchor consumption is directional along the alignment diagonal and that partitioning HSP segment files diagonally (rather than row- or column-wise) bounds per-task work and quadratic linked-list overhead while minimizing duplicate straddling extensions. The primary areas for improvement are: (1) providing a direct, nucleotide-level alignment equivalence benchmark (precision, recall, and exact fraction of straddling/duplicate alignme..."
   },
   {
     "pmcid": "PMC13017963",
@@ -1623,13 +1623,13 @@
     "an_id": "AN_RAW_068",
     "anon_id": "AN_ANON_057",
     "scrubbed_bytes": 25988,
-    "overall": 9.2,
-    "rigor": 3.1,
-    "claims": 2.3,
+    "overall": 8.8,
+    "rigor": 2.9,
+    "claims": 2.1,
     "biology": 1.9,
     "reproducibility": 1.9,
-    "sci_core_8": 7.3,
-    "summary_note": "`[SOFTWARE_PACKAGE] 3` is a well-engineered bioinformatics resource whose performance evaluation is transparent and thoughtfully controlled: by restricting Table 2 averages to identical datasets completing in both environments ($n=75$ to $87$ per method), reporting both mean runtimes and interquartile-to-median overhead dispersion, and documenting hardware and mobile browser memory ceilings (4 GB `wasm32` limit, 300\u2013500 MB on mobile, and Safari `IndexedDB` eviction caveats), the authors avoid overclaiming client-side capabilities. Three straigh..."
+    "sci_core_8": 6.9,
+    "summary_note": "The engineering and benchmarking are well executed: compiling a full suite of maximum-likelihood and Bayesian codon models to run client-side with a `1.67x\u20131.93x` single-thread overhead for likelihood methods (`aBSREL`, `BUSTED`, `FEL`, `MEME`) eliminates upload queues and preserves sequence privacy for standard gene alignments (`<50,000` to `200,000` sequence $\\times$ site products). A few methodological and reporting refinements would strengthen the paper: (1) Table 2 computes `WASM overhead` from the ratio of arithmetic mean runtimes across ..."
   },
   {
     "pmcid": "PMC4166496",
@@ -1647,13 +1647,13 @@
     "an_id": "AN_RAW_069",
     "anon_id": "AN_ANON_069",
     "scrubbed_bytes": 24065,
-    "overall": 6.0,
-    "rigor": 1.5,
-    "claims": 1.8,
-    "biology": 1.3,
-    "reproducibility": 1.4,
-    "sci_core_8": 4.6,
-    "summary_note": "As a historical and pedagogical perspective article, the compilation captures practical insights from foundational tool developers\u2014such as the role of Karlin\u2013Altschul extreme-value statistics in `BLAST`, standardized `Bioconductor` data containers for interoperability, and the need for ground-truth synthetic or empirical benchmarks to evaluate competing ChIP-seq peak callers. Evaluated strictly against quantitative scientific peer-review standards, however, the manuscript contains no original mathematical modeling, empirical benchmarking, or hy..."
+    "overall": 8.1,
+    "rigor": 2.5,
+    "claims": 2.2,
+    "biology": 1.8,
+    "reproducibility": 1.6,
+    "sci_core_8": 6.5,
+    "summary_note": "As a synthesis of domain expertise, the article provides candid, technically grounded perspectives on why certain computational tools achieve lasting adoption while hundreds of competing utilities (such as ChIP-seq peak callers) remain fragmented due to a lack of ground-truth validation datasets. Because this is a qualitative interview compilation rather than an empirical research study, its methodological evaluation centers on the accuracy of its technical summaries, the consistency of the bibliometric comparisons in Table 1, and editorial com..."
   },
   {
     "pmcid": "PMC3890430",
@@ -1671,13 +1671,13 @@
     "an_id": "AN_RAW_070",
     "anon_id": "AN_ANON_070",
     "scrubbed_bytes": 30836,
-    "overall": 8.1,
-    "rigor": 2.7,
-    "claims": 1.8,
-    "biology": 1.7,
+    "overall": 8.9,
+    "rigor": 3.0,
+    "claims": 2.1,
+    "biology": 1.9,
     "reproducibility": 1.9,
-    "sci_core_8": 6.2,
-    "summary_note": "The primary resource deliverable is technically rigorous: the authors cross-validate KB1 and ABT variant calls across three orthogonal sequencing chemistries (454, Illumina, SOLiD), high-density genotyping arrays (Illumina 1M), array-CGH, and Sanger/TaqMan assays, establishing an empirical false-positive SNP rate of 0.0009 and false-negative rate of 0.09 for KB1. They also provide a clear empirical demonstration of SNP array ascertainment bias in southern Africans (where Illumina 1M arrays underestimate heterozygosity in KB1 relative to a Europ..."
+    "sci_core_8": 7.0,
+    "summary_note": "The study is a landmark contribution to human evolutionary genomics that redresses the severe under-representation of basal southern African hunter-gatherer lineages in reference databases and demonstrates how European-biased commercial SNP arrays systematically underestimate heterozygosity in Khoisan populations. The multi-platform cross-validation of SNPs, indels, and segmental duplications is highly rigorous. The primary methodological limitations are restricted to secondary comparative and exploratory analyses: (1) Table 1 compares raw SNP ..."
   },
   {
     "pmcid": "PMC1937548",
@@ -1701,7 +1701,7 @@
     "biology": 1.6,
     "reproducibility": 1.6,
     "sci_core_8": 5.6,
-    "summary_note": "The comparative discovery of 90 conserved mammalian dual-coding exons and the empirical demonstration in Figure 5B that alternative reading frames in dual-coding exons evolve at virtually the same nonsynonymous rate as untranslated out-of-frame control segments ($\\text{DC } d_{N,\\text{alt}} = 0.45$ vs. $\\text{SC } d_{N,\\text{alt}} = 0.48$ for `INK4a/ARF`) are valuable contributions. However, the evolutionary analysis of the overlapping `exon 2` region suffers from a fundamental model misspecification: fitting a standard single-frame codon model..."
+    "summary_note": "The manuscript makes a valuable empirical contribution by demonstrating that asymmetric evolution\u2014a constrained primary frame paired with a permissive alternative frame evolving near the neutral frame-shifted background rate\u2014is a general feature of mammalian alternatively spliced dual-coding exons rather than an anomaly of *INK4a/ARF*. Furthermore, the $\\text{SC } d_{N,\\text{alt}}$ versus $\\text{DC } d_{N,\\text{alt}}$ comparison (Figure 5B) is a well-designed internal control. However, the statistical analysis of exon 2 in Table 1 suffers from ..."
   },
   {
     "pmcid": "PMC1240089",
@@ -1719,13 +1719,13 @@
     "an_id": "AN_RAW_072",
     "anon_id": "AN_ANON_072",
     "scrubbed_bytes": 20516,
-    "overall": 7.2,
-    "rigor": 2.3,
-    "claims": 1.9,
-    "biology": 1.5,
-    "reproducibility": 1.5,
-    "sci_core_8": 5.7,
-    "summary_note": "As a bioinformatics infrastructure contribution, the history-based genomic interval manipulation paradigm is well-designed, modular, and directly empowers experimentalists without command-line or SQL training to perform reproducible multi-track coordinate queries. However, the manuscript has three notable weaknesses: (1) direct numerical contradictions between the main text (line 77) and Table 1 in the ENCODE promoter intersection analysis, (2) absence of background coverage normalization or statistical enrichment testing when comparing ENCODE ..."
+    "overall": 7.9,
+    "rigor": 2.6,
+    "claims": 2.1,
+    "biology": 1.8,
+    "reproducibility": 1.4,
+    "sci_core_8": 6.5,
+    "summary_note": "`[SOFTWARE]` addresses a genuine bottleneck for experimental biologists by enabling multi-step genomic interval algebra (unions, intersections, subtractions, proximity filtering) and persistent query histories without requiring command-line scripting or SQL fluency. The modular HTTP API separation between the C interval engine and the web interface is well engineered, and the ENCODE promoter case study provides clear biological examples of how comparative conservation (`phastCons`) and cell-type-specific ChIP binding (HeLa TAF1/Pol II) capture ..."
   },
   {
     "pmcid": "PMC187552",
@@ -1743,13 +1743,13 @@
     "an_id": "AN_RAW_073",
     "anon_id": "AN_ANON_073",
     "scrubbed_bytes": 47015,
-    "overall": 8.0,
-    "rigor": 2.7,
-    "claims": 1.9,
-    "biology": 1.8,
-    "reproducibility": 1.6,
-    "sci_core_8": 6.4,
-    "summary_note": "The study is well-conceived and features a particularly strong internal negative control: testing single and consecutive sets of internal (nonboundary) exons within class 2 domains (Table 2) alongside 10,000 random subsamples from the 92,052-exon genomic background cleanly refutes the hypothesis that general splicing-error selection (Lynch's model) drives genome-wide exon symmetry, proving instead that symmetrical phase correlations arise from the shuffling of complete structural domains. The primary limitations are: (1) overstating the enrichm..."
+    "overall": 8.5,
+    "rigor": 2.9,
+    "claims": 2.0,
+    "biology": 1.9,
+    "reproducibility": 1.7,
+    "sci_core_8": 6.8,
+    "summary_note": "The study is well designed and provides a compelling resolution to a longstanding debate in molecular evolution: by showing that phase symmetry excess resides exclusively at domain boundaries and vanishes for internal non-boundary exons, the authors demonstrate both that complete structural domains are the primary units of exon shuffling and that genome-wide exon phase symmetry is not merely a byproduct of purifying selection against frameshifts during erroneous splicing of constitutive internal exons. Furthermore, the family-weighted control e..."
   },
   {
     "pmcid": "PMC169003",
@@ -1767,12 +1767,12 @@
     "an_id": "AN_RAW_074",
     "anon_id": "AN_ANON_074",
     "scrubbed_bytes": 15025,
-    "overall": 6.8,
-    "rigor": 2.1,
-    "claims": 1.8,
-    "biology": 1.5,
+    "overall": 7.4,
+    "rigor": 2.3,
+    "claims": 2.0,
+    "biology": 1.7,
     "reproducibility": 1.4,
-    "sci_core_8": 5.4,
-    "summary_note": "Using evolutionary purifying selection ($K_A/K_S < 1$) to distinguish true protein-coding exons from false-positive ab initio predictions is biologically well-founded and addresses a practical gap in genome annotation for species with sparse EST coverage. However, the statistical and algorithmic implementation in `ETOPE` has three substantive methodological flaws: (1) feeding continuous, multiple-hit-corrected substitution estimates ($S_S, S_N$) and effective site counts ($L_S, L_N$) from Yang\u2013Nielsen (`YN00`) into a $2 \\times 2$ Fisher's exact..."
+    "sci_core_8": 6.0,
+    "summary_note": "`ETOPE` provides a practical, accessible web workflow for filtering false-positive *ab initio* gene predictions in newly sequenced mammalian genomes (such as rat, dog, cow, and pig) where species-specific EST coverage is sparse or biased toward highly expressed transcripts. While the overall comparative genomics rationale is sound and builds on established simulation benchmarks ([AUTHOR_HANDLE] et al.; Guig\u00f3 et al.), several technical and mathematical details in the pipeline specification require correction or clarification: (1) the discontiguo..."
   }
 ]
